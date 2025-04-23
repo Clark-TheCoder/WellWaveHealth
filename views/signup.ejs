@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <form id="signup_form">
+    <div class="input_container">
+        <label for="firstname">First Name:</label>
+        <input type="firstname" name="firstname" id="firstname">
+    </div>
+    <div class="input_container">
+        <label for="lastname">Last Name:</label>
+        <input type="lastname" name="lastname" id="lastname">
+    </div>
+    <div class="input_container">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email">
+    </div>
+    <div class="input_container">
+        <label for="position">Position:</label>
+        <select name="position" id="position">
+            <option value="Doctor">Doctor</option>
+            <option value="Nurse">Nurse</option>
+            <option value="Psychiatrist">Psychiatrist</option>
+            <option value="Nutritionist">Nutritionist</option>
+        </select>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+    </div>
+    <button type="submit">Submit</button>
+    </form>
+    <script src="/js/signup.js"></script>
+</body>
+</html>
