@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS call_logs (
   duration_minutes INT,
   status ENUM('generated', 'in-progress', 'used', 'canceled', 'rescheduled') DEFAULT 'generated',
   status_changed_by ENUM('provider', 'patient'),
-  call_type VARCHAR(50),
   call_notes TEXT,
   FOREIGN KEY (doctor_id) REFERENCES doctors(id) ON DELETE CASCADE
 );

@@ -1,6 +1,7 @@
-import db from "db.js";
-
-const createUser = async (req, res) => {
+const createLink = async (req, res) => {
   try {
+    return res.status(200).json({ message: "Success" });
   } catch (error) {}
 };
+
+export { createLink };

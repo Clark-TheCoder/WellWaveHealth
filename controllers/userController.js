@@ -1,9 +1,8 @@
 import dotenv from "dotenv";
 import { createNewUser, findUserByEmail } from "../models/userModel.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { json } from "express";
 dotenv.config();
+import jwt from "jsonwebtoken";
 
 const createUser = async (req, res) => {
   try {
