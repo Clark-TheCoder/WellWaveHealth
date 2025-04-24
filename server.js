@@ -33,4 +33,8 @@ app.get("/landingpage", (req, res) => {
 import authRoutes from "./routes/authRoutes.js";
 app.use("/auth", authRoutes);
 
+//Call Routes
+import callRoutes from "./routes/callRoutes.js";
+app.use("/call", callRoutes);
+
 app.listen(PORT);
