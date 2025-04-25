@@ -15,7 +15,7 @@ createLinkBtn.addEventListener("click", async (e) => {
 
     const data = await response.json();
     if (response.ok) {
-      console.log(data.message);
+      console.log(data.link);
     }
   } catch (error) {
     console.log("Error:", error.message);

@@ -1,12 +1,21 @@
+import { v4 as uuidv4 } from "uuid";
+
 const createLink = async (req, res) => {
   try {
-    const user = req.user;
+    const providerId = req.user.id;
 
-    // Perform logic for creating the call
-    console.log(user); // Example: user info decoded from the token
+    const roomId = uuidv4();
+    const link = `http://localhost:3000/call/${roomId}`;
 
-    res.status(200).json({ message: "Call created successfully!" });
-  } catch (error) {}
+    return res.status(200).json({
+      link: link,
+      roomId: roomId,
+    });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Unable to generate token at this time." });
+  }
 };
 
 export { createLink };

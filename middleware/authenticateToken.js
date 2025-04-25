@@ -5,10 +5,10 @@ const authenticateToken = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
 
-    //check if token exists
+    //check if token exists and split at the space if it does
     const token = authHeader && authHeader.split(" ")[1];
     if (!token) {
-      return res.status(401).json({ message: "Access Denied" });
+      return res.status(403).json({ message: "Access Denied" });
     }
 
     const decoded = await new Promise((resolve, reject) => {
