@@ -7,15 +7,29 @@
     <title>Generate Link</title>
 </head>
 <body>
-     <h2>Generate a Shareable Link</h2>
+    <h1>Generate a Shareable Link</h1>
 
-  <div>
+  <button id="createLinkBtn">Generate Link</button>
+  <div class="input_container">
     <input type="text" id="linkOutput" readonly placeholder="Your link will appear here" />
     <button id="copyBtn">Copy</button>
   </div>
 
-  <button id="createLinkBtn">Generate Link</button>
-  
+  <h2>Send link to patient:</h2>
+  <form id="contact_form">
+    <div class="input_container">
+      <label for="patientPhoneNum">Patient's Phone Number:</label>
+      <input type="phone" placeholder="(123) 456 7890">
+    </div>
+    <div class="input_container">
+      <label for="patientEmail">Patient's Email:</label>
+      <input type="email"  placeholder="JohnDoe@email.com">
+    </div>
+    <button type="submit">Send Link</button>
+  </form>
+
+
+<script src="/js/contact_patient.js"></script>
 <script src="/js/create_link.js"></script>
 </body>
 </html>

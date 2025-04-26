@@ -1,4 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
+import twilio from "twilio";
+import nodemailer from "nodemailer";
+import { createCall } from "../models/callModel.js";
 
 const createLink = async (req, res) => {
   try {
@@ -6,6 +9,8 @@ const createLink = async (req, res) => {
 
     const roomId = uuidv4();
     const link = `http://localhost:3000/call/${roomId}`;
+
+    const logCall = await createCall(roomId, providerId);
 
     return res.status(200).json({
       link: link,
@@ -15,6 +20,14 @@ const createLink = async (req, res) => {
     return res
       .status(400)
       .json({ message: "Unable to generate token at this time." });
+  }
+};
+
+const contactPatient = async (req, res) => {
+  try {
+    const { phoneNumber, email } = req.body;
+  } catch (error) {
+    return res.status(400).json({ message: "Cannot message user" });
   }
 };
 

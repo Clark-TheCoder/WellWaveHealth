@@ -8,7 +8,7 @@ const createUser = async (req, res) => {
   try {
     const { firstname, lastname, email, position, password } = req.body;
 
-    //check to see if form is complete
+    //check to see if form is completed
     if (!firstname || !lastname || !email || !position || !password) {
       return res.status(400).json({ message: "All fields are required." });
     }

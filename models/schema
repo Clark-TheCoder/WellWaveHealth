@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS call_logs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   call_id VARCHAR(255) UNIQUE NOT NULL,
-  doctor_id INT NOT NULL,
+  provider_id INT NOT NULL,
   patient_alias VARCHAR(100) NOT NULL,
   call_topic TEXT,
   date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS call_logs (
   status ENUM('generated', 'in-progress', 'used', 'canceled', 'rescheduled') DEFAULT 'generated',
   status_changed_by ENUM('provider', 'patient'),
   call_notes TEXT,
-  FOREIGN KEY (doctor_id) REFERENCES doctors(id) ON DELETE CASCADE
+  FOREIGN KEY (provider_id) REFERENCES users(id) ON DELETE CASCADE
 );

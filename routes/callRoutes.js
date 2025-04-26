@@ -13,4 +13,6 @@ router.get("/edit_call_details", (req, res) => {
   res.render("edit_call_details");
 });
 
+router.post("/contact_patient", authenticateToken, contactPatient);
+
 export default router;
