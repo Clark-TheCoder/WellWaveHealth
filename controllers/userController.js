@@ -104,4 +104,10 @@ const authenicateUser = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
-export { createUser, authenicateUser };
+
+const updateUserProfile = async (req, res) => {
+  const userData = req.body;
+  console.log(req.body);
+};
+
+export { createUser, authenicateUser, updateUserProfile };

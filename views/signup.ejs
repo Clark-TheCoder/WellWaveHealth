@@ -5,36 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <link rel="stylesheet" href="/css/form.css">
 </head>
 <body>
-    <form id="signup_form">
-    <div class="input_container">
-        <label for="firstname">First Name:</label>
-        <input type="firstname" name="firstname" id="firstname">
-    </div>
-    <div class="input_container">
-        <label for="lastname">Last Name:</label>
-        <input type="lastname" name="lastname" id="lastname">
-    </div>
-    <div class="input_container">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email">
-    </div>
-    <div class="input_container">
-        <label for="position">Position:</label>
-        <select name="position" id="position">
-            <option value="Doctor">Doctor</option>
-            <option value="Nurse">Nurse</option>
-            <option value="Psychiatrist">Psychiatrist</option>
-            <option value="Nutritionist">Nutritionist</option>
-        </select>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password">
-    </div>
-    <button type="submit">Submit</button>
-    </form>
+    <main>
+        <div class="title_container">
+            <h1>Sign Up</h1>
+        </div>
+        <form id="signup_form">
+            <div class="input_div">
+                <input type="text" id="firstname" name="firstname" placeholder="John" required>
+            </div>
+            <div class="input_div">
+                <input type="text" id="lastname" name="lastname" placeholder="Doe" required>
+            </div>
+             <div class="select_div">
+                <select name="position" id="position">
+                    <option value="doctor">Doctor</option>
+                    <option value="nurse">Nurse</option>
+                    <option value="Psychiatrist">Psychiatrist</option>
+                    <option value="Nutritionist">Nutritionist</option>
+                </select>
+            </div>
+            <div class="input_div">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="input_div">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="input_div">
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+            <div id="error_message_div">
+                <p>Sign up failure. Please try again.</p>
+            </div>
+             <div class="submit_link_container">
+                <button class="inactive_button" id="submit_button" type="submit" disabled>Sign Up</button>
+                <a href="/auth/login">Log In</a>
+            </div>
+        </form>
+    </main>
     <script src="/js/signup.js"></script>
 </body>
 </html>

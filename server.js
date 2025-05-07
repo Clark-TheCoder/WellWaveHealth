@@ -37,4 +37,8 @@ app.use("/auth", authRoutes);
 import callRoutes from "./routes/callRoutes.js";
 app.use("/call", callRoutes);
 
+//User Routes
+import userRoutes from "./routes/userRoutes.js";
+app.use("/user", userRoutes);
+
 app.listen(PORT);

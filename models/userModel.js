@@ -22,4 +22,6 @@ async function createNewUser(firstname, lastname, email, position, password) {
   return rows[0];
 }
 
+async function updateUser(userId, fieldsToUpdate) {}
+
 export { createNewUser, findUserByEmail };

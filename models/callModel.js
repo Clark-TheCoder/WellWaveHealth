@@ -1,14 +1,15 @@
 import db from "./db.js";
 
-async function createCall(provider_id, call_id) {
+async function createCall(call_id, provider_id, patient_alias) {
   try {
     const [result] = await db.execute(
       `INSERT INTO calls (
         call_id,
-        provider_id
-      ) VALUES (?, ?)
+        provider_id, 
+        patient_alias
+      ) VALUES (?, ?, ?)
     `,
-      [call_id, provider_id]
+      [call_id, provider_id, patient_alias]
     );
 
     return result.affectedRows > 0;
@@ -17,5 +18,7 @@ async function createCall(provider_id, call_id) {
     throw error;
   }
 }
+
+// console.log(createCall(1231231, 11, "Em10"));
 
 export { createCall };

@@ -1,5 +1,5 @@
 import express from "express";
-import { createLink } from "../controllers/callController.js";
+import { createLink, contactPatient } from "../controllers/callController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
 const router = express.Router();
 

@@ -1,16 +1,17 @@
 import { v4 as uuidv4 } from "uuid";
-import twilio from "twilio";
-import nodemailer from "nodemailer";
 import { createCall } from "../models/callModel.js";
+import { generatePatientAlias } from "../utils/generatePatientAlias.js";
 
 const createLink = async (req, res) => {
   try {
-    const providerId = req.user.id;
+    const { patientFirstname, patientDayOfBirth } = req.body;
 
+    const providerId = req.user.id;
+    const alias = generatePatientAlias;
     const roomId = uuidv4();
     const link = `http://localhost:3000/call/${roomId}`;
 
-    const logCall = await createCall(roomId, providerId);
+    const logCall = await createCall(roomId, providerId, alias);
 
     return res.status(200).json({
       link: link,
@@ -31,4 +32,4 @@ const contactPatient = async (req, res) => {
   }
 };
 
-export { createLink };
+export { createLink, contactPatient };
