@@ -1,0 +1,87 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  nav {
+    height: 80px;
+    padding: 0 1rem; /* left and right only */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2184a3;
+    box-sizing: border-box;
+  }
+
+  nav a img {
+    height: 50px;
+    width: auto;
+  }
+
+  .show_menu {
+    transform: rotate(90deg);
+  }
+
+  #navigation_container {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cfe7eb;
+    display: none;
+  }
+
+  #navigation_container.show_nav {
+    display: block;
+  }
+
+  #navigation_container ul {
+    width: 100%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #navigation_container ul li {
+    width: 100%; /* Make each li span full width */
+    padding: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #2184a3;
+    font-size: large;
+    text-align: center;
+  }
+
+  #navigation_container ul li:hover {
+    background: #00a9a7;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+  }
+</style>
+
+<nav>
+  <a id="logo" href="https://www.nshealth.ca"
+    ><img src="/media/images/logo.png" alt="Nova Scotia Health"
+  /></a>
+
+  <img
+    id="menu_icon"
+    src="/media/images/menu-burger-2.png"
+    alt="Menu"
+    height="35px"
+    width="35px"
+  />
+</nav>
+
+<div id="navigation_container">
+  <ul>
+    <li>Create Call Link</li>
+    <li>Request Call History</li>
+    <li>Edit Profile</li>
+    <li>Log Out</li>
+  </ul>
+</div>
