@@ -22,6 +22,22 @@ async function createNewUser(firstname, lastname, email, position, password) {
   return rows[0];
 }
 
-async function updateUser(userId, fieldsToUpdate) {}
+async function updateUser(userFields, userId) {
+  const keys = Object.keys(userFields);
+  const values = Object.values(userFields);
 
-export { createNewUser, findUserByEmail };
+  if (keys.length === 0) {
+    throw new Error("No fields provided to update.");
+  }
+
+  const setClause = keys.map((key) => `${key} = ?`).join(", ");
+  console.log(setClause, values);
+  const [result] = await db.execute(
+    `UPDATE users SET ${setClause} WHERE id = ?`,
+    [...values, userId]
+  );
+
+  return result;
+}
+
+export { createNewUser, findUserByEmail, updateUser };

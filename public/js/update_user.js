@@ -24,7 +24,7 @@ function validateValues() {
   const password = passwordInput.value;
   const confirmPassword = confirmPasswordInput.value;
 
-  if (firstname || lastname || position || email) {
+  if (firstname || lastname || position || email || password) {
     if (password && password != confirmPassword) {
       submitButton.disabled = true;
       submitButton.classList.remove("active_button");
@@ -40,6 +40,10 @@ function validateValues() {
       submitButton.classList.remove("inactive_button");
       submitButton.classList.add("active_button");
     }
+  } else {
+    submitButton.disabled = true;
+    submitButton.classList.remove("active_button");
+    submitButton.classList.add("inactive_button");
   }
 }
 
@@ -61,21 +65,23 @@ editUserForm.addEventListener("submit", async (e) => {
   if (position) body.position = position;
   if (password) body.password = password;
 
+  console.log(body);
+
   const token = localStorage.getItem("token");
 
   try {
-    const response = fetch("/user/edit_user_details", {
+    const response = await fetch("/user/edit_user_details", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ body }),
+      body: JSON.stringify(body),
     });
 
-    const data = await json.response();
+    const data = await response.json();
     if (response.ok) {
-      console.log("good");
+      console.log(data.message);
     } else {
       console.log("bad");
     }
