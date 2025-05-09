@@ -6,7 +6,7 @@
 body {
   height: 100vh;
   width: 100vw;
-  background-image: url("/images/index-image.jpg");
+  background-image: url("/media/images/index-image.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
