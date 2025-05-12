@@ -31,13 +31,16 @@ async function updateUser(userFields, userId) {
   }
 
   const setClause = keys.map((key) => `${key} = ?`).join(", ");
-  console.log(setClause, values);
+
   const [result] = await db.execute(
     `UPDATE users SET ${setClause} WHERE id = ?`,
     [...values, userId]
   );
-
-  return result;
+  const [rows] = await db.execute(
+    `SELECT id, firstname, lastname, email, position FROM users WHERE id = ?`,
+    [userId]
+  );
+  return rows[0];
 }
 
 export { createNewUser, findUserByEmail, updateUser };

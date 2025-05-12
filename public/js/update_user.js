@@ -5,6 +5,10 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const confirmPasswordInput = document.getElementById("confirm_password");
 const submitButton = document.getElementById("submit_button");
+const errorMessage = document.getElementById("error_message_div");
+const errorMesageText = document.getElementById("error_message");
+const popup = document.getElementById("popup");
+const pageOverlay = document.getElementById("page_overlay");
 
 //add eventlistener to each field in the form
 const inputs = document.querySelectorAll("input");
@@ -65,8 +69,6 @@ editUserForm.addEventListener("submit", async (e) => {
   if (position) body.position = position;
   if (password) body.password = password;
 
-  console.log(body);
-
   const token = localStorage.getItem("token");
 
   try {
@@ -81,11 +83,16 @@ editUserForm.addEventListener("submit", async (e) => {
 
     const data = await response.json();
     if (response.ok) {
-      console.log(data.message);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      popup.style.display = "block";
+      popup.querySelector("h1").textContent = data.message;
+      pageOverlay.style.display = "block";
     } else {
-      console.log("bad");
+      errorMessage.style.display = "flex";
+      errorMesageText.textContent = data.message;
     }
   } catch (error) {
     console.log("Cannot make this request to the backend at this time.");
+    //need to send to 404 page
   }
 });

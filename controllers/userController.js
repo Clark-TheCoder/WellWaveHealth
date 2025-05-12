@@ -38,7 +38,6 @@ const createUser = async (req, res) => {
     if (!newUser) {
       return res.status(400).json({ message: "Unable to create new user." });
     }
-
     const token = jwt.sign(
       {
         id: Number(newUser.id),
@@ -53,7 +52,6 @@ const createUser = async (req, res) => {
     res.status(201).json({
       token,
       user: {
-        id: newUser.id,
         firstname: newUser.firstname,
         lastname: newUser.lastname,
         email: newUser.email,
@@ -76,12 +74,16 @@ const authenicateUser = async (req, res) => {
 
     const existingUser = await findUserByEmail(email);
     if (!existingUser) {
-      return res.status(400).json({ message: "Login failed." });
+      return res
+        .status(400)
+        .json({ message: "Login failure. Please try again." });
     }
 
     const match = await bcrypt.compare(password, existingUser.password);
     if (!match) {
-      return res.status(400).json({ message: "Login failed. User not found." });
+      return res
+        .status(400)
+        .json({ message: "Login failure. Please try again." });
     }
 
     const token = jwt.sign(
@@ -98,7 +100,6 @@ const authenicateUser = async (req, res) => {
     res.status(200).json({
       token,
       user: {
-        id: existingUser.id,
         firstname: existingUser.firstname,
         lastname: existingUser.lastname,
         email: existingUser.email,
@@ -112,14 +113,7 @@ const authenicateUser = async (req, res) => {
 
 const updateUserProfile = async (req, res) => {
   try {
-    //get the user id from the token
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      console.log("No token found in the request headers.");
-      return res.status(401).json({ message: "No token provided" });
-    }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.id;
+    const userId = req.user.id;
 
     //get the filled out fields from the form
     const userFields = {};
@@ -135,13 +129,13 @@ const updateUserProfile = async (req, res) => {
     //call db function
     const updatedUser = await updateUser(userFields, userId);
     if (updatedUser.affectedRows === 0) {
-      return res
-        .status(400)
-        .json({ message: "No user found or no changes made." });
+      return res.status(400).json({
+        message: "No changes made. Please sign back in and try again.",
+      });
     } else {
       res.status(200).json({
-        message: "User updated successfully",
-        affectedRows: updatedUser.affectedRows,
+        message: "Updated successfully",
+        user: updatedUser,
       });
     }
   } catch (error) {

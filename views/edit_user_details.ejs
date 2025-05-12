@@ -46,7 +46,7 @@
       </div>
 
       <div id="error_message_div">
-        <p>Sign up failure. Please try again.</p>
+        <p id="error_message">Could not edit user details at this time. Please try signing back in and trying again.</p>
       </div>
 
       <div class="submit_link_container">
@@ -55,6 +55,17 @@
       </div>
     </form>
   </main>
+
+
+  <link rel="stylesheet" href="/css/popup.css" />
+    <div id="page_overlay"></div>
+  <div id="popup">
+    <h1>Success.</h1>
+    <div class="popup-button-container">
+      <button><a href="/home">Ok</a></button>
+    </div>
+    
+  </div>
     <script src="/js/update_user.js"></script>
 </body>
 </html>
