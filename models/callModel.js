@@ -19,6 +19,4 @@ async function createCall(call_id, provider_id, patient_alias) {
   }
 }
 
-// console.log(createCall(1231231, 11, "Em10"));
-
 export { createCall };

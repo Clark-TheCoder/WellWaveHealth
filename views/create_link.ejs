@@ -5,45 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate Link</title>
+    <link rel="stylesheet" href="/css/form.css">
 </head>
 <body>
-    <h1>Generate a Shareable Link</h1>
+  <main>
+    <div class="title_container">
+        <h1>Create Call Link</h1>
+    </div>
+    <form id="createLink_form">
+        <div class="input_div">
+            <input type="text" id="firstname" name="firstname" placeholder="Patient's First Name" required>
+        </div>
+        <div class="input_div">
+            <input type="number" id="dayOfBirth" name="day" min="1" max="31" required placeholder="Patient's Day of Birth:"/>
+        </div>
+        <div id="error_message_div">
+            <p id="error_message">Failed to generate token. Please try again.</p>
+        </div>
+        <div class="submit_link_container">
+            <button class="inactive_button" id="submit_button" type="submit" disabled>Generate</button>
+        </div>
+    </form>
+  </main>
 
-  <form id="createLink_form">
-    <div class="input_div">
-      <input type="text" id="patientFirstname" placeholder="Patient First Name"/>
-      <button id="copyBtn">Copy</button>
-      <div class="error" id="patientFirstname-error"></div>
-    </div>
-    <div class="input_div">
-      <label for="day">Patient's Day of Birth:</label>
-      <input type="number" id="day" name="day" min="1" max="31" required />
-      <div class="error" id="patientDayOfBirth-error"></div>
-    </div>
-    <div class="submit_link_container">
-        <button type="submit">Generate Link</button>
-    </div>
-    <div class="input_div">
-      <input type="text" id="linkOutput" readonly placeholder="Your link will appear here" />
-      <button id="copyBtn">Copy</button>
-      <div class="error" id="linkOutput-error"></div>
-    </div>
-  </form>
-
-  <h2>Send link to patient:</h2>
-  <form id="contact_form">
-    <div class="input_container">
-      <label for="patientPhoneNum">Patient's Phone Number:</label>
-      <input type="phone" placeholder="(123) 456 7890">
-    </div>
-    <div class="input_container">
-      <label for="patientEmail">Patient's Email:</label>
-      <input type="email"  placeholder="JohnDoe@email.com">
-    </div>
-    <button type="submit">Send Link</button>
-  </form>
-
-<script src="/js/contact_patient.js"></script>
 <script src="/js/create_link.js"></script>
 </body>
 </html>
