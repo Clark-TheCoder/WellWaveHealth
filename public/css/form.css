@@ -48,7 +48,8 @@ h1 {
 
 #signup_form,
 #login_form,
-#editUser_form {
+#editUser_form,
+#createLink_form {
   display: flex;
   flex-direction: column;
   justify-content: center;
