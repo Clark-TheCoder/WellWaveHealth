@@ -2,28 +2,6 @@ import { v4 as uuidv4 } from "uuid";
 import { createCall } from "../models/callModel.js";
 import { generatePatientAlias } from "../utils/generatePatientAlias.js";
 
-// const createLink = async (req, res) => {
-//   try {
-//     const { patientFirstname, patientDayOfBirth } = req.body;
-
-//     const providerId = req.user.id;
-//     const alias = generatePatientAlias;
-//     const roomId = uuidv4();
-//     const link = `http://localhost:3000/call/${roomId}`;
-
-//     const logCall = await createCall(roomId, providerId, alias);
-
-//     return res.status(200).json({
-//       link: link,
-//       roomId: roomId,
-//     });
-//   } catch (error) {
-//     return res
-//       .status(400)
-//       .json({ message: "Unable to generate token at this time." });
-//   }
-// };
-
 const createLink = async (req, res) => {
   const userId = req.user.id;
 
@@ -35,9 +13,11 @@ const createLink = async (req, res) => {
 
   try {
     const newLink = await createCall(roomId, userId, patientAlias);
-    res.status(200).json({ message: link });
+    res.status(200).json({ link });
   } catch (error) {
-    res.status(400).json({ message: "Bad from the backend" });
+    res
+      .status(400)
+      .json({ message: "Cannot generate link. Sign back in an try again." });
   }
 };
 
