@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generate Link</title>
-    <link rel="stylesheet" href="/css/form.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Link</title>
+  <link rel="stylesheet" href="/css/form.css">
 </head>
+
 <body>
-  <main>
-    <div class="title_container">
+  <div id="nav-placeholder"></div>
+  <div class="form_wrapper">
+    <div class="form_container">
+      <div class="title_container">
         <h1>Create Call Link</h1>
-    </div>
-    <form id="createLink_form">
+      </div>
+      <form id="createLink_form">
         <div class="input_div">
-            <input type="text" id="firstname" name="firstname" placeholder="Patient's First Name" required>
+          <input type="text" id="firstname" name="firstname" placeholder="Patient's First Name" required>
         </div>
         <div class="input_div">
-            <input type="number" id="dayOfBirth" name="day" min="1" max="31" required placeholder="Patient's Day of Birth:"/>
+          <input type="number" id="dayOfBirth" name="day" min="1" max="31" required placeholder="Patient's Day of Birth:" />
         </div>
         <div id="error_message_div">
-            <p id="error_message">Failed to generate token. Please try again.</p>
+          <p id="error_message">Failed to generate token. Please try again.</p>
         </div>
         <div class="submit_link_container">
-            <button class="inactive_button" id="submit_button" type="submit" disabled>Generate</button>
+          <button class="inactive_button" id="submit_button" type="submit" disabled>Generate</button>
         </div>
-    </form>
+      </form>
 
-    <div class="input_div">
+      <div class="input_div">
         <input type="text" id="link" name="link" placeholder="Link" readonly>
-    </div>
+      </div>
 
-    <div class="sub_title_container" id="sub_title_container">
+      <div class="sub_title_container" id="sub_title_container">
         <h3>Send Link to Patient</h3>
-    </div>
-    <form id="sendLink_form">
+      </div>
+      <form id="sendLink_form">
         <div class="input_div">
-            <input type="email" id="email" name="email" placeholder="Patient's Email" disabled>
+          <input type="email" id="email" name="email" placeholder="Patient's Email" disabled>
         </div>
         <div class="input_div">
-            <input type="phone" id="phone" name="phone" placeholder="Patient's Phone #" disabled>
+          <input type="phone" id="phone" name="phone" placeholder="Patient's Phone #" disabled>
         </div>
         <div class="submit_link_container">
-            <button class="inactive_button" id="send_button" type="submit" disabled>Send</button>
+          <button class="inactive_button" id="send_button" type="submit" disabled>Send</button>
         </div>
-    </form>
+      </form>
 
-  </main>
-<script src="/js/create_link.js"></script>
+    </div>
+  </div>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/create_link.js"></script>
 </body>
+
 </html>

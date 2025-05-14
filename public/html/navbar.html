@@ -1,9 +1,4 @@
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
   nav {
     height: 80px;
     padding: 0 1rem; /* left and right only */
@@ -12,6 +7,9 @@
     align-items: center;
     background-color: #2184a3;
     box-sizing: border-box;
+    z-index: 10;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
 
   nav a img {
@@ -31,6 +29,9 @@
     align-items: center;
     background-color: #cfe7eb;
     display: none;
+    z-index: 10;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
 
   #navigation_container.show_nav {
@@ -45,7 +46,7 @@
     align-items: stretch;
   }
 
-  #navigation_container ul li {
+  #navigation_container li {
     width: 100%; /* Make each li span full width */
     padding: 20px;
     font-family: "Montserrat", sans-serif;
@@ -53,6 +54,11 @@
     color: #2184a3;
     font-size: large;
     text-align: center;
+  }
+
+  #navigation_container a {
+    text-decoration: none;
+    color: #2184a3;
   }
 
   #navigation_container ul li:hover {
@@ -79,9 +85,9 @@
 
 <div id="navigation_container">
   <ul>
-    <li>Create Call Link</li>
-    <li>Request Call History</li>
-    <li>Edit Profile</li>
-    <li>Log Out</li>
+    <li><a href="/call/create_link">Create Call Link</a></li>
+    <li><a href="#">Request Call History</a></li>
+    <li><a href="/user/edit_user_details">Edit Account</a></li>
+    <li><a href="#">Log Out</a></li>
   </ul>
 </div>
