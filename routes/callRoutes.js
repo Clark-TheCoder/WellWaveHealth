@@ -9,8 +9,8 @@ router.get("/create_link", (req, res) => {
 
 router.post("/create_link", authenticateToken, createLink);
 
-router.get("/edit_call_details", (req, res) => {
-  res.render("edit_call_details");
+router.get("/visit_summary", (req, res) => {
+  res.render("visit_summary");
 });
 
 router.post("/contact_patient", authenticateToken, contactPatient);

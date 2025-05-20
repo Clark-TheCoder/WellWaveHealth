@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <h1 id="welcome">Welcome</h1> 
-<script>
+  <div id="nav-placeholder"></div>
+
+  <div class="page_wrapper">
+    <div class="content_container">
+      <div class="welcome_container">
+        <h1 id="welcome">Welcome</h1>
+      </div>
+      <div class="options_container">
+        <h3>Options:</h3>
+        <div class="options">
+          <button><a href="/call/create_link">Create Call</a></button>
+          <button><a href="#">Call History</a></button>
+          <button><a href="#">Account Details</a></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
     const user = JSON.parse(localStorage.getItem("user"));
     const welcome = document.getElementById("welcome");
-    welcome.textContent = `Welcome, ${user.firstname}!`;
-</script>
+    welcome.textContent = `Hello, ${user.firstname}!`;
+  </script>
+  <script src="/js/navbar.js"></script>
 </body>
-</html>   
 
+</html>

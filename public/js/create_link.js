@@ -64,8 +64,3 @@ createLinkForm.addEventListener("submit", async (e) => {
     console.log("Cannot get to backend");
   }
 });
-
-
-sendPatientLink(){
-  
-}

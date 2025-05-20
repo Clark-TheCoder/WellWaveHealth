@@ -5,6 +5,8 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const confirmPasswordInput = document.getElementById("confirm_password");
 const submitBtn = document.getElementById("submit_button");
+const errorMessage = document.getElementById("error_message_div");
+const errorMesageText = document.getElementById("error_message");
 
 //add eventlistener to each field in the form
 const inputs = document.querySelectorAll("input");
@@ -77,14 +79,14 @@ signupForm.addEventListener("submit", async (e) => {
 
     if (response.ok) {
       localStorage.setItem("token", data.token);
-      console.log("User data to be saved:", data.user);
       localStorage.setItem("user", JSON.stringify(data.user));
-      //send to home
       window.location.href = "/home";
     } else {
-      console.error("Invalid signup response:", data);
+      errorMessage.style.display = "flex";
+      errorMesageText.textContent = data.message;
     }
   } catch (error) {
     console.log("Error:", error);
+    //display a 404 page
   }
 });

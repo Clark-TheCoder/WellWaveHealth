@@ -113,6 +113,7 @@ const authenicateUser = async (req, res) => {
 
 const updateUserProfile = async (req, res) => {
   try {
+    //get ID of user from JWT token, not from the user var in localstorage
     const userId = req.user.id;
 
     //get the filled out fields from the form

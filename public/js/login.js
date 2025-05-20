@@ -2,6 +2,8 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const submitButton = document.getElementById("submit_button");
 const errorMessage = document.getElementById("error_message_div");
+const errorMesageText = document.getElementById("error_message");
+
 //activate submit button
 emailInput.addEventListener("input", checkInputs);
 passwordInput.addEventListener("input", checkInputs);
@@ -42,11 +44,12 @@ loginForm.addEventListener("submit", async (e) => {
       localStorage.setItem("user", JSON.stringify(data.user));
       window.location.href = "/home";
     } else {
-      console.error("Invalid signup response:", data);
       errorMessage.style.display = "flex";
+      errorMesageText.textContent =
+        data.message || "Login failure. Please try again.";
     }
   } catch (error) {
     console.log("Error:", error);
-    errorMessage.style.display = "flex";
+    //create a 404 page
   }
 });
