@@ -30,6 +30,7 @@ body {
   align-items: center;
   width: 80%;
   height: 60%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .welcome_container {

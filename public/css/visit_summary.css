@@ -7,6 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100vw;
   background-color: #ede8e1ed;
   background-image: url("/media/images/homeBackground.png");
   background-repeat: no-repeat;
@@ -18,7 +19,7 @@ body {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: stretch;
   padding: 80px;
 }
 
@@ -35,6 +36,10 @@ body {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+form {
+  width: 100%;
+}
+
 .title_container {
   margin-top: -30px;
   margin-bottom: 20px;
@@ -48,10 +53,21 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
+.warning_message {
+  margin: 30px;
+  text-align: center;
+}
+
+.warning_message p {
+  font-family: "Montserrat", sans-serif;
+  color: rgb(196, 36, 36);
+}
+
 .input_div {
   width: 100%;
   border: 1px solid #2184a3;
-  padding: 10px;
+  border-radius: 5px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,10 +88,18 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+  user-select: none;
 }
 
 .section_inputs_div {
   display: none;
+}
+.section_inputs_div.flex {
+  display: flex;
+  width: 100%;
   flex-direction: column;
 }
 
@@ -97,13 +121,51 @@ body {
 
 .subsection_div {
   display: flex;
+  justify-content: center;
   flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #e3ded7;
+  margin: 10px;
+  padding-bottom: 15px;
+}
+
+.subsection_inputs_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
-.subsection_inputs_div input[type="checkbox"]:checked + span {
+.subsection_inputs_div input[type="checkbox"]:checked + span,
+.subsection_inputs_div input[type="radio"]:checked + span,
+.subsection_inputs_div input[type="text"]:checked + span {
   background-color: #2184a3;
   color: white;
+}
+
+.subsection_inputs_div input[type="text"] {
+  border: none;
+  outline: none;
+  width: 100%;
+  font: inherit;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.freetext {
+  border: none;
+  min-height: 50px;
+  min-width: 100%;
+  max-width: 100%;
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-size: large;
+  color: gray;
+  background-color: white;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  padding: 10px;
 }
 
 h1 {
