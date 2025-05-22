@@ -5,9 +5,8 @@ const linkInput = document.getElementById("link");
 const errorMessage = document.getElementById("error_message_div");
 const errorMesageText = document.getElementById("error_message");
 const sendLinkTitle = document.getElementById("sub_title_container");
-const email = document.getElementById("email");
-const phone = document.getElementById("phone");
-const sendButton = document.getElementById("send_button");
+const emailInput = document.getElementById("email");
+const phoneInput = document.getElementById("phone");
 
 firstNameInput.addEventListener("input", validateForm);
 dayOfBirthInput.addEventListener("input", validateForm);
@@ -49,11 +48,11 @@ createLinkForm.addEventListener("submit", async (e) => {
     if (response.ok) {
       linkInput.value = data.link;
       sendLinkTitle.style.backgroundColor = "#2184a3";
-      email.disabled = false;
-      phone.disabled = false;
-      sendButton.classList.remove("inactive_button");
-      sendButton.classList.add("active_button");
-      sendButton.addEventListener("submit", sendPatientLink);
+      emailInput.disabled = false;
+      phoneInput.disabled = false;
+
+      emailInput.addEventListener("input", validateContactForm);
+      phoneInput.addEventListener("input", validateContactForm);
     } else {
       errorMessage.style.display = "flex";
       errorMesageText.textContent =
@@ -64,3 +63,45 @@ createLinkForm.addEventListener("submit", async (e) => {
     console.log("Cannot get to backend");
   }
 });
+
+function validateContactForm() {
+  const email = emailInput.value;
+  const phone = phoneInput.value;
+
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isValidPhone = /^\d{10}$/.test(phone);
+  if (isValidEmail || isValidPhone) {
+    const sendButton = document.getElementById("send_button");
+    sendButton.classList.remove("inactive_button");
+    sendButton.classList.add("active_button");
+    sendButton.addEventListener("submit", sendPatientLink);
+  } else if (!isValidEmail && !isValidPhone) {
+    const sendButton = document.getElementById("send_button");
+    sendButton.classList.add("inactive_button");
+    sendButton.classList.remove("active_button");
+    sendButton.addEventListener("submit", sendPatientLink);
+  }
+}
+
+async function sendPatientLink(e) {
+  e.preventDefault();
+
+  const email = emailInput.value;
+  const phone = phoneInput.value;
+
+  //fetch to the api
+
+  // const response = await fetch("/call/send_link", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  //   body: JSON.stringify({
+  //     email,
+  //     phone,
+  //     link,
+  //   }),
+  // });
+  // const data = await response.json();
+}
