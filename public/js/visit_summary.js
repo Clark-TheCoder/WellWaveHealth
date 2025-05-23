@@ -9,46 +9,132 @@ inputSectionLabels.forEach((section) => {
   });
 });
 
-//get form information
-const form = document.getElementById("visitSummary_form");
+//undither form
+const visitStatusInputs = document.querySelectorAll(".visit_status_input");
+const planInput = document.getElementById("plan");
+const summaryInput = document.getElementById("call_summary");
+const notesInput = document.getElementById("notes");
+const summaryTextArea = document.getElementById("summary_textarea");
+const notesTextArea = document.getElementById("notes_textarea");
+const planTextArea = document.getElementById("plan_textarea");
 const submitButton = document.getElementById("submit_button");
-const inputs = document.querySelectorAll("input, textarea");
-inputs.forEach((input) => {
-  const inputType = input.type;
-  input.addEventListener("click", () => {
-    console.log(input.type);
-    if (inputType === "checkbox" || inputType === "radio") {
-      submitButton.disabled = false;
-      submitButton.classList.remove("inactive_button");
-      submitButton.classList.add("active_button");
-    }
-  });
 
-  input.addEventListener("input", () => {
-    console.log(input.type);
-    if (inputType === "text" || inputType === "textarea") {
-      if (input.value.trim().length > 0) {
-        submitButton.disabled = false;
-        submitButton.classList.remove("inactive_button");
-        submitButton.classList.add("active_button");
-      } else if (input.value.trim().length === 0 && !input.value) {
-        //need to fix this
-        submitButton.disabled = true;
-        submitButton.classList.remove("active_button");
-        submitButton.classList.add("inactive_button");
+let currentVisitStatus = null;
+
+function hideAllSections() {
+  [planInput, summaryInput, notesInput].forEach((section) => {
+    section.classList.add("hidden_input_div");
+    section.classList.remove("input_div");
+  });
+}
+
+function showSections(status) {
+  if (
+    status === "no_show" ||
+    status === "cancelled_by_patient" ||
+    status === "cancelled_by_provider"
+  ) {
+    notesInput.classList.remove("hidden_input_div");
+    notesInput.classList.add("input_div");
+
+    planInput.classList.remove("hidden_input_div");
+    planInput.classList.add("input_div");
+    validateForm();
+  } else if (status === "completed") {
+    summaryInput.classList.remove("hidden_input_div");
+    summaryInput.classList.add("input_div");
+
+    notesInput.classList.remove("hidden_input_div");
+    notesInput.classList.add("input_div");
+
+    planInput.classList.remove("hidden_input_div");
+    planInput.classList.add("input_div");
+    validateForm();
+  }
+}
+
+visitStatusInputs.forEach((input) => {
+  input.addEventListener("click", () => {
+    const selectedStatus = input.value;
+    if (
+      currentVisitStatus === "completed" &&
+      selectedStatus !== "completed" &&
+      summaryTextArea.value.trim().length > 0
+    ) {
+      const confirmChange = confirm(
+        "Changing the visit status will erase the Call Summary. Do you want to proceed?"
+      );
+      if (!confirmChange) {
+        input.checked = false;
+        document.querySelector(`input[value="${currentVisitStatus}"]`).checked =
+          true;
+        return;
+      } else {
+        summaryInput.querySelector("textarea").value = "";
       }
     }
+
+    currentVisitStatus = selectedStatus;
+    hideAllSections();
+    showSections(selectedStatus);
+  });
+});
+
+function validateForm() {
+  submitButton.disabled = false;
+  submitButton.classList.add("active_button");
+  submitButton.classList.remove("inactive_button");
+}
+
+const cancelButton = document
+  .getElementById("cancel_button")
+  .addEventListener("click", () => {
+    summaryTextArea.value = "";
+    planTextArea.value = "";
+    notesTextArea.value = "";
   });
 
-  // input.addEventListener("input", () => {
-  //   if (input.length > 0) {
-  //     submitButton.disabled = false;
-  //     submitButton.classList.remove("inactive_button");
-  //     submitButton.classList.add("active_button");
-  //   } else {
-  //     submitButton.disabled = true;
-  //     submitButton.classList.remove("active_button");
-  //     submitButton.classList.add("inactive_button");
-  //   }
-  // });
+const visitSummaryform = document.getElementById("visitSummary_form");
+
+visitSummaryform.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formInfo = {};
+  const visitStatus = currentVisitStatus;
+  const summary = summaryTextArea.value;
+  const plan = planTextArea.value;
+  const notes = notesTextArea.value;
+
+  if (visitStatus) formInfo.visitStatus = visitStatus;
+  if (summary) formInfo.summary = summary;
+  if (plan) formInfo.plan = plan;
+  if (notes) formInfo.notes = notes;
+
+  console.log(formInfo);
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await fetch("/call/visit_summary", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authourization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.log("Cannot reach backend");
+  }
+
+  // try {
+  //   const response = await fetch("/call/visit_summary", {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     body: JSON.stringify(formInfo),
+  //   });
+  // } catch (error) {
+  //   console.log("Error:", error);
+  //}
 });

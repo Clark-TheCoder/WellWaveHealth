@@ -76,6 +76,10 @@ form {
   box-sizing: border-box;
 }
 
+.hidden_input_div {
+  display: none;
+}
+
 .section_label_div {
   margin-top: -30px;
   margin-bottom: 20px;
@@ -219,6 +223,16 @@ h3 {
   font-size: large;
   font-weight: 500;
   cursor: not-allowed;
+}
+
+#cancel_button {
+  all: unset;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  color: #2184a3;
+}
+#cancel_button:hover {
+  font-weight: 600;
 }
 
 #error_message_div {

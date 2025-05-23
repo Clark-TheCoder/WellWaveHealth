@@ -23,33 +23,19 @@
         <div class="input_div">
           <input type="number" id="dayOfBirth" name="day" min="1" max="31" required placeholder="Patient's Day of Birth:" />
         </div>
+        <div class="input_div">
+          <input type="email" id="email" name="email" placeholder="Patient's Email">
+        </div>
+        <div class="input_div">
+          <input type="phone" id="phone" name="phone" placeholder="Patient's Phone #">
+        </div>
         <div id="error_message_div">
           <p id="error_message">Failed to generate token. Please try again.</p>
         </div>
         <div class="submit_link_container">
-          <button class="inactive_button" id="submit_button" type="submit" disabled>Generate</button>
+          <button class="inactive_button" id="submit_button" type="submit" disabled>Generate and Send</button>
         </div>
       </form>
-
-      <div class="input_div">
-        <input type="text" id="link" name="link" placeholder="Link" readonly>
-      </div>
-
-      <div class="sub_title_container" id="sub_title_container">
-        <h3>Send Link to Patient</h3>
-      </div>
-      <form id="sendLink_form">
-        <div class="input_div">
-          <input type="email" id="email" name="email" placeholder="Patient's Email" disabled>
-        </div>
-        <div class="input_div">
-          <input type="phone" id="phone" name="phone" placeholder="Patient's Phone #" disabled>
-        </div>
-        <div class="submit_link_container">
-          <button class="inactive_button" id="send_button" type="submit" disabled>Send</button>
-        </div>
-      </form>
-
     </div>
   </div>
   <script src="/js/navbar.js"></script>

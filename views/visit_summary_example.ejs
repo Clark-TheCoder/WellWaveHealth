@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visit Summary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/visit_summary.css">
+</head>
+
+
+<body>
+  <div id="nav-placeholder"></div>
+  <div class="form_wrapper">
+    <div class="form_container">
+      <div class="title_container">
+        <h1>Visit Summary</h1>
+      </div>
+      <div class="warning_message">
+        <p>*Use this form to record brief notes that are sufficient to support recall of the visit. Please do not include any patient names/identifiers in this form. This summary is intended only to confirm that the patient visit occurred and is not a substitute for detailed clinical notes.
+          In-depth documentation should be recorded separately in the appropriate medical record system.*
+        </p>
+      </div>
+      <form id="visitSummary_form">
+        <div class="input_div">
+          <div class="section_label_div">
+            <h3>Chief Complaint(s):</h3>
+          </div>
+          <div class="section_inputs_div">
+            <div class="subsection_div">
+              <!-- General Symptoms -->
+              <div class="subsection_label">
+                <h3>General Symptoms</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Fever" hidden><span>Fever</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Fatigue" hidden><span>Fatigue</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Weight Loss" hidden><span>Weight Loss</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Chills" hidden><span>Chills</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Night Sweats" hidden><span>Night Sweats</span></label>
+              </div>
+            </div>
+
+            <div class="subsection_div">
+              <!-- Pain -->
+              <div class="subsection_label">
+                <h3>Pain</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Headache" hidden><span>Headache</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Chest Pain" hidden><span>Chest Pain</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Abdominal Pain" hidden><span>Abdominal Pain</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Joint Pain" hidden><span>Joint Pain</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Back Pain" hidden><span>Back Pain</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Pelvic Pain" hidden><span>Pelvic Pain</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Muscle Pain" hidden><span>Muscle Pain</span></label>
+              </div>
+            </div>
+
+            <div class="subsection_div">
+              <!-- Respiratory -->
+              <div class="subsection_label">
+                <h3>Respiratory</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Cough" hidden><span>Cough</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Shortness of Breath" hidden><span>Shortness of Breath</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Wheezing" hidden><span>Wheezing</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Nasal Congestion" hidden><span>Nasal Congestion</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Sore Throat" hidden><span>Sore Throat</span></label>
+              </div>
+            </div>
+
+            <div class="subsection_div">
+              <!-- Cardiovascular -->
+              <div class="subsection_label">
+                <h3>Cardiovascular</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Palpitations" hidden><span>Palpitations</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Swelling in Legs" hidden><span>Swelling in Legs</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Dizziness / Fainting" hidden><span>Dizziness / Fainting</span></label>
+              </div>
+            </div>
+
+
+            <div class="subsection_div">
+              <!-- Gastrointestinal -->
+              <div class="subsection_label">
+                <h3>Gastrointestinal</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Nausea" hidden><span>Nausea</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Vomiting" hidden><span>Vomiting</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Diarrhea" hidden><span>Diarrhea</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Constipation" hidden><span>Constipation</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Heartburn" hidden><span>Heartburn</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Blood in Stool" hidden><span>Blood in Stool</span></label>
+              </div>
+            </div>
+
+
+            <div class="subsection_div">
+              <!-- Genitourinary -->
+              <div class="subsection_label">
+                <h3>Genitourinary</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Painful Urination" hidden><span>Painful Urination</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Frequent Urination" hidden><span>Frequent Urination</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Blood in Urine" hidden><span>Blood in Urine</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Incontinence" hidden><span>Incontinence</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Vaginal Discharge" hidden><span>Vaginal Discharge</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Erectile Dysfunction" hidden><span>Erectile Dysfunction</span></label>
+              </div>
+            </div>
+
+
+            <div class="subsection_div">
+              <!-- Neurological -->
+              <div class="subsection_label">
+                <h3>Neurological</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Dizziness" hidden><span>Dizziness</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Numbness / Tingling" hidden><span>Numbness / Tingling</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Seizures" hidden><span>Seizures</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Memory Loss" hidden><span>Memory Loss</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Tremors" hidden><span>Tremors</span></label>
+              </div>
+            </div>
+
+
+
+            <div class="subsection_div">
+              <!-- Mental Health  -->
+              <div class="subsection_label">
+                <h3>Mental Health </h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Anxiety" hidden><span>Anxiety</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Depression" hidden><span>Depression</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Insomnia" hidden><span>Insomnia</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Suicidal Thoughts" hidden><span>Suicidal Thoughts</span></label>
+              </div>
+            </div>
+
+
+            <div class="subsection_div">
+              <!-- Skin -->
+              <div class="subsection_label">
+                <h3>Skin</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Rash" hidden><span>Rash</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Itching" hidden><span>Itching</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Lumps or Bumps" hidden><span>Lumps or Bumps</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Hair Loss" hidden><span>Hair Loss</span></label>
+
+              </div>
+            </div>
+
+
+            <div class="subsection_div">
+              <!-- Eye / ENT -->
+              <div class="subsection_label">
+                <h3>Eye / ENT</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Blurred Vision" hidden><span>Blurred Vision</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Eye Pain" hidden><span>Eye Pain</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Hearing Loss" hidden><span>Hearing Loss</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Ringing in Ears" hidden><span>Ringing in Ears</span></label>
+              </div>
+            </div>
+
+            <div class="subsection_div">
+              <!-- Other  -->
+              <div class="subsection_label">
+                <h3>Other </h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="chief_complaint" value="Annual Checkup" hidden><span>Annual Checkup</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Medication Refill" hidden><span>Medication Refill</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Follow-Up Visit" hidden><span>Follow-Up Visit</span></label>
+                <label><input type="checkbox" name="chief_complaint" value="Pre-Surgical Clearance" hidden><span>Pre-Surgical Clearance</span></label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="input_div">
+          <div class="section_label_div">
+            <h3>History of Present Illness:</h3>
+          </div>
+          <div class="section_inputs_div">
+
+            <div class="subsection_div">
+              <!-- Onset -->
+              <div class="subsection_label">
+                <h3>Onset</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="radio" name="Onset" value="sudden" hidden><span>Sudden</span></label>
+                <label><input type="radio" name="Onset" value="gradual" hidden><span>Gradual</span></label>
+                <label><input type="radio" name="Onset" value="intermittent" hidden><span>Intermittent</span></label>
+                <label><input type="radio" name="Onset" value="unknown" hidden><span>Unknown</span></label>
+              </div>
+            </div>
+            <div class="subsection_div">
+              <!-- Location  -->
+              <div class="subsection_label">
+                <h3>Location</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="Location" value="head" hidden><span>Head</span></label>
+                <label><input type="checkbox" name="Location" value="chest" hidden><span>Chest</span></label>
+                <label><input type="checkbox" name="Location" value="abdomen" hidden><span>Abdomen</span></label>
+                <label><input type="checkbox" name="Location" value="back" hidden><span>Back</span></label>
+                <label><input type="checkbox" name="Location" value="arm_hand" hidden><span>Arm/Hand</span></label>
+                <label><input type="checkbox" name="Location" value="leg_foot" hidden><span>Leg/Foot</span></label>
+                <label><input type="checkbox" name="Location" value="generalized" hidden><span>Generalized</span></label>
+                <label>
+                  <span><input type="text" name="location_other" placeholder="Other (specify)"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="subsection_div">
+              <!-- Duration -->
+              <div class="subsection_label">
+                <h3>Duration</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="radio" name="Duration" value="minutes" hidden><span>Minutes</span></label>
+                <label><input type="radio" name="Duration" value="hours" hidden><span>Hours</span></label>
+                <label><input type="radio" name="Duration" value="days" hidden><span>Days</span></label>
+                <label><input type="radio" name="Duration" value="weeks" hidden><span>Weeks</span></label>
+                <label><input type="radio" name="Duration" value="months" hidden><span>Months</span></label>
+                <label><input type="radio" name="Duration" value="chronic" hidden><span>Chronic</span></label>
+                <label>
+                  <span><input type="text" name="duration_other" placeholder="Other (specify)"></span>
+                </label>
+              </div>
+            </div>
+
+
+            <div class="subsection_div">
+              <!-- Character -->
+              <div class="subsection_label">
+                <h3>Character</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="radio" name="Character" value="sharp" hidden><span>Sharp</span></label>
+                <label><input type="radio" name="Character" value="dull" hidden><span>Dull</span></label>
+                <label><input type="radio" name="Character" value="throbbing" hidden><span>Throbbing</span></label>
+                <label><input type="radio" name="Character" value="burning" hidden><span>Burning</span></label>
+                <label><input type="radio" name="Character" value="cramping" hidden><span>Cramping</span></label>
+                <label><input type="radio" name="Character" value="pressure" hidden><span>Pressure</span></label>
+                <label><input type="radio" name="Character" value="tingling_numb" hidden><span>Tingling/Numb</span></label>
+                <label>
+                  <span><input type="text" name="duration_other" placeholder="Other (specify)"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="subsection_div">
+              <!-- Aggravating/Alleviating Factors -->
+              <div class="subsection_label">
+                <h3>Aggravating/Alleviating Factors</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="checkbox" name="Aggravating/Alleviating Factors" value="sharp" hidden><span>Worse with movement</span></label>
+                <label><input type="checkbox" name="Aggravating/Alleviating Factors" value="dull" hidden><span>Worse with food</span></label>
+                <label><input type="checkbox" name="Aggravating/Alleviating Factors" value="throbbing" hidden><span>Worse at night</span></label>
+                <label><input type="checkbox" name="Aggravating/Alleviating Factors" value="burning" hidden><span>Relieved by rest</span></label>
+                <label><input type="checkbox" name="Aggravating/Alleviating Factors" value="cramping" hidden><span>Relieved by medication</span></label>
+                <label><input type="checkbox" name="Aggravating/Alleviating Factors" value="pressure" hidden><span>No relieving/aggravating factors</span></label>
+                <label><input type="checkbox" name="Aggravating/Alleviating Factors" value="tingling_numb" hidden><span>Tingling/Numb</span></label>
+                <label>
+                  <span><input type="text" name="duration_other" placeholder="Other (specify)"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="subsection_div">
+              <!-- Timing -->
+              <div class="subsection_label">
+                <h3>Timing</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="radio" name="Timing" value="constant" hidden><span>Constant</span></label>
+                <label><input type="radio" name="Timing" value="comes_and_goes" hidden><span>Comes and goes</span></label>
+                <label><input type="radio" name="Timing" value="worse_in_the_morning" hidden><span>Worse in the morning</span></label>
+                <label><input type="radio" name="Timing" value="worse_in_the_evening" hidden><span>Worse in the evening</span></label>
+                <label><input type="radio" name="Timing" value="occasional" hidden><span>Occasional</span></label>
+                <label><input type="radio" name="Timing" value="triggers" hidden><span>Only after specific triggers</span></label>
+                <label>
+                  <span><input type="text" name="duration_other" placeholder="Other (specify)"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="subsection_div">
+              <!-- Severity -->
+              <div class="subsection_label">
+                <h3>Severity</h3>
+              </div>
+              <div class="subsection_inputs_div">
+                <label><input type="radio" name="Severity" value="1" hidden><span>1 (Mild) </span></label>
+                <label><input type="radio" name="Severity" value="2" hidden><span>2</span></label>
+                <label><input type="radio" name="Severity" value="3" hidden><span>3</span></label>
+                <label><input type="radio" name="Severity" value="4" hidden><span>4</span></label>
+                <label><input type="radio" name="Severity" value="5" hidden><span>5</span></label>
+                <label><input type="radio" name="Severity" value="6" hidden><span>6</span></label>
+                <label><input type="radio" name="Severity" value="7" hidden><span>7</span></label>
+                <label><input type="radio" name="Severity" value="8" hidden><span>8</span></label>
+                <label><input type="radio" name="Severity" value="9" hidden><span>9</span></label>
+                <label><input type="radio" name="Severity" value="10" hidden><span>10 (Severe)</span></label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="input_div">
+          <div class="section_label_div">
+            <h3>Assessment:</h3>
+          </div>
+          <div class="section_inputs_div">
+            <textarea class="freetext" id="assessment" placeholder="Instructions, follow-up plan, or therapy interventions..."></textarea>
+          </div>
+        </div>
+
+        <div class="input_div">
+          <div class="section_label_div">
+            <h3>Care Plan:</h3>
+          </div>
+          <div class="section_inputs_div">
+            <textarea class="freetext" id="care_plan" placeholder="Instructions, follow-up plan, or therapy interventions..."></textarea>
+          </div>
+        </div>
+
+        <div class="input_div">
+          <div class="section_label_div">
+            <h3>Visit Status:</h3>
+          </div>
+          <div class="section_inputs_div">
+            <div class="subsection_inputs_div">
+              <label><input type="radio" name="visit_status" value="completed" hidden><span>Completed</span></label>
+              <label><input type="radio" name="visit_status" value="no_show" hidden><span>No Show</span></label>
+              <label><input type="radio" name="visit_status" value="cancelled_by_patient" hidden><span>Canceled by Patient</span></label>
+              <label><input type="radio" name="visit_status" value="cancelled_by_provider" hidden><span>Canceled by Provider</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="input_div">
+          <div class="section_label_div">
+            <h3>Other/Notes:</h3>
+          </div>
+          <div class="section_inputs_div">
+            <textarea class="freetext" id="visit_summary_notes" placeholder="Enter notes here..."></textarea>
+          </div>
+        </div>
+
+        <div id="error_message_div">
+          <p id="error_message">Could not edit user details at this time. Please try signing back in and trying again.</p>
+        </div>
+
+        <div class="submit_link_container">
+          <button class="inactive_button" id="submit_button" type="submit" disabled>Submit</button>
+          <a id="cancel_button">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/navbar.js"></script>
+  <script src="/js/visit_summary.js"></script>
+</body>
+
+</html>
