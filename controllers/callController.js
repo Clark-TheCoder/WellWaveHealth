@@ -61,4 +61,17 @@ async function emailCallLink(patientEmail, link) {
   }
 }
 
-export { createLink };
+async function changeCallStatus(req, res) {
+  const { value } = req.body;
+
+  console.log("Received status value:", value); // For debugging
+
+  // Optional: you can check if value is empty
+  if (!value) {
+    return res.status(400).json({ message: "Missing value in request body." });
+  }
+
+  return res.status(200).json({ message: "Great Success!" });
+}
+
+export { createLink, changeCallStatus };

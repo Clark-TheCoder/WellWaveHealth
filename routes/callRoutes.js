@@ -1,6 +1,7 @@
 import express from "express";
-import { createLink } from "../controllers/callController.js";
+import { createLink, changeCallStatus } from "../controllers/callController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
+import { get } from "http";
 const router = express.Router();
 
 router.get("/create_link", (req, res) => {
@@ -11,6 +12,12 @@ router.post("/create_link", authenticateToken, createLink);
 
 router.get("/visit_summary", (req, res) => {
   res.render("visit_summary");
+});
+
+router.patch("/change_call_status", authenticateToken, changeCallStatus);
+
+router.get("/scheduled_calls", (req, res) => {
+  res.render("scheduled_calls");
 });
 
 export default router;

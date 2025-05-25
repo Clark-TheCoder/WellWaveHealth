@@ -22,6 +22,9 @@ const PORT = process.env.PORT;
 app.use("/home", (req, res) => {
   res.render("home");
 });
+app.use("/error_page", (req, res) => {
+  res.render("error_page");
+});
 
 app.get("/", (req, res) => {
   res.send("hello");

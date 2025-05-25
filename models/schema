@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS call_logs (
   call_start_time TIMESTAMP,
   call_end_time TIMESTAMP,
   duration_minutes INT,
+  access_token VARCHAR(255) UNIQUE,
   status ENUM('generated', 'scheduled', 'in-progress', 'completed', 'cancelled_by_patient', 'cancelled_by_provider', 'no_show') DEFAULT 'generated',
   call_notes JSON,
   FOREIGN KEY (provider_id) REFERENCES users(id) ON DELETE CASCADE
