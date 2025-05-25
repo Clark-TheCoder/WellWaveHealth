@@ -19,8 +19,14 @@ const createLink = async (req, res) => {
   try {
     const newLink = await createCall(roomId, userId, patientAlias, accessToken);
     const link = `http://localhost:3000/join/${accessToken}`;
+
     if (email) {
-      await emailCallLink(email, link);
+      const sentEmail = await emailCallLink(email, link);
+      if (!sentEmail || sentEmail.error) {
+        return res.status(500).json({
+          message: "Link generated but failed to send email to patient.",
+        });
+      }
     }
     res.status(200).json({
       message: "Link generated successfully and sent to Patient",
@@ -37,7 +43,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 async function emailCallLink(patientEmail, link) {
   try {
     const data = await resend.emails.send({
-      from: "emmabossuytclark@gmail.com",
+      from: "onboarding@resend.dev",
       to: patientEmail,
       subject: "Your Virtual Appointment Link",
       html: `
@@ -51,7 +57,7 @@ async function emailCallLink(patientEmail, link) {
     return data;
   } catch (error) {
     console.error("Failed to send email via resend", error);
-    throw error;
+    return { error };
   }
 }
 

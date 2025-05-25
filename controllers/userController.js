@@ -38,6 +38,8 @@ const createUser = async (req, res) => {
     if (!newUser) {
       return res.status(400).json({ message: "Unable to create new user." });
     }
+
+    //create JWT token
     const token = jwt.sign(
       {
         id: Number(newUser.id),
@@ -46,11 +48,19 @@ const createUser = async (req, res) => {
         lastname: newUser.lastname,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "2h" }
+      { expiresIn: "4h" }
     );
 
+    //cookies
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 2 * 60 * 60 * 1000, // 2 hours
+    });
+
     res.status(201).json({
-      token,
+      message: "Successful Sign Up",
       user: {
         firstname: newUser.firstname,
         lastname: newUser.lastname,
@@ -94,11 +104,18 @@ const authenicateUser = async (req, res) => {
         lastname: existingUser.lastname,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "2h" }
+      { expiresIn: "4h" }
     );
 
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 2 * 60 * 60 * 1000, // 2 hours
+    });
+
     res.status(200).json({
-      token,
+      message: "Successful Login",
       user: {
         firstname: existingUser.firstname,
         lastname: existingUser.lastname,

@@ -1,12 +1,11 @@
 import jwt from "jsonwebtoken";
 
 const SECRET_KEY = process.env.JWT_SECRET;
+
 const authenticateToken = async (req, res, next) => {
   try {
-    const authHeader = req.headers["authorization"];
+    const token = req.cookies?.token; // Grab token from cookie
 
-    //check if token exists and split at the space if it does
-    const token = authHeader && authHeader.split(" ")[1];
     if (!token) {
       return res.status(403).json({ message: "Access Denied" });
     }
@@ -21,8 +20,7 @@ const authenticateToken = async (req, res, next) => {
       });
     });
 
-    req.user = decoded;
-
+    req.user = decoded; // Set user info for controller use
     next();
   } catch (error) {
     return res.status(403).json({ message: "Invalid or expired token." });

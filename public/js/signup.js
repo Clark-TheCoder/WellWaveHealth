@@ -58,6 +58,7 @@ function validateValues() {
 }
 
 const signupForm = document.getElementById("signup_form");
+
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -77,7 +78,6 @@ signupForm.addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
-      localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       window.location.href = "/home";
     } else {

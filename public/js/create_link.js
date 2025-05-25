@@ -57,22 +57,26 @@ createLinkForm.addEventListener("submit", async (e) => {
   const dayOfBirth = dayOfBirthInput.value;
   const email = emailInput.value;
   const phone = phoneInput.value;
-  const token = localStorage.getItem("token");
 
   try {
     const response = await fetch("/call/create_link", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
+      credentials: "include",
       body: JSON.stringify({ firstname, dayOfBirth, email, phone }),
     });
 
     const data = await response.json();
     if (response.ok) {
-      console.log(data.message);
+      console.log(data.link);
       submitButton.disabled = true;
+      const popup = document.getElementById("popup");
+      const pageOverlay = document.getElementById("page_overlay");
+      popup.style.display = "block";
+      popup.querySelector("h1").textContent = data.message;
+      pageOverlay.style.display = "block";
     } else {
       errorMessage.style.display = "flex";
       errorMesageText.textContent =
@@ -83,22 +87,3 @@ createLinkForm.addEventListener("submit", async (e) => {
     console.log("Cannot get to backend");
   }
 });
-
-function validateContactForm() {
-  const email = emailInput.value;
-  const phone = phoneInput.value;
-
-  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const isValidPhone = /^\d{10}$/.test(phone);
-  if (isValidEmail || isValidPhone) {
-    const sendButton = document.getElementById("send_button");
-    sendButton.classList.remove("inactive_button");
-    sendButton.classList.add("active_button");
-    sendButton.addEventListener("submit", sendPatientLink);
-  } else if (!isValidEmail && !isValidPhone) {
-    const sendButton = document.getElementById("send_button");
-    sendButton.classList.add("inactive_button");
-    sendButton.classList.remove("active_button");
-    sendButton.addEventListener("submit", sendPatientLink);
-  }
-}

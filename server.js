@@ -2,8 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
+app.use(cookieParser());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,5 +42,10 @@ app.use("/call", callRoutes);
 //User Routes
 import userRoutes from "./routes/userRoutes.js";
 app.use("/user", userRoutes);
+
+// app.get("/test-cookie", (req, res) => {
+//   console.log("Cookies:", req.cookies); // 🔍 This should log your JWT token
+//   res.send("Check your console for cookies.");
+// });
 
 app.listen(PORT);

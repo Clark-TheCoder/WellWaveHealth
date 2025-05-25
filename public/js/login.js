@@ -2,7 +2,7 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const submitButton = document.getElementById("submit_button");
 const errorMessage = document.getElementById("error_message_div");
-const errorMesageText = document.getElementById("error_message");
+const errorMessageText = document.getElementById("error_message");
 
 //activate submit button
 emailInput.addEventListener("input", checkInputs);
@@ -23,7 +23,6 @@ function checkInputs() {
 
 //log in user
 const loginForm = document.getElementById("login_form");
-
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -40,12 +39,11 @@ loginForm.addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
-      localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       window.location.href = "/home";
     } else {
       errorMessage.style.display = "flex";
-      errorMesageText.textContent =
+      errorMessageText.textContent =
         data.message || "Login failure. Please try again.";
     }
   } catch (error) {
