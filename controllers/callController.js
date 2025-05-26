@@ -1,6 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import crypto from "crypto";
-import { createCall, getCurrentCalls } from "../models/callModel.js";
+import {
+  createCall,
+  getCurrentCalls,
+  updateCallStatus,
+} from "../models/callModel.js";
 import { Resend } from "resend";
 import dotenv from "dotenv";
 dotenv.config();
@@ -23,7 +27,7 @@ const createLink = async (req, res) => {
       const sentEmail = await emailCallLink(email, link);
       if (!sentEmail || sentEmail.error) {
         return res.status(500).json({
-          message: "Link generated but failed to send email to patient.",
+          message: "Link failed to send to this email address",
         });
       }
     }
@@ -62,16 +66,20 @@ async function emailCallLink(patientEmail, link) {
 }
 
 async function changeCallStatus(req, res) {
-  const { value } = req.body;
+  const { updatedStatus, callAccessToken } = req.body;
 
-  console.log("Received status value:", value); // For debugging
+  console.log("Received status value:", updatedStatus);
 
-  // Optional: you can check if value is empty
-  if (!value) {
+  if (!updatedStatus || !callAccessToken) {
     return res.status(400).json({ message: "Missing value in request body." });
   }
-
-  return res.status(200).json({ message: "Great Success!" });
+  const updatedCall = await updateCallStatus(callAccessToken, updatedStatus);
+  if (!updatedCall) {
+    return res.status(400).json({ message: "Could not find call" });
+  }
+  return res
+    .status(200)
+    .json({ message: "Great Success!", newCallStatus: updatedStatus });
 }
 
 async function fetchCurrentCalls(req, res) {

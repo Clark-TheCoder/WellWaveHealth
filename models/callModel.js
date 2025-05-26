@@ -20,12 +20,13 @@ async function createCall(call_id, provider_id, patient_alias, access_token) {
   }
 }
 
-async function updateCallStatus(call_id, newStatus) {
+async function updateCallStatus(accessToken, newStatus) {
   try {
     const [result] = await db.execute(
-      `UPDATE calls SET status = ? WHERE call_id = ?`,
-      [newStatus, call_id]
+      `UPDATE calls SET status = ? WHERE access_token = ?`,
+      [newStatus, accessToken]
     );
+
     return result.affectedRows > 0;
   } catch (error) {
     console.error("Error updating call status:", error);
@@ -66,4 +67,4 @@ async function getCurrentCalls(userId) {
   }
 }
 
-export { createCall, getCurrentCalls };
+export { createCall, getCurrentCalls, updateCallStatus };
