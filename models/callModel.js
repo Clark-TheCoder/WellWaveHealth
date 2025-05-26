@@ -67,4 +67,27 @@ async function getCurrentCalls(userId) {
   }
 }
 
-export { createCall, getCurrentCalls, updateCallStatus };
+async function updateCallNotes(accessToken, formData) {
+  const { visitStatus, summary, plan, notes } = formData;
+
+  try {
+    const [result] = await db.execute(
+      `UPDATE calls
+       SET call_notes = JSON_OBJECT(
+         'visitStatus', ?,
+         'summary', ?,
+         'plan', ?,
+         'notes', ?
+       )
+       WHERE access_token = ?`,
+      [visitStatus, summary, plan, notes, accessToken]
+    );
+
+    return result;
+  } catch (error) {
+    console.error("Error updating call_notes:", error);
+    throw error;
+  }
+}
+
+export { createCall, getCurrentCalls, updateCallStatus, updateCallNotes };

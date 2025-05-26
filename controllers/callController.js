@@ -4,6 +4,7 @@ import {
   createCall,
   getCurrentCalls,
   updateCallStatus,
+  updateCallNotes,
 } from "../models/callModel.js";
 import { Resend } from "resend";
 import dotenv from "dotenv";
@@ -65,6 +66,31 @@ async function emailCallLink(patientEmail, link) {
   }
 }
 
+async function addCallNotes(req, res) {
+  const { accessToken, visitStatus, summary, plan, notes } = req.body;
+
+  if (!accessToken) {
+    return res.status(400).json({ error: "Access token is required" });
+  }
+
+  const formData = {
+    visitStatus,
+    summary,
+    plan,
+    notes,
+  };
+
+  const updatedCall = await updateCallNotes(accessToken, formData);
+
+  if (updatedCall) {
+    return res
+      .status(200)
+      .json({ message: "The notes have been saved for this call." });
+  } else {
+    return res.status(400).json({ error: result.error });
+  }
+}
+
 async function changeCallStatus(req, res) {
   const { updatedStatus, callAccessToken } = req.body;
 
@@ -101,4 +127,4 @@ async function fetchCurrentCalls(req, res) {
   }
 }
 
-export { createLink, changeCallStatus, fetchCurrentCalls };
+export { createLink, changeCallStatus, fetchCurrentCalls, addCallNotes };

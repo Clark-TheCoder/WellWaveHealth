@@ -85,8 +85,12 @@ function createChartButton(call) {
   chartButton.textContent = "Chart";
   chartButton.addEventListener("click", () => {
     console.log("Send to visitSummary page.");
-
-    // window.location.href = "visit_summary.html";
+    if (!call.access_token) {
+      console.log("No access token, need to put something here for this.");
+    } else {
+      sessionStorage.setItem("accessToken", call.access_token);
+      window.location.href = "/call/visit_summary";
+    }
   });
   return chartButton;
 }

@@ -3,6 +3,7 @@ import {
   createLink,
   changeCallStatus,
   fetchCurrentCalls,
+  addCallNotes,
 } from "../controllers/callController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
 import { get } from "http";
@@ -17,6 +18,8 @@ router.post("/create_link", authenticateToken, createLink);
 router.get("/visit_summary", (req, res) => {
   res.render("visit_summary");
 });
+
+router.patch("/visit_summary", authenticateToken, addCallNotes);
 
 router.get("/scheduled_calls", (req, res) => {
   res.render("scheduled_calls");

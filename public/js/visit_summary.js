@@ -99,42 +99,48 @@ const visitSummaryform = document.getElementById("visitSummary_form");
 visitSummaryform.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const formInfo = {};
   const visitStatus = currentVisitStatus;
-  const summary = summaryTextArea.value;
-  const plan = planTextArea.value;
-  const notes = notesTextArea.value;
+  const summary = summaryTextArea.value.trim();
+  const plan = planTextArea.value.trim();
+  const notes = notesTextArea.value.trim();
+  const accessToken = sessionStorage.getItem("accessToken");
 
-  if (visitStatus) formInfo.visitStatus = visitStatus;
-  if (summary) formInfo.summary = summary;
-  if (plan) formInfo.plan = plan;
-  if (notes) formInfo.notes = notes;
+  if (!accessToken) {
+    console.error("No access token found in sessionStorage.");
+    return;
+  }
+
+  const formInfo = {
+    visitStatus,
+    summary,
+    plan,
+    notes,
+  };
 
   console.log(formInfo);
-  const token = localStorage.getItem("token");
 
   try {
     const response = await fetch("/call/visit_summary", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authourization: `Bearer ${token}`,
       },
+      credentials: "include",
+      body: JSON.stringify({ accessToken, ...formInfo }),
     });
-  } catch (error) {
-    console.log("Cannot reach backend");
-  }
 
-  // try {
-  //   const response = await fetch("/call/visit_summary", {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     body: JSON.stringify(formInfo),
-  //   });
-  // } catch (error) {
-  //   console.log("Error:", error);
-  //}
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log("Visit summary submitted successfully.");
+      // Optionally redirect or show a confirmation message
+    } else {
+      console.error(
+        "Server responded with error:",
+        data.message || "Unknown error"
+      );
+    }
+  } catch (error) {
+    console.error("Fetch failed:", error);
+  }
 });
