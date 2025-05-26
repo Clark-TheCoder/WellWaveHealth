@@ -1,5 +1,9 @@
 import express from "express";
-import { createLink, changeCallStatus } from "../controllers/callController.js";
+import {
+  createLink,
+  changeCallStatus,
+  fetchCurrentCalls,
+} from "../controllers/callController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
 import { get } from "http";
 const router = express.Router();
@@ -19,5 +23,7 @@ router.patch("/change_call_status", authenticateToken, changeCallStatus);
 router.get("/scheduled_calls", (req, res) => {
   res.render("scheduled_calls");
 });
+
+router.get("/scheduled_calls/loadCalls", authenticateToken, fetchCurrentCalls);
 
 export default router;

@@ -36,7 +36,7 @@ async function updateCallStatus(call_id, newStatus) {
 async function findCallByAccessToken(accessToken) {
   try {
     const [rows] = await db.execute(
-      "SELECT * FROM call_logs WHERE access_token = ?",
+      "SELECT * FROM calls WHERE access_token = ?",
       [accessToken]
     );
 
@@ -47,4 +47,23 @@ async function findCallByAccessToken(accessToken) {
   }
 }
 
-export { createCall };
+async function getCurrentCalls(userId) {
+  try {
+    const [rows] = await db.execute(
+      `SELECT patient_alias, status, access_token
+       FROM calls
+       WHERE provider_id = ?
+         AND DATE(date_created) = CURDATE()
+         AND status IN ('generated', 'completed-not-charted')
+      `,
+      [userId]
+    );
+
+    return rows;
+  } catch (error) {
+    console.error("Error fetching today's call summaries:", error);
+    throw error;
+  }
+}
+
+export { createCall, getCurrentCalls };

@@ -15,7 +15,7 @@ body {
   background-position: center;
 }
 
-.wrapper {
+#wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,7 +46,7 @@ h3 {
   color: #ede8e1;
 }
 
-.calls {
+#calls {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -75,7 +75,7 @@ h3 {
   align-self: flex-end;
 }
 
-button {
+.button {
   margin: 5px;
   text-decoration: none;
   font-family: "Montserrat", sans-serif;
@@ -88,6 +88,13 @@ button {
   font-weight: 500;
 }
 
-button:hover {
+.button:hover {
   scale: 1.05;
+}
+
+.empty_calls_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
