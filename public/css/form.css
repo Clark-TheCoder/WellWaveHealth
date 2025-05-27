@@ -31,7 +31,8 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   padding: 20px;
   height: fit-content;
-  width: 40%;
+  width: 50%;
+  transition: width 0.3s ease-in-out;
 }
 
 .title_container {
@@ -82,12 +83,12 @@ h3 {
 .select_div {
   margin: 10px;
   background-color: white;
-  width: 60%;
-  min-width: 200px;
+  width: 90%;
   height: 50px;
   border-radius: 5px;
   display: flex;
   align-items: center;
+  margin: 15px 30px;
 }
 
 .input_div input:disabled {
@@ -194,4 +195,10 @@ a {
 
 a:hover {
   font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .form_container {
+    width: 90%;
+  }
 }
