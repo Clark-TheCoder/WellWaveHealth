@@ -68,19 +68,18 @@ async function getCurrentCalls(userId) {
 }
 
 async function updateCallNotes(accessToken, formData) {
-  const { visitStatus, summary, plan, notes } = formData;
+  const { summary, plan, notes } = formData;
 
   try {
     const [result] = await db.execute(
       `UPDATE calls
        SET call_notes = JSON_OBJECT(
-         'visitStatus', ?,
          'summary', ?,
          'plan', ?,
          'notes', ?
        )
        WHERE access_token = ?`,
-      [visitStatus, summary, plan, notes, accessToken]
+      [summary, plan, notes, accessToken]
     );
 
     return result;

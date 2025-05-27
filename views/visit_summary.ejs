@@ -72,10 +72,20 @@
         </div>
 
         <div class="submit_link_container">
-          <button class="inactive_button" id="submit_button" type="submit" disabled>Submit</button>
+          <button class="inactive_button" id="submit_button" type="button" disabled>Submit</button>
           <button id="cancel_button" type="button">Cancel</button>
         </div>
       </form>
+
+      <link rel="stylesheet" href="/css/popup.css" />
+      <div id="page_overlay"></div>
+      <div id="popup">
+        <h1>Success.</h1>
+        <div class="popup-button-container">
+          <button id="undo_button">Undo</button>
+          <button id="continue_button" type="submit">Continue</button>
+        </div>
+      </div>
     </div>
   </div>
 

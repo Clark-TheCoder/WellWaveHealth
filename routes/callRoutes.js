@@ -7,6 +7,7 @@ import {
 } from "../controllers/callController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
 import { get } from "http";
+import { updateCallStatus } from "../models/callModel.js";
 const router = express.Router();
 
 router.get("/create_link", (req, res) => {

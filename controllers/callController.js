@@ -69,25 +69,31 @@ async function emailCallLink(patientEmail, link) {
 async function addCallNotes(req, res) {
   const { accessToken, visitStatus, summary, plan, notes } = req.body;
 
-  if (!accessToken) {
-    return res.status(400).json({ error: "Access token is required" });
+  if (!accessToken || !visitStatus) {
+    return res
+      .status(400)
+      .json({ error: "Access token and visit status are required." });
   }
 
-  const formData = {
-    visitStatus,
-    summary,
-    plan,
-    notes,
-  };
+  const formData = { summary, plan, notes };
 
-  const updatedCall = await updateCallNotes(accessToken, formData);
+  try {
+    // Perform both updates
+    const statusUpdated = await updateCallStatus(accessToken, visitStatus);
+    const notesUpdated = await updateCallNotes(accessToken, formData);
 
-  if (updatedCall) {
-    return res
-      .status(200)
-      .json({ message: "The notes have been saved for this call." });
-  } else {
-    return res.status(400).json({ error: result.error });
+    if (!statusUpdated && !notesUpdated) {
+      return res
+        .status(400)
+        .json({ error: "Failed to update status and notes." });
+    }
+
+    return res.status(200).json({
+      message: "Visit summary and call status updated successfully.",
+    });
+  } catch (error) {
+    console.error("Error updating call notes/status:", error);
+    return res.status(500).json({ error: "Internal server error." });
   }
 }
 

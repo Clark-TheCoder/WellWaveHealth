@@ -94,7 +94,31 @@ const cancelButton = document
     notesTextArea.value = "";
   });
 
+const pageOverlay = document.getElementById("page_overlay");
+submitButton.addEventListener("click", verifySubmission);
+function verifySubmission() {
+  popup.style.display = "block";
+  popup.querySelector("h1").textContent =
+    "Once you sumbit this form, you will not be able to edit this call's information again.";
+  pageOverlay.style.display = "block";
+}
+
+const undoButton = document
+  .getElementById("undo_button")
+  .addEventListener("click", removePopup);
+
+function removePopup() {
+  popup.style.display = "none";
+  pageOverlay.style.display = "none";
+}
+
+const continueButton = document.getElementById("continue_button");
 const visitSummaryform = document.getElementById("visitSummary_form");
+
+continueButton.addEventListener("click", () => {
+  visitSummaryform.requestSubmit();
+  removePopup();
+});
 
 visitSummaryform.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -111,13 +135,10 @@ visitSummaryform.addEventListener("submit", async (e) => {
   }
 
   const formInfo = {
-    visitStatus,
     summary,
     plan,
     notes,
   };
-
-  console.log(formInfo);
 
   try {
     const response = await fetch("/call/visit_summary", {
@@ -126,14 +147,15 @@ visitSummaryform.addEventListener("submit", async (e) => {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ accessToken, ...formInfo }),
+      body: JSON.stringify({ accessToken, ...formInfo, visitStatus }),
     });
 
     const data = await response.json();
 
     if (response.ok) {
       console.log("Visit summary submitted successfully.");
-      // Optionally redirect or show a confirmation message
+      sessionStorage.removeItem("accessToken");
+      window.location.href = "/call/scheduled_calls";
     } else {
       console.error(
         "Server responded with error:",

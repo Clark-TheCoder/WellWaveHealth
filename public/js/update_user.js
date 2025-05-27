@@ -10,7 +10,6 @@ const errorMesageText = document.getElementById("error_message");
 const popup = document.getElementById("popup");
 const pageOverlay = document.getElementById("page_overlay");
 
-//add eventlistener to each field in the form
 const inputs = document.querySelectorAll("input");
 inputs.forEach((input) => {
   input.addEventListener("input", validateValues);
