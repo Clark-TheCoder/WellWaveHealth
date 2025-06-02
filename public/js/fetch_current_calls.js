@@ -115,7 +115,8 @@ function showCancelPopup(call) {
   const popup = document.getElementById("popup");
   const pageOverlay = document.getElementById("page_overlay");
   popup.style.display = "block";
-  popup.querySelector("h1").textContent = "Are you sure you want to cancel?";
+  popup.querySelector("h1").textContent =
+    "Are you sure you want to cancel this call?";
   pageOverlay.style.display = "block";
 
   const undoButton = document.getElementById("undo_button");

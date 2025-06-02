@@ -1,16 +1,19 @@
 import { v4 as uuidv4 } from "uuid";
-import crypto from "crypto";
+import crypto, { createSecretKey } from "crypto";
 import {
   createCall,
   getCurrentCalls,
   updateCallStatus,
   updateCallNotes,
+  retrieveCalls,
 } from "../models/callModel.js";
 import { Resend } from "resend";
 import dotenv from "dotenv";
 dotenv.config();
 import { generatePatientAlias } from "../utils/generatePatientAlias.js";
+import { formatDateQuery } from "../utils/formatDateQuery.js";
 import express from "express";
+import e from "express";
 
 const createLink = async (req, res) => {
   const userId = req.user.id;
@@ -133,4 +136,59 @@ async function fetchCurrentCalls(req, res) {
   }
 }
 
-export { createLink, changeCallStatus, fetchCurrentCalls, addCallNotes };
+async function fetchPastCalls(req, res) {
+  const { year, month, day, alias, status } = req.body;
+  const filterCriteria = {};
+
+  //deal with possible date formats
+  const date = {};
+  if (year) date.year = year;
+  if (month) date.month = month;
+  if (day) date.day = day;
+  const dateQueryParameters = formatDateQuery(date);
+  if (dateQueryParameters.exactDate)
+    filterCriteria.exactDate = dateQueryParameters.exactDate;
+  if (dateQueryParameters.startRange)
+    filterCriteria.startRange = dateQueryParameters.startRange;
+  if (dateQueryParameters.endRange)
+    filterCriteria.endRange = dateQueryParameters.endRange;
+
+  if (alias) filterCriteria.alias = alias;
+
+  //ensure status has a valid value
+  let validStatus = [
+    "completed",
+    "no_show",
+    "cancelled_by_provider",
+    "cancelled_by_patient",
+  ];
+  if (validStatus.includes(status)) {
+    filterCriteria.status = status;
+  } else {
+    res.status(400).json({ message: "Invalid Status." });
+  }
+
+  try {
+    const retrievedCalls = await retrieveCalls(filterCriteria);
+
+    if (retrievedCalls.length > 0) {
+      retrievedCalls;
+      return res.status(200).json({
+        calls: retrievedCalls,
+        message: `${retrievedCalls.length} calls found.`,
+      });
+    } else {
+      return res
+        .status(200)
+        .json({ message: "There are no calls that meet this criteria." });
+    }
+  } catch (error) {}
+}
+
+export {
+  createLink,
+  changeCallStatus,
+  fetchCurrentCalls,
+  fetchPastCalls,
+  addCallNotes,
+};

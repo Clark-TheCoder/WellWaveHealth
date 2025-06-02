@@ -90,7 +90,16 @@ createLinkForm.addEventListener("submit", async (e) => {
       popup.style.display = "block";
       popup.querySelector("h1").textContent = data.message;
       pageOverlay.style.display = "block";
-      //in here
+      const closeButton = document
+        .getElementById("close_button")
+        .addEventListener("click", () => {
+          popup.style.display = "none";
+          pageOverlay.style.display = "none";
+          firstNameInput.value = "";
+          dayOfBirthInput.value = "";
+          emailInput.value = "";
+          phoneInput.value = "";
+        });
     } else {
       errorMessage.style.display = "flex";
       errorMesageText.textContent =

@@ -89,4 +89,52 @@ async function updateCallNotes(accessToken, formData) {
   }
 }
 
-export { createCall, getCurrentCalls, updateCallStatus, updateCallNotes };
+async function retrieveCalls(searchFields) {
+  const { exactDate, startRange, endRange, status, alias } = searchFields;
+
+  const filters = [];
+  const values = [];
+
+  if (exactDate) {
+    filters.push("DATE(date_created) = ?");
+    values.push(exactDate);
+  }
+
+  if (startRange && endRange) {
+    filters.push("DATE(date_created) BETWEEN ? AND ?");
+    values.push(startRange, endRange);
+  }
+
+  if (status) {
+    filters.push("status = ?");
+    values.push(status);
+  }
+  if (alias) {
+    filters.push("patient_alias = ?");
+    values.push(alias);
+  }
+
+  //combine the clauses into one where clause
+  let whereClause = "";
+  if (filters.length > 0) {
+    whereClause = "WHERE " + filters.join(" AND ");
+  }
+
+  try {
+    const [results] = await db.execute(
+      `SELECT patient_alias, date_created, duration_minutes, status, call_notes from calls ${whereClause}`,
+      values
+    );
+    return results;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export {
+  createCall,
+  getCurrentCalls,
+  updateCallStatus,
+  updateCallNotes,
+  retrieveCalls,
+};

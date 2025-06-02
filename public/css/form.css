@@ -186,6 +186,10 @@ input::placeholder {
   cursor: not-allowed;
 }
 
+button {
+  color: #2184a3;
+}
+
 a {
   text-decoration: none;
   color: #2184a3;
