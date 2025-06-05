@@ -92,23 +92,23 @@ function validateForm() {
 const searchForm = document.getElementById("search_form");
 searchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  callsContainer.innerHTML = "";
 
+  const searchData = {};
   const year = yearInput.value.trim();
-  const month = Number(monthInput.value.trim());
-  const day = Number(dayInput.value.trim());
+  const month = monthInput.value.trim();
+  const day = dayInput.value.trim();
   const alias = aliasInput.value.trim();
   const status = statusInput.value.trim();
 
-  const searchData = {};
   if (year) searchData.year = year;
-  if (month) searchData.month = month;
-  if (day) searchData.day = day;
+  if (month !== "") searchData.month = Number(month);
+  if (day !== "") searchData.day = Number(day);
   if (alias) searchData.alias = alias;
   if (status) searchData.status = status;
 
-  console.log(searchData);
   try {
-    const response = await fetch("/call/call_history", {
+    let response = await fetch("/call/call_history", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -117,22 +117,23 @@ searchForm.addEventListener("submit", async (e) => {
 
     const data = await response.json();
     if (response.ok) {
-      console.log(data);
-      callsContainer.innerHTML = "";
-      if (data.calls) {
+      if (data.calls && data.calls.length > 0) {
+        console.log(data.calls);
         renderCalls(data.calls);
         errorMessage.style.display = "none";
       } else {
         errorMessage.style.display = "flex";
-        errorMessageText.textContent = data.message;
+        errorMessageText.textContent =
+          "Could not find calls matching this criteria. ";
       }
     } else {
       errorMessage.style.display = "flex";
-      errorMessageText.textContent = "Bad response. Please try again later.";
+      errorMessageText.textContent = data.message || "Unknown error";
     }
   } catch (error) {
     errorMessage.style.display = "flex";
-    errorMessageText.textContent = "Cannot get calls at this time.";
+    errorMessageText.textContent =
+      "We could not retrieve your search results. Check your internet connection or try again later.";
   }
 });
 

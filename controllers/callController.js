@@ -136,26 +136,85 @@ async function fetchCurrentCalls(req, res) {
   }
 }
 
+// async function fetchPastCalls(req, res) {
+//   const { year, month, day, alias, status } = req.body;
+//   const filterCriteria = {};
+
+//   //deal with possible date formats
+//   const date = {};
+//   if (year) date.year = year;
+//   if (month) date.month = month;
+//   if (day) date.day = day;
+//   const dateQueryParameters = formatDateQuery(date);
+//   if (dateQueryParameters.exactDate)
+//     filterCriteria.exactDate = dateQueryParameters.exactDate;
+//   if (dateQueryParameters.startRange)
+//     filterCriteria.startRange = dateQueryParameters.startRange;
+//   if (dateQueryParameters.endRange)
+//     filterCriteria.endRange = dateQueryParameters.endRange;
+
+//   if (alias) filterCriteria.alias = alias;
+
+//   //ensure status has a valid value
+//   let validStatus = [
+//     "completed",
+//     "no_show",
+//     "cancelled_by_provider",
+//     "cancelled_by_patient",
+//   ];
+//   if (status !== undefined && status !== "") {
+//     if (validStatus.includes(status)) {
+//       filterCriteria.status = status;
+//     } else {
+//       return res.status(400).json({ message: "Invalid Status." });
+//     }
+//   }
+
+//   try {
+//     const retrievedCalls = await retrieveCalls(filterCriteria);
+
+//     if (retrievedCalls.length > 0) {
+//       retrievedCalls;
+//       return res.status(200).json({
+//         calls: retrievedCalls,
+//         message: `${retrievedCalls.length} calls found.`,
+//       });
+//     } else {
+//       return res
+//         .status(200)
+//         .json({ message: "There are no calls that meet this criteria." });
+//     }
+//   } catch (error) {
+//     return res
+//       .status(400)
+//       .json({ message: "Cannot get calls. Try signing back in." });
+//   }
+// }
+
 async function fetchPastCalls(req, res) {
-  const { year, month, day, alias, status } = req.body;
+  const { year, month, day, status, alias } = req.body;
+  if (!year && !month && !day && !status && !alias) {
+    return res.status(400).json({ message: "No form data received" });
+  }
+
   const filterCriteria = {};
 
-  //deal with possible date formats
+  //add date if it exists and is in it's valid formats
   const date = {};
   if (year) date.year = year;
   if (month) date.month = month;
   if (day) date.day = day;
   const dateQueryParameters = formatDateQuery(date);
-  if (dateQueryParameters.exactDate)
-    filterCriteria.exactDate = dateQueryParameters.exactDate;
-  if (dateQueryParameters.startRange)
-    filterCriteria.startRange = dateQueryParameters.startRange;
-  if (dateQueryParameters.endRange)
-    filterCriteria.endRange = dateQueryParameters.endRange;
+  if (dateQueryParameters) {
+    if (dateQueryParameters.exactDate)
+      filterCriteria.exactDate = dateQueryParameters.exactDate;
+    if (dateQueryParameters.startRange)
+      filterCriteria.startRange = dateQueryParameters.startRange;
+    if (dateQueryParameters.endRange)
+      filterCriteria.endRange = dateQueryParameters.endRange;
+  }
 
-  if (alias) filterCriteria.alias = alias;
-
-  //ensure status has a valid value
+  //add status if it exists and is valid
   let validStatus = [
     "completed",
     "no_show",
@@ -169,25 +228,24 @@ async function fetchPastCalls(req, res) {
       return res.status(400).json({ message: "Invalid Status." });
     }
   }
+  //add alias if there is an alias
+  if (alias) {
+    filterCriteria.alias = alias;
+  }
 
   try {
     const retrievedCalls = await retrieveCalls(filterCriteria);
 
-    if (retrievedCalls.length > 0) {
-      retrievedCalls;
-      return res.status(200).json({
-        calls: retrievedCalls,
-        message: `${retrievedCalls.length} calls found.`,
-      });
-    } else {
-      return res
-        .status(200)
-        .json({ message: "There are no calls that meet this criteria." });
-    }
+    return res.status(200).json({
+      calls: retrievedCalls || [],
+      message:
+        retrievedCalls.length > 0 ? "Calls Found" : "No matching calls found.",
+    });
   } catch (error) {
+    console.error("Error retrieving calls:", error);
     return res
-      .status(400)
-      .json({ message: "Cannot get calls. Try signing back in." });
+      .status(500)
+      .json({ message: "Server error while retrieving calls." });
   }
 }
 

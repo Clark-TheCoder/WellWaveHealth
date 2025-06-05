@@ -95,14 +95,38 @@ async function retrieveCalls(searchFields) {
   const filters = [];
   const values = [];
 
-  if (exactDate) {
+  if (exactDate && status) {
     filters.push("DATE(date_created) = ?");
     values.push(exactDate);
   }
 
-  if (startRange && endRange) {
-    filters.push("DATE(date_created) BETWEEN ? AND ?");
-    values.push(startRange, endRange);
+  if (startRange && endRange && status) {
+    filters.push("date_created >= ? AND date_created < ?");
+
+    const endDateObj = new Date(endRange);
+    endDateObj.setDate(endDateObj.getDate() + 1);
+    const endRangePlusOne = endDateObj.toISOString().split("T")[0];
+
+    values.push(startRange, endRangePlusOne);
+  }
+
+  if (exactDate && !status) {
+    filters.push(
+      "DATE(date_created) = ? AND (status = 'completed' OR status = 'cancelled_by_provider' OR status = 'cancelled_by_patient' OR status = 'no_show')"
+    );
+    values.push(exactDate);
+  }
+
+  if (startRange && endRange && !status) {
+    filters.push(
+      "date_created >= ? AND date_created < ? AND (status = 'completed' OR status = 'cancelled_by_provider' OR status = 'cancelled_by_patient' OR status = 'no_show')"
+    );
+
+    const endDateObj = new Date(endRange);
+    endDateObj.setDate(endDateObj.getDate() + 1);
+    const endRangePlusOne = endDateObj.toISOString().split("T")[0];
+
+    values.push(startRange, endRangePlusOne);
   }
 
   if (status) {
@@ -119,15 +143,7 @@ async function retrieveCalls(searchFields) {
   if (filters.length > 0) {
     whereClause = "WHERE " + filters.join(" AND ");
   }
-  console.log(whereClause);
-
   try {
-    console.log(
-      await db.execute(
-        `SELECT patient_alias, date_created, duration_minutes, status, call_notes from calls ${whereClause}`,
-        values
-      )
-    );
     const [results] = await db.execute(
       `SELECT patient_alias, date_created, duration_minutes, status, call_notes from calls ${whereClause}`,
       values
