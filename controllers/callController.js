@@ -162,10 +162,12 @@ async function fetchPastCalls(req, res) {
     "cancelled_by_provider",
     "cancelled_by_patient",
   ];
-  if (validStatus.includes(status)) {
-    filterCriteria.status = status;
-  } else {
-    res.status(400).json({ message: "Invalid Status." });
+  if (status !== undefined && status !== "") {
+    if (validStatus.includes(status)) {
+      filterCriteria.status = status;
+    } else {
+      return res.status(400).json({ message: "Invalid Status." });
+    }
   }
 
   try {
@@ -182,7 +184,11 @@ async function fetchPastCalls(req, res) {
         .status(200)
         .json({ message: "There are no calls that meet this criteria." });
     }
-  } catch (error) {}
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Cannot get calls. Try signing back in." });
+  }
 }
 
 export {

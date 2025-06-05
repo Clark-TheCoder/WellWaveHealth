@@ -124,10 +124,14 @@ visitSummaryform.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const visitStatus = currentVisitStatus;
-  const summary = summaryTextArea.value.trim();
-  const plan = planTextArea.value.trim();
-  const notes = notesTextArea.value.trim();
+  let summary = summaryTextArea.value.trim();
+  let plan = planTextArea.value.trim();
+  let notes = notesTextArea.value.trim();
   const accessToken = sessionStorage.getItem("accessToken");
+
+  if (!summary) summary = "No summary provided.";
+  if (!plan) plan = "No care plan provided.";
+  if (!notes) notes = "No additional notes provided.";
 
   if (!accessToken) {
     console.error("No access token found in sessionStorage.");

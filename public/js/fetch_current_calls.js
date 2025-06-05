@@ -68,7 +68,7 @@ function createCallCard(call) {
     buttonDiv.appendChild(createJoinButton(call));
     buttonDiv.appendChild(createChartButton(call));
     buttonDiv.appendChild(createCancelButton(call));
-  } else if (call.status === "completed-not-charted") {
+  } else if (call.status === "completed_not_charted") {
     callDiv.style.backgroundColor = "#a4a4a4";
     buttonDiv.appendChild(createChartButton(call));
   }

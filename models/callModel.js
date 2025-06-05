@@ -119,8 +119,15 @@ async function retrieveCalls(searchFields) {
   if (filters.length > 0) {
     whereClause = "WHERE " + filters.join(" AND ");
   }
+  console.log(whereClause);
 
   try {
+    console.log(
+      await db.execute(
+        `SELECT patient_alias, date_created, duration_minutes, status, call_notes from calls ${whereClause}`,
+        values
+      )
+    );
     const [results] = await db.execute(
       `SELECT patient_alias, date_created, duration_minutes, status, call_notes from calls ${whereClause}`,
       values
