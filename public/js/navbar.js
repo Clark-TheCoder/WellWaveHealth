@@ -1,4 +1,4 @@
-fetch("/html/navbar.html") // Adjust the path to reflect the correct location
+fetch("/html/navbar.html")
   .then((res) => res.text())
   .then((data) => {
     document.getElementById("nav-placeholder").innerHTML = data;

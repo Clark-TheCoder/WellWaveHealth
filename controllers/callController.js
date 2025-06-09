@@ -14,6 +14,7 @@ import { generatePatientAlias } from "../utils/generatePatientAlias.js";
 import { formatDateQuery } from "../utils/formatDateQuery.js";
 import express from "express";
 import e from "express";
+import { readSync } from "fs";
 
 const createLink = async (req, res) => {
   const userId = req.user.id;
@@ -71,6 +72,7 @@ async function emailCallLink(patientEmail, link) {
 
 async function addCallNotes(req, res) {
   const { accessToken, visitStatus, summary, plan, notes } = req.body;
+  const userId = req.user.id;
 
   if (!accessToken || !visitStatus) {
     return res
@@ -82,7 +84,11 @@ async function addCallNotes(req, res) {
 
   try {
     // Perform both updates
-    const statusUpdated = await updateCallStatus(accessToken, visitStatus);
+    const statusUpdated = await updateCallStatus(
+      accessToken,
+      userId,
+      visitStatus
+    );
     const notesUpdated = await updateCallNotes(accessToken, formData);
 
     if (!statusUpdated && !notesUpdated) {
@@ -102,13 +108,16 @@ async function addCallNotes(req, res) {
 
 async function changeCallStatus(req, res) {
   const { updatedStatus, callAccessToken } = req.body;
-
-  console.log("Received status value:", updatedStatus);
+  const userId = req.user.id;
 
   if (!updatedStatus || !callAccessToken) {
     return res.status(400).json({ message: "Missing value in request body." });
   }
-  const updatedCall = await updateCallStatus(callAccessToken, updatedStatus);
+  const updatedCall = await updateCallStatus(
+    callAccessToken,
+    userId,
+    updatedStatus
+  );
   if (!updatedCall) {
     return res.status(400).json({ message: "Could not find call" });
   }
@@ -135,61 +144,6 @@ async function fetchCurrentCalls(req, res) {
     });
   }
 }
-
-// async function fetchPastCalls(req, res) {
-//   const { year, month, day, alias, status } = req.body;
-//   const filterCriteria = {};
-
-//   //deal with possible date formats
-//   const date = {};
-//   if (year) date.year = year;
-//   if (month) date.month = month;
-//   if (day) date.day = day;
-//   const dateQueryParameters = formatDateQuery(date);
-//   if (dateQueryParameters.exactDate)
-//     filterCriteria.exactDate = dateQueryParameters.exactDate;
-//   if (dateQueryParameters.startRange)
-//     filterCriteria.startRange = dateQueryParameters.startRange;
-//   if (dateQueryParameters.endRange)
-//     filterCriteria.endRange = dateQueryParameters.endRange;
-
-//   if (alias) filterCriteria.alias = alias;
-
-//   //ensure status has a valid value
-//   let validStatus = [
-//     "completed",
-//     "no_show",
-//     "cancelled_by_provider",
-//     "cancelled_by_patient",
-//   ];
-//   if (status !== undefined && status !== "") {
-//     if (validStatus.includes(status)) {
-//       filterCriteria.status = status;
-//     } else {
-//       return res.status(400).json({ message: "Invalid Status." });
-//     }
-//   }
-
-//   try {
-//     const retrievedCalls = await retrieveCalls(filterCriteria);
-
-//     if (retrievedCalls.length > 0) {
-//       retrievedCalls;
-//       return res.status(200).json({
-//         calls: retrievedCalls,
-//         message: `${retrievedCalls.length} calls found.`,
-//       });
-//     } else {
-//       return res
-//         .status(200)
-//         .json({ message: "There are no calls that meet this criteria." });
-//     }
-//   } catch (error) {
-//     return res
-//       .status(400)
-//       .json({ message: "Cannot get calls. Try signing back in." });
-//   }
-// }
 
 async function fetchPastCalls(req, res) {
   const { year, month, day, status, alias } = req.body;
@@ -249,10 +203,30 @@ async function fetchPastCalls(req, res) {
   }
 }
 
+async function joinCallAsDoctor(req, res) {
+  const { accessToken } = req.body;
+  const userId = req.user.id;
+  try {
+    const updatedCallStatus = await updateCallStatus(
+      accessToken,
+      userId,
+      "in_progress"
+    );
+    if (updatedCallStatus) {
+      return res.status(200).json({ message: "Call found." });
+    } else {
+      return res.status(400).json({ message: "Call not found." });
+    }
+  } catch (error) {
+    return res.status(400).json({ message: "Failed to join call" });
+  }
+}
+
 export {
   createLink,
   changeCallStatus,
   fetchCurrentCalls,
   fetchPastCalls,
   addCallNotes,
+  joinCallAsDoctor,
 };

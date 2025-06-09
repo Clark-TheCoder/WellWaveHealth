@@ -5,6 +5,7 @@ import {
   fetchCurrentCalls,
   addCallNotes,
   fetchPastCalls,
+  joinCallAsDoctor,
 } from "../controllers/callController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
 import { get } from "http";
@@ -34,7 +35,9 @@ router.get("/call_history", (req, res) => {
   res.render("call_history");
 });
 router.post("/call_history", authenticateToken, fetchPastCalls);
-
 router.patch("/change_call_status", authenticateToken, changeCallStatus);
+
+//join call routes
+router.post("/join/doctor", authenticateToken, joinCallAsDoctor);
 
 export default router;

@@ -8,7 +8,11 @@ CREATE TABLE IF NOT EXISTS call_logs (
   call_end_time TIMESTAMP,
   duration_minutes INT,
   access_token VARCHAR(255) UNIQUE,
-  status ENUM('generated', 'scheduled', 'in-progress', 'completed', 'cancelled_by_patient', 'cancelled_by_provider', 'no_show') DEFAULT 'generated',
-  call_notes JSON,
+  status ENUM('generated', 'scheduled', 'in_progress', 'completed', 'cancelled_by_patient', 'cancelled_by_provider', 'no_show') DEFAULT 'generated',
+  call_notes JSON DEFAULT ('{
+    "plan": "No care plan provided.",
+    "notes": "No additional notes provided.",
+    "summary": "No summary provided."
+  }')
   FOREIGN KEY (provider_id) REFERENCES users(id) ON DELETE CASCADE
 );

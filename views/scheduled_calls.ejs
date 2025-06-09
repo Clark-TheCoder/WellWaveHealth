@@ -22,18 +22,60 @@
     </div>
   </div>
 
+
   <link rel="stylesheet" href="/css/popup.css" />
   <div id="page_overlay"></div>
   <div id="popup">
     <h1>Success.</h1>
     <div class="popup-button-container">
-      <button id="undo_button">Undo</button>
-      <button id="continue_button">Continue</button>
     </div>
   </div>
 
+  <link rel="stylesheet" href="/css/pre_call_popup.css" />
+  <div id="pc_page_overlay"></div>
+  <div id="pc_popup">
+    <h2>Would you like to begin this call?</h2>
+    <div class="settings_container">
+      <div class="video_example">
+        <div class="video_placeholder">
+          <video id="video_preview" autoplay playsinline muted></video>
+          <img id="camera_icon" src="/media/images/camera-off-2.png" alt="Camera Turned Off">
+        </div>
+      </div>
+      <div class="settings">
+        <h3>Call Settings:</h3>
+        <div class="camera_settings_container">
+          <div class="camera_label_container">
+            <img src="/media/images/video-img.png" alt="Video">
+            <h4>Camera</h4>
+          </div>
+          <button id="camera_button"></button>
+        </div>
+
+        <div class="audio_settings_container">
+          <div class="audio_label_container">
+            <img src="/media/images/volume.png" alt="Video">
+            <h4>Microphone</h4>
+          </div>
+          <button id="audio_button" class="selected"></button>
+        </div>
+      </div>
+    </div>
+    <div class="pc_button_container">
+      <button id="cancel_call_button">Cancel</button>
+      <button id="join_call_button">Join Call</button>
+    </div>
+  </div>
+
+
+
+
+
   <script type="module" src="/js/fetch_current_calls.js"></script>
+  <script type="module" src="/js/join_call.js"></script>
   <script src="/js/navbar.js"></script>
+
+
 </body>
 
 </html>

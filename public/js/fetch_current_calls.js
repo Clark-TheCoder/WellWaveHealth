@@ -1,4 +1,5 @@
 import { changeCallStatus } from "./change_call_status.js";
+import { joinCall } from "./join_call.js";
 
 document.addEventListener("DOMContentLoaded", loadScheduledCalls);
 
@@ -81,7 +82,13 @@ function createJoinButton(call) {
   const joinButton = document.createElement("button");
   joinButton.classList.add("button");
   joinButton.textContent = "Join Call";
-  // Add logic as needed
+  console.log(call);
+  joinButton.addEventListener("click", () => {
+    showPreCallPopup(call.patient_alias);
+    if (showCancelPopup) {
+      joinCall(call);
+    }
+  });
   return joinButton;
 }
 
@@ -90,7 +97,6 @@ function createChartButton(call) {
   chartButton.classList.add("button");
   chartButton.textContent = "Chart";
   chartButton.addEventListener("click", () => {
-    console.log("Send to visitSummary page.");
     if (!call.access_token) {
       console.log("No access token, need to put something here for this.");
     } else {
@@ -114,25 +120,102 @@ function createCancelButton(call) {
 function showCancelPopup(call) {
   const popup = document.getElementById("popup");
   const pageOverlay = document.getElementById("page_overlay");
-  popup.style.display = "block";
-  popup.querySelector("h1").textContent =
-    "Are you sure you want to cancel this call?";
+
+  // Clear old popup content
+  popup.innerHTML = "";
+
+  // Show overlay and popup
   pageOverlay.style.display = "block";
+  popup.style.display = "block";
 
-  const undoButton = document.getElementById("undo_button");
-  const continueButton = document.getElementById("continue_button");
+  // Title
+  const title = document.createElement("h1");
+  title.textContent = "Are you sure you want to cancel this call?";
+  popup.appendChild(title);
 
-  const newUndo = undoButton.cloneNode(true);
-  undoButton.parentNode.replaceChild(newUndo, undoButton);
-  newUndo.addEventListener("click", () => {
+  // Button container
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("popup-button-container");
+
+  // Undo button
+  const undoButton = document.createElement("button");
+  undoButton.textContent = "Undo";
+  undoButton.id = "undo_button";
+  undoButton.addEventListener("click", () => {
     popup.style.display = "none";
     pageOverlay.style.display = "none";
   });
 
-  const newContinue = continueButton.cloneNode(true);
-  continueButton.parentNode.replaceChild(newContinue, continueButton);
-  newContinue.addEventListener("click", async () => {
+  // Continue button
+  const continueButton = document.createElement("button");
+  continueButton.textContent = "Continue";
+  continueButton.id = "continue_button";
+  continueButton.addEventListener("click", async () => {
     await changeCallStatus("cancelled_by_patient", call.access_token);
     window.location.reload();
   });
+
+  // Add buttons to container
+  buttonContainer.appendChild(undoButton);
+  buttonContainer.appendChild(continueButton);
+
+  // Add button container to popup
+  popup.appendChild(buttonContainer);
+}
+
+//pre call popup functionality
+const preCallPopup = document.getElementById("pc_popup");
+const preCallOverlay = document.getElementById("pc_page_overlay");
+const cancelCallButton = document.getElementById("cancel_call_button");
+const joinCallButton = document.getElementById("join_call_button");
+const cameraButton = document.getElementById("camera_button");
+const audioButton = document.getElementById("audio_button");
+const videoPreview = document.getElementById("video_preview");
+const cameraPlaceholder = document.getElementById("camera_icon");
+
+function showPreCallPopup(patientAlias) {
+  preCallPopup.style.display = "flex";
+  const callLabel = preCallPopup.querySelector("#pc_popup h2");
+  callLabel.innerHTML =
+    "Would you like to join this call with " + patientAlias + "?";
+  preCallOverlay.style.display = "block";
+}
+
+cancelCallButton.addEventListener("click", cancelJoinCallAction);
+function cancelJoinCallAction() {
+  preCallPopup.style.display = "none";
+  preCallOverlay.style.display = "none";
+  deactivateCamera();
+}
+
+cameraButton.addEventListener("click", toggleCameraSettings);
+function toggleCameraSettings() {
+  if (cameraButton.classList.contains("selected")) {
+    deactivateCamera();
+  } else {
+    activateCamera();
+  }
+}
+function activateCamera() {
+  navigator.mediaDevices
+    .getUserMedia({ video: true, audio: true })
+    .then((stream) => {
+      cameraButton.classList.add("selected");
+      cameraPlaceholder.style.display = "none";
+      videoPreview.srcObject = stream;
+      videoPreview.style.display = "block";
+    })
+    .catch((err) => {
+      console.error("Error accessing camera:", err);
+    });
+}
+function deactivateCamera() {
+  cameraButton.classList.remove("selected");
+  cameraPlaceholder.style.display = "flex";
+  let stream = videoPreview.srcObject;
+  if (stream) {
+    stream.getTracks().forEach((track) => track.stop());
+  }
+  videoPreview.srcObject = null;
+  videoPreview.style.display = "none";
 }

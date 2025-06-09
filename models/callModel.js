@@ -20,11 +20,11 @@ async function createCall(call_id, provider_id, patient_alias, access_token) {
   }
 }
 
-async function updateCallStatus(accessToken, newStatus) {
+async function updateCallStatus(accessToken, userId, newStatus) {
   try {
     const [result] = await db.execute(
-      `UPDATE calls SET status = ? WHERE access_token = ?`,
-      [newStatus, accessToken]
+      `UPDATE calls SET status = ? WHERE access_token = ? AND provider_id = ?`,
+      [newStatus, accessToken, userId]
     );
 
     return result.affectedRows > 0;
