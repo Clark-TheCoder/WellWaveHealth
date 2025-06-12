@@ -8,7 +8,7 @@
   padding: 20px 40px;
   box-shadow: 0 0 45px rgba(0, 0, 0, 0.2);
   z-index: 99999;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -132,7 +132,7 @@
   gap: 10px;
 }
 
-.audio_label_container img {
+#audio_image {
   height: 30px;
 }
 
@@ -184,7 +184,7 @@ h4 {
   #pc_popup {
     box-shadow: 0 0 45px rgba(0, 0, 0, 0.2);
     z-index: 99999;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;

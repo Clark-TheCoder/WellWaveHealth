@@ -40,4 +40,9 @@ router.patch("/change_call_status", authenticateToken, changeCallStatus);
 //join call routes
 router.post("/join/doctor", authenticateToken, joinCallAsDoctor);
 
+//doctor call view
+router.get("/doctor_call_view", (req, res) => {
+  res.render("doctor_call_view");
+});
+
 export default router;

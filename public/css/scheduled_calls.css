@@ -98,3 +98,14 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 600px) {
+  .call_buttons_div {
+    align-self: center;
+  }
+  .button {
+    font-size: medium;
+    font-weight: 500;
+    transition: font-size 0.3s ease;
+  }
+}
