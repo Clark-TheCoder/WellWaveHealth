@@ -1,4 +1,4 @@
-export async function joinCall(call, cameraSettings, audioSettings) {
+export async function joinCall(call, videoStream) {
   try {
     let response = await fetch("/call/join/doctor", {
       method: "POST",
@@ -9,6 +9,7 @@ export async function joinCall(call, cameraSettings, audioSettings) {
     const data = await response.json();
     if (response.ok) {
       window.location.href = "/call/doctor_call_view";
+      console.log(videoStream);
     } else {
       console.log("no");
     }
