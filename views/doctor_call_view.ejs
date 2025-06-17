@@ -6,10 +6,60 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>In Call</title>
+  <link rel="stylesheet" href="/css/doctor_call_view.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <div class="call_ui">
+    <div class="video_ui_container">
+      <div class="provider_video_container">
+        <div class="provider_video"> <img src="/media/images/stethoscope.png" alt="You"></div>
+      </div>
+      <div class="video_container">
+        <div class="video"><img src="/media/images/patient_icon.png" alt="Patient"></div>
+      </div>
+      <div class="video_buttons">
+        <button><img src="/media/images/volume_off.png" alt="Mic"></button>
+        <button><img src="/media/images/camera_off.png" alt="Camera"></button>
+        <button id="end_call_button"><img src="/media/images/end_call.png" alt="Hang Up"></button>
+      </div>
+    </div>
+    <button id="notes_button"><img src="/media/images/menu-dots-vertical.png" alt=""></button>
+    <div id="notes_container" class="hidden">
+      <div class="notes">
+        <div id="call_summary" class="input_div">
+          <div class="section_label_div">
+            <h3>Call Summary:</h3>
+          </div>
+          <div class="section_inputs_div">
+            <textarea class="freetext" id="summary_textarea" placeholder="Summary of discussion with patient..."></textarea>
+          </div>
+        </div>
+        <div id="plan" class="input_div">
+          <div class="section_label_div">
+            <h3>Plan:</h3>
+          </div>
+          <div class="section_inputs_div">
+            <textarea class="freetext" id="plan_textarea" placeholder="Care plan details, prescriptions, consultations..."></textarea>
+          </div>
+        </div>
+        <div id="notes" class="input_div">
+          <div class="section_label_div">
+            <h3>Additional Notes:</h3>
+          </div>
+          <div class="section_inputs_div">
+            <textarea class="freetext" id="notes_textarea" placeholder="Enter notes here..."></textarea>
+          </div>
+        </div>
+      </div>
 
+    </div>
+
+    <script type="module" src="/js/call_ui/sidebar_functionality.js"></script>
+    <script type="module" src="/js/call_ui/fetches/end_call.js"></script>
 </body>
 
 </html>

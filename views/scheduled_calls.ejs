@@ -46,7 +46,7 @@
         <h3>Call Settings:</h3>
         <div class="camera_settings_container">
           <div class="camera_label_container">
-            <img src="/media/images/video-camera.png" alt="Video">
+            <img id="camera_image" src=" /media/images/camera_off.png" alt="Video">
             <h4>Camera</h4>
           </div>
           <button id="camera_button"></button>
@@ -54,7 +54,7 @@
 
         <div class="audio_settings_container">
           <div class="audio_label_container">
-            <img id="audio_image" src="/media/images/audio.png" alt="Video">
+            <img id="audio_image" src="/media/images/volume_off.png" alt="Microphone">
             <h4>Microphone</h4>
           </div>
           <button id="audio_button"></button>
@@ -66,16 +66,8 @@
       <button id="join_call_button">Join Call</button>
     </div>
   </div>
-
-
-
-
-
   <script type="module" src="/js/fetch_current_calls.js"></script>
-  <script type="module" src="/js/join_call.js"></script>
   <script type="module" src="/js/navbar.js"></script>
-
-
 </body>
 
 </html>
