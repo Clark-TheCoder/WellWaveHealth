@@ -13,6 +13,8 @@ export async function toggleAudioSettings(audioButton, audioImage, audio) {
     audioSettings.enabled = false;
   } else {
     audio.srcObject = await activateAudio();
+    audio.muted = true;
+    await audio.play();
     audioButton.classList.add("selected");
     audioImage.src = "/media/images/volume_on.png";
     audioSettings.enabled = true;
