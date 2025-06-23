@@ -1,7 +1,7 @@
 const endCallButton = document.getElementById("end_call_button");
-endCallButton.addEventListener("click", showEndCallPopUp);
+endCallButton.addEventListener("click", endCall);
 
-function showEndCallPopUp() {
+function endCall() {
   const summaryTextArea = document.getElementById("summary_textarea");
   const planTextArea = document.getElementById("plan_textarea");
   const notesTextArea = document.getElementById("notes_textarea");

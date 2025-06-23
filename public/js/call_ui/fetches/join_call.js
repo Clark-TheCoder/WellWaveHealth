@@ -1,7 +1,7 @@
-import { activateAudio } from "../utils/audioSettings.js";
-import { activateCamera } from "../utils/cameraSettings.js";
+import { audioSettings } from "../../precall_call_ui/preCall_popup/toggle_audio.js";
+import { cameraSettings } from "../../precall_call_ui/preCall_popup/toggle_camera.js";
 
-export async function joinCall(call, cameraSettings, audioSettings) {
+export async function joinCall(call) {
   try {
     let response = await fetch("/call/join/doctor", {
       method: "POST",
@@ -11,12 +11,14 @@ export async function joinCall(call, cameraSettings, audioSettings) {
     });
     const data = await response.json();
     if (response.ok) {
-      if (cameraSettings === true) {
-        await activateCamera();
-      }
-      if (audioSettings) {
-        await activateAudio();
-      }
+      sessionStorage.setItem(
+        "audioState",
+        JSON.stringify(audioSettings.enabled)
+      );
+      sessionStorage.setItem(
+        "cameraState",
+        JSON.stringify(cameraSettings.enabled)
+      );
       window.location.href = "/call/doctor_call_view";
     } else {
       console.log("no");

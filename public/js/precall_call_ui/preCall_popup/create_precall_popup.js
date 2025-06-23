@@ -2,7 +2,7 @@ import { cameraSettings, toggleCameraSettings } from "./toggle_camera.js";
 import { audioSettings, toggleAudioSettings } from "./toggle_audio.js";
 import { deactivateCamera } from "../../../utils/cameraSettings.js";
 import { deactivateAudio } from "../../../utils/audioSettings.js";
-import { joinCall } from "../../join_call.js";
+import { joinCall } from "../../call_ui/fetches/join_call.js";
 
 const preCallPopup = document.getElementById("pc_popup");
 const preCallOverlay = document.getElementById("pc_page_overlay");
@@ -18,10 +18,7 @@ export function showPreCallPopup(call) {
   const newJoinCallButton = joinCallButton.cloneNode(true);
   joinCallButton.parentNode.replaceChild(newJoinCallButton, joinCallButton);
 
-  // Now attach the call-specific function
-  newJoinCallButton.addEventListener("click", () =>
-    joinCall(call, cameraSettings, audioSettings)
-  );
+  newJoinCallButton.addEventListener("click", () => joinCall(call));
 }
 //add functionality to the buttons on the pre call popup
 //doing it here because it makes sense in my head and it
@@ -43,6 +40,7 @@ cameraButton.addEventListener("click", () =>
 const audioImage = document.getElementById("audio_image");
 const audio = document.createElement("audio");
 audio.autoplay = true;
+
 audio.style.display = "none";
 document.body.appendChild(audio);
 

@@ -51,7 +51,7 @@ img {
 }
 
 #notes_button:hover {
-  background-color: #137c9c;
+  background-color: hsl(194, 90%, 39%);
 }
 
 #notes_button img {
@@ -132,16 +132,35 @@ h3 {
   align-items: center;
   height: 90px;
   width: 160px;
-  background-color: #0b303b;
   top: 20px;
   left: 20px;
-  border-radius: 5px;
-  border: 2px solid #cfe7eb;
 }
 
+.provider_video {
+  height: 100%;
+  width: 100%;
+  background-color: #0b303b;
+  border-radius: 5px;
+  border: 2px solid #cfe7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .provider_video img {
   height: 50px;
   width: 50px;
+}
+.hidden {
+  display: none;
+}
+
+.provider_video_on {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 2px solid #cfe7eb;
+  background-color: #0b303b;
 }
 
 .video_buttons {

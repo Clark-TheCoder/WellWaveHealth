@@ -16,14 +16,17 @@
   <div class="call_ui">
     <div class="video_ui_container">
       <div class="provider_video_container">
+        <!-- Placeholder before camera is on -->
         <div class="provider_video"> <img src="/media/images/stethoscope.png" alt="You"></div>
+        <!-- Actual video stream -->
+        <video class="provider_video_on hidden" autoplay muted src=""></video>
       </div>
       <div class="video_container">
         <div class="video"><img src="/media/images/patient_icon.png" alt="Patient"></div>
       </div>
       <div class="video_buttons">
-        <button><img src="/media/images/volume_off.png" alt="Mic"></button>
-        <button><img src="/media/images/camera_off.png" alt="Camera"></button>
+        <button id="audio_button"><img id="volume_image" src="/media/images/volume_off.png" alt="Mic"></button>
+        <button id="camera_button"><img id="camera_image" src="/media/images/camera_off.png" alt="Camera"></button>
         <button id="end_call_button"><img src="/media/images/end_call.png" alt="Hang Up"></button>
       </div>
     </div>
@@ -57,8 +60,9 @@
       </div>
 
     </div>
-
-    <script type="module" src="/js/call_ui/sidebar_functionality.js"></script>
+    <script type="module" src="/js/call_ui/doctor_call_view.js"></script>
+    <script type="module" src="/js/call_ui/functionality/general/sidebar_functionality.js"></script>
+    <script type="module" src="/js/call_ui/functionality/general/button_functionality.js"></script>
     <script type="module" src="/js/call_ui/fetches/end_call.js"></script>
 </body>
 

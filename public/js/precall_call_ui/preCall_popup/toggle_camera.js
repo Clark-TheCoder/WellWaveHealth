@@ -3,7 +3,7 @@ import {
   deactivateCamera,
 } from "../../../utils/cameraSettings.js";
 
-export let cameraSettings = false;
+export const cameraSettings = { enabled: false };
 
 export async function toggleCameraSettings(
   cameraButton,
@@ -18,13 +18,13 @@ export async function toggleCameraSettings(
     cameraPlaceholder.style.display = "flex";
     videoPreview.srcObject = null;
     videoPreview.style.display = "none";
-    cameraSettings = false;
+    cameraSettings.enabled = false;
   } else {
     videoPreview.srcObject = await activateCamera();
     videoPreview.style.display = "block";
     cameraButton.classList.add("selected");
     cameraImage.src = "/media/images/camera_on.png";
     cameraPlaceholder.style.display = "none";
-    cameraSettings = true;
+    cameraSettings.enabled = true;
   }
 }
