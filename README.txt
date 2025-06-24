@@ -25,6 +25,9 @@ In Progress (Remaining ~25%):
 • Finishing front-end UI polish (some popups and error messages)
 • Saving call log durations securely on the backend after the call has been completed
 • Clean up un-used calls that are older than 24 hours old
+• Develop sign out functionality
+• Create landing page
+
 ---
 
 Privacy & Security:
