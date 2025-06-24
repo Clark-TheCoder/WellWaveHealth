@@ -174,10 +174,10 @@ function renderCalls(calls) {
     const button = document.createElement("button");
     const img = document.createElement("img");
     img.id = "menu_icon";
-    img.src = "/media/images/down-arrow.png";
+    img.src = "/media/images/angle-down.png";
     img.alt = ">";
-    img.width = 35;
-    img.height = 35;
+    img.width = 30;
+    img.height = 30;
     button.appendChild(img);
     bottomOfCover.appendChild(bottomInfoContainer);
     bottomOfCover.appendChild(button);
