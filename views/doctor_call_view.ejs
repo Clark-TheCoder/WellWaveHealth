@@ -14,6 +14,7 @@
 
 <body>
   <div class="call_ui">
+    <audio id="provider_audio" autoplay muted></audio>
     <div class="video_ui_container">
       <div class="provider_video_container">
         <!-- Placeholder before camera is on -->
@@ -30,6 +31,7 @@
         <button id="end_call_button"><img src="/media/images/end_call.png" alt="Hang Up"></button>
       </div>
     </div>
+
     <button id="notes_button"><img src="/media/images/menu-dots-vertical.png" alt=""></button>
     <div id="notes_container" class="hidden">
       <div class="notes">
@@ -58,9 +60,20 @@
           </div>
         </div>
       </div>
-
     </div>
-    <audio id="provider_audio" autoplay muted></audio>
+
+    <link rel="stylesheet" href="/css/popup.css" />
+    <div id="page_overlay"></div>
+    <div id="popup">
+      <h1>End Call?</h1>
+      <p>How would you like to proceed?</p>
+      <div class="popup-button-container">
+        <button>End Call and Chart Now</button>
+        <button>End Call and Chart Later</button>
+        <button id="defined_button">Return to Call</button>
+      </div>
+    </div>
+
     <script type="module" src="/js/call_ui/doctor_call_view.js"></script>
     <script type="module" src="/js/call_ui/functionality/general/sidebar_functionality.js"></script>
     <script type="module" src="/js/call_ui/functionality/general/button_functionality.js"></script>

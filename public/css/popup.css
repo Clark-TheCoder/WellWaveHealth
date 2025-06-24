@@ -15,6 +15,12 @@
 
 #popup h1 {
   color: #2184a3;
+  font-family: "Montserrat", sans-serif;
+}
+
+p {
+  color: #2184a3;
+  font-family: "Montserrat", sans-serif;
 }
 
 .popup-button-container {
@@ -29,11 +35,23 @@
   font-size: small;
   padding: 10px 20px;
   border: 2px #2184a3 solid;
+  color: #2184a3;
   border-radius: 5px;
   background-color: white;
 }
 #popup button:hover {
-  border: 3px #2184a3 solid;
+  background-color: rgb(194, 194, 194);
+}
+
+#defined_button {
+  background-color: #2184a3 !important;
+  color: white !important;
+}
+
+#defined_button:hover {
+  background-color: #1a677e !important;
+  color: white !important;
+  border: 2px solid #1a677e !important;
 }
 
 #page_overlay {
@@ -45,4 +63,10 @@
   background-color: rgba(234, 229, 229, 0.7);
   z-index: 99998;
   display: none;
+}
+
+@media (max-width: 600px) {
+  .popup-button-container {
+    flex-direction: column;
+  }
 }
