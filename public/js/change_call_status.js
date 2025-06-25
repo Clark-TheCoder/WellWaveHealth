@@ -1,11 +1,10 @@
-export async function changeCallStatus(updatedStatus, callAccessToken) {
-  console.log("Sending value:", updatedStatus, callAccessToken);
+export async function changeCallStatus(updatedStatus, access_token) {
   try {
     const response = await fetch("/call/change_call_status", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({ updatedStatus, callAccessToken }),
+      body: JSON.stringify({ updatedStatus, access_token }),
     });
 
     const data = await response.json();

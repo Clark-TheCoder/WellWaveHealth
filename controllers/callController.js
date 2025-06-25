@@ -23,10 +23,10 @@ const createLink = async (req, res) => {
   const patientAlias = generatePatientAlias(firstname, dayOfBirth);
 
   const roomId = uuidv4();
-  const accessToken = crypto.randomBytes(16).toString("hex");
+  const access_token = crypto.randomBytes(16).toString("hex");
 
   try {
-    const link = `http://localhost:3000/join/${accessToken}`;
+    const link = `http://localhost:3000/join/${access_token}`;
 
     if (email) {
       const sentEmail = await emailCallLink(email, link);
@@ -36,7 +36,12 @@ const createLink = async (req, res) => {
         });
       }
     }
-    const newLink = await createCall(roomId, userId, patientAlias, accessToken);
+    const newLink = await createCall(
+      roomId,
+      userId,
+      patientAlias,
+      access_token
+    );
     res.status(200).json({
       message: "Link generated successfully and sent to Patient",
       link: link,
@@ -71,10 +76,10 @@ async function emailCallLink(patientEmail, link) {
 }
 
 async function addCallNotes(req, res) {
-  const { accessToken, visitStatus, summary, plan, notes } = req.body;
+  const { access_token, visitStatus, summary, plan, notes } = req.body;
   const userId = req.user.id;
 
-  if (!accessToken || !visitStatus) {
+  if (!access_token || !visitStatus) {
     return res
       .status(400)
       .json({ error: "Access token and visit status are required." });
@@ -85,11 +90,11 @@ async function addCallNotes(req, res) {
   try {
     // Perform both updates
     const statusUpdated = await updateCallStatus(
-      accessToken,
+      access_token,
       userId,
       visitStatus
     );
-    const notesUpdated = await updateCallNotes(accessToken, formData);
+    const notesUpdated = await updateCallNotes(access_token, formData);
 
     if (!statusUpdated && !notesUpdated) {
       return res
@@ -107,14 +112,14 @@ async function addCallNotes(req, res) {
 }
 
 async function changeCallStatus(req, res) {
-  const { updatedStatus, callAccessToken } = req.body;
+  const { updatedStatus, access_token } = req.body;
   const userId = req.user.id;
 
-  if (!updatedStatus || !callAccessToken) {
+  if (!updatedStatus || !access_token) {
     return res.status(400).json({ message: "Missing value in request body." });
   }
   const updatedCall = await updateCallStatus(
-    callAccessToken,
+    access_token,
     userId,
     updatedStatus
   );
@@ -204,11 +209,11 @@ async function fetchPastCalls(req, res) {
 }
 
 async function joinCallAsDoctor(req, res) {
-  const { accessToken } = req.body;
+  const { access_token } = req.body;
   const userId = req.user.id;
   try {
     const updatedCallStatus = await updateCallStatus(
-      accessToken,
+      access_token,
       userId,
       "in_progress"
     );

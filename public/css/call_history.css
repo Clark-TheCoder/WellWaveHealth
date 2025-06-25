@@ -133,6 +133,7 @@ button {
   height: fit-content;
   gap: 15px;
   margin-top: 30px;
+  padding-bottom: 50px;
 }
 
 .call {
@@ -214,4 +215,19 @@ p {
 #error_message_div p {
   font-family: "Montserrat", sans-serif;
   color: #c42424;
+}
+
+@media (max-width: 600px) {
+  .call_buttons_div {
+    align-self: center;
+  }
+  .button {
+    font-size: medium;
+    font-weight: 500;
+    transition: font-size 0.3s ease;
+  }
+  #calls {
+    width: 90%;
+    transition: width 0.4s ease-in-out;
+  }
 }

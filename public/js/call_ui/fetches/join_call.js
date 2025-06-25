@@ -7,7 +7,7 @@ export async function joinCall(call) {
       method: "POST",
       headers: { "Content-type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({ accessToken: call.access_token }),
+      body: JSON.stringify({ access_token: call.access_token }),
     });
     const data = await response.json();
     if (response.ok) {
@@ -19,6 +19,7 @@ export async function joinCall(call) {
         "cameraState",
         JSON.stringify(cameraSettings.enabled)
       );
+      sessionStorage.setItem("access_token", call.access_token);
       window.location.href = "/call/doctor_call_view";
     } else {
       console.log("no");

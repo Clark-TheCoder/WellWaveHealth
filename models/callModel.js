@@ -20,11 +20,11 @@ async function createCall(call_id, provider_id, patient_alias, access_token) {
   }
 }
 
-async function updateCallStatus(accessToken, userId, newStatus) {
+async function updateCallStatus(access_token, userId, newStatus) {
   try {
     const [result] = await db.execute(
       `UPDATE calls SET status = ? WHERE access_token = ? AND provider_id = ?`,
-      [newStatus, accessToken, userId]
+      [newStatus, access_token, userId]
     );
 
     return result.affectedRows > 0;
@@ -34,11 +34,11 @@ async function updateCallStatus(accessToken, userId, newStatus) {
   }
 }
 
-async function findCallByAccessToken(accessToken) {
+async function findCallByaccess_token(access_token) {
   try {
     const [rows] = await db.execute(
       "SELECT * FROM calls WHERE access_token = ?",
-      [accessToken]
+      [access_token]
     );
 
     return rows[0] || null;
@@ -55,7 +55,7 @@ async function getCurrentCalls(userId) {
        FROM calls
        WHERE provider_id = ?
          AND DATE(date_created) = CURDATE()
-         AND status IN ('generated', 'completed-not-charted')
+         AND status IN ('generated', 'completed_not_charted')
       `,
       [userId]
     );
@@ -67,7 +67,7 @@ async function getCurrentCalls(userId) {
   }
 }
 
-async function updateCallNotes(accessToken, formData) {
+async function updateCallNotes(access_token, formData) {
   const { summary, plan, notes } = formData;
 
   try {
@@ -79,7 +79,7 @@ async function updateCallNotes(accessToken, formData) {
          'notes', ?
        )
        WHERE access_token = ?`,
-      [summary, plan, notes, accessToken]
+      [summary, plan, notes, access_token]
     );
 
     return result;

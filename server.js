@@ -19,15 +19,16 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const PORT = process.env.PORT;
 
-app.use("/home", (req, res) => {
-  res.render("home");
-});
-app.use("/error_page", (req, res) => {
-  res.render("error_page");
+app.get("/", (req, res) => {
+  res.render("landingpage");
 });
 
-app.get("/", (req, res) => {
-  res.send("hello");
+app.get("/home", (req, res) => {
+  res.render("home");
+});
+
+app.use("/error_page", (req, res) => {
+  res.render("error_page");
 });
 
 app.get("/landingpage", (req, res) => {

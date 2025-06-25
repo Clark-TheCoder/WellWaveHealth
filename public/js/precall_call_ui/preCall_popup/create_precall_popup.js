@@ -20,7 +20,7 @@ export function showPreCallPopup(call) {
 
   newJoinCallButton.addEventListener("click", () => joinCall(call));
 }
-//add functionality to the buttons on the pre call popup
+//add functionality to the media buttons on the pre call popup
 //doing it here because it makes sense in my head and it
 //avoids race conditions
 const cameraImage = document.getElementById("camera_image");
