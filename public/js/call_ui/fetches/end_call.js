@@ -1,8 +1,15 @@
+import { changeCallStatus } from "../../../../utils/api/change_call_status.js";
 export async function endCall() {
-  const response = await fetch();
-  if (!access_token) {
-    console.error("No access token found in sessionStorage.");
-    return;
+  let changedStatus = await changeCallStatus(
+    "completed_not_charted",
+    sessionStorage.getItem("access_token")
+  );
+
+  if (changedStatus) {
+    sessionStorage.removeItem("access_token");
+  } else {
+    //***Tailor alert */
+    alert("Failed to change call status.");
   }
 }
 

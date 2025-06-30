@@ -18,12 +18,12 @@
     <div class="video_ui_container">
       <div class="provider_video_container">
         <!-- Placeholder before camera is on -->
-        <div class="provider_video"> <img src="/media/images/stethoscope.png" alt="You"></div>
+        <div class="provider_video"> <img src="/media/images/provider_on_call.jpg" alt="You"></div>
         <!-- Actual video stream -->
         <video class="provider_video_on hidden" autoplay muted src=""></video>
       </div>
       <div class="video_container">
-        <div class="video"><img src="/media/images/patient_icon.png" alt="Patient"></div>
+        <div class="video"><img src="/media/images/patient_on_call.jpg" alt="Patient"></div>
       </div>
       <div class="video_buttons">
         <button id="audio_button"><img id="volume_image" src="/media/images/volume_off.png" alt="Mic"></button>
@@ -74,10 +74,7 @@
       </div>
     </div>
 
-    <script type="module" src="/js/call_ui/doctor_call_view.js"></script>
-    <script type="module" src="/js/call_ui/functionality/general/sidebar_functionality.js"></script>
-    <script type="module" src="/js/call_ui/functionality/general/button_functionality.js"></script>
-    <script type="module" src="/js/call_ui/fetches/end_call.js"></script>
+    <script type="module" src="/js/call_ui/index.js"></script>
 </body>
 
 </html>

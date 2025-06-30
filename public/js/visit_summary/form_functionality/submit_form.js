@@ -1,3 +1,4 @@
+import { submitVisitSummary } from "../../../utils/api/submit_call_info.js";
 import { getCurrentVisitStatus } from "./status_handlers.js";
 
 export function setupFormSubmission() {
@@ -30,30 +31,23 @@ export function setupFormSubmission() {
       notes,
     };
 
-    try {
-      const response = await fetch("/call/visit_summary", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ access_token, ...formInfo, visitStatus }),
-      });
+    const result = await submitVisitSummary({
+      access_token,
+      summary,
+      plan,
+      notes,
+      visitStatus,
+    });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Visit summary submitted successfully.");
-        sessionStorage.removeItem("access_token");
-        window.location.href = "/call/scheduled_calls";
-      } else {
-        console.error(
-          "Server responded with error:",
-          data.message || "Unknown error"
-        );
-      }
-    } catch (error) {
-      console.error("Fetch failed:", error);
+    if (result.success) {
+      sessionStorage.removeItem("access_token");
+      window.location.href = "/call/scheduled_calls";
+    } else {
+      //***Need to add error message popup here */
+      console.error(
+        "Server responded with error:",
+        result.message || "Unknown error"
+      );
     }
   });
 }
