@@ -6,10 +6,10 @@ import {
   addCallNotes,
   fetchPastCalls,
   joinCallAsDoctor,
+  getCallNotes,
 } from "../controllers/callController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
 import { get } from "http";
-import { updateCallStatus } from "../models/callModel.js";
 const router = express.Router();
 
 //create link routes
@@ -23,6 +23,7 @@ router.get("/visit_summary", (req, res) => {
   res.render("visit_summary");
 });
 router.patch("/visit_summary", authenticateToken, addCallNotes);
+router.post("/visit_summary", authenticateToken, getCallNotes);
 
 //scheduled calls routes
 router.get("/scheduled_calls", (req, res) => {

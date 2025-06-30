@@ -111,6 +111,10 @@ async function addCallNotes(req, res) {
   }
 }
 
+async function getCallNotes(access_token) {
+  console.log("hi");
+}
+
 async function changeCallStatus(req, res) {
   const { updatedStatus, access_token } = req.body;
   const userId = req.user.id;
@@ -126,9 +130,8 @@ async function changeCallStatus(req, res) {
   if (!updatedCall) {
     return res.status(400).json({ message: "Could not find call" });
   }
-  return res
-    .status(200)
-    .json({ message: "Great Success!", newCallStatus: updatedStatus });
+  return res.status(200).json({ message: "Success" });
+  //,newCallStatus: updatedStatus
 }
 
 async function fetchCurrentCalls(req, res) {
@@ -234,4 +237,5 @@ export {
   fetchPastCalls,
   addCallNotes,
   joinCallAsDoctor,
+  getCallNotes,
 };
