@@ -3,26 +3,27 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  width: 100vw;
-  height: fit-content;
-  background-color: whitesmoke;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #ede8e1;
   font-family: "Montserrat", sans-serif;
 }
 
 nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   height: 80px;
   padding: 0 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: whitesmoke;
+  background-color: #ede8e1;
   box-sizing: border-box;
-  z-index: 10;
-  position: relative;
+  border-bottom: 2px grey solid;
 }
 
 nav a img {
@@ -47,7 +48,7 @@ nav ul a:hover {
   text-decoration: underline;
 }
 
-#button_nav_container a {
+.button_nav_container a {
   font-family: "Montserrat", sans-serif;
   font-size: small;
   padding: 10px 20px;
@@ -58,18 +59,80 @@ nav ul a:hover {
   margin: 0 3px;
   align-self: center;
 }
-#button_nav_container a:hover {
+.button_nav_container a:hover {
   background-color: #0b3f4d;
 }
 
 section {
-  height: 100vh;
+  height: calc(100vh - 80px);
   width: 100vw;
   background-color: #0e5467;
 }
 
 section:nth-of-type(odd) {
-  background-color: #ede8e1ed; /* or any color you like */
+  background-color: #ede8e1;
+}
+
+#welcome_content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding-top: 80px;
+  align-items: center;
+  gap: 30px;
+}
+.welcome_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+}
+
+h1 {
+  font-size: 6em;
+  color: #0e5467;
+}
+
+h2 {
+  font-size: 3em;
+  color: #0e5467;
+}
+
+h3 {
+  font-size: 2em;
+  color: #0e5467;
+}
+
+#welcome_content h4 {
+  width: 80vw;
+  font-size: 1em;
+  color: #828b8e;
+}
+
+.button_welcome_container a {
+  font-family: "Montserrat", sans-serif;
+  font-size: medium;
+  padding: 10px 20px;
+  background-color: #0e5467;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.button_welcome_container a:hover {
+  background-color: #0b3f4d;
+}
+.welcome_image {
+  color: palegoldenrod;
+  width: 80%;
+}
+
+.welcome_image img {
+  height: 100%;
+  width: 100%;
 }
 
 @media (max-width: 600px) {
