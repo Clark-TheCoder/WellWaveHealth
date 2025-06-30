@@ -1,4 +1,7 @@
-import { createCallCard, showNoCallsMessage } from "./precall_call_ui/index.js";
+import {
+  createCallCard,
+  showNoCallsMessage,
+} from "./scheduled_calls/precall_call_ui/index.js";
 
 document.addEventListener("DOMContentLoaded", loadScheduledCalls);
 
