@@ -1,4 +1,5 @@
-import { createCallCard } from "./create_call_card.js";
+import { createCallCard } from "./call_card/create_call_card.js";
+import { showNoCallsMessage } from "./call_card/show_no_calls_message.js";
 
 // Load calls when page loads
 document.addEventListener("DOMContentLoaded", loadScheduledCalls);

@@ -6,15 +6,13 @@ import {
   updateCallStatus,
   updateCallNotes,
   retrieveCalls,
+  retrieveCallNotes,
 } from "../models/callModel.js";
 import { Resend } from "resend";
 import dotenv from "dotenv";
 dotenv.config();
 import { generatePatientAlias } from "../utils/generatePatientAlias.js";
 import { formatDateQuery } from "../utils/formatDateQuery.js";
-import express from "express";
-import e from "express";
-import { readSync } from "fs";
 
 const createLink = async (req, res) => {
   const userId = req.user.id;
@@ -111,8 +109,31 @@ async function addCallNotes(req, res) {
   }
 }
 
-async function getCallNotes(access_token) {
-  console.log("hi");
+async function getCallNotes(req, res) {
+  const userId = req.user?.id;
+  const { access_token } = req.body;
+
+  if (!access_token) {
+    return res.status(400).json({ message: "Cannot find call." });
+  }
+
+  try {
+    const call = await retrieveCallNotes(access_token, userId);
+
+    if (!call) {
+      return res.status(404).json({ message: "Call not found." });
+    }
+
+    console.log(call.call_notes);
+    return res
+      .status(200)
+      .json({ message: "Success", data: { notes: call.call_notes } });
+  } catch (error) {
+    console.error("Error retrieving call notes:", error);
+    return res
+      .status(500)
+      .json({ message: "Server error while retrieving notes." });
+  }
 }
 
 async function changeCallStatus(req, res) {

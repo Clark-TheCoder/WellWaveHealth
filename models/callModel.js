@@ -34,17 +34,18 @@ async function updateCallStatus(access_token, userId, newStatus) {
   }
 }
 
-async function findCallByaccess_token(access_token) {
+async function retrieveCallNotes(access_token, userId) {
+  console.log("Searching DB with:", access_token, userId);
   try {
     const [rows] = await db.execute(
-      "SELECT * FROM calls WHERE access_token = ?",
-      [access_token]
+      `SELECT call_notes FROM calls WHERE access_token = ? AND provider_id = ?`,
+      [access_token, userId]
     );
-
+    console.log("DB rows:", rows);
     return rows[0] || null;
-  } catch (error) {
-    console.error("Error finding call by access token:", error);
-    throw error;
+  } catch (err) {
+    console.error("DB error:", err);
+    throw err; // Don't hide the error
   }
 }
 
@@ -160,4 +161,5 @@ export {
   updateCallStatus,
   updateCallNotes,
   retrieveCalls,
+  retrieveCallNotes,
 };

@@ -55,7 +55,6 @@ async function endAndChart() {
     alert("Unable to save call notes. Call will still be ended.");
   }
 
-  sessionStorage.removeItem("access_token");
   window.location.href = "/call/visit_summary";
 }
 

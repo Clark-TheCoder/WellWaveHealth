@@ -4,6 +4,7 @@ export function createChartButton(call) {
   chartButton.textContent = "Chart";
   chartButton.addEventListener("click", () => {
     if (!call.access_token) {
+      //***Make a custom alert */
       console.log("No access token, need to put something here for this.");
     } else {
       sessionStorage.setItem("access_token", call.access_token);
