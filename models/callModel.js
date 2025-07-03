@@ -155,6 +155,33 @@ async function retrieveCalls(searchFields) {
   }
 }
 
+// async function validateCall(access_token) {
+//   console.log("validateCall called with token:", access_token);
+//   try {
+//     const [rows] = await db.execute(
+//       `SELECT status FROM calls WHERE access_token = ? AND call_end_time IS NULL AND status IN ('in_progress', 'generated') `,
+//       [access_token]
+//     );
+//     console.log(rows);
+//     return rows.length > 0 ? rows[0] : null;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
+async function validateCall(access_token) {
+  try {
+    const [rows] = await db.execute(
+      `SELECT * FROM calls WHERE access_token = ? AND call_end_time IS NULL AND status IN ('in_progress', 'generated')`,
+      [access_token]
+    );
+    console.log([rows]);
+    return rows.length > 0 ? rows[0] : null;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export {
   createCall,
   getCurrentCalls,
@@ -162,4 +189,5 @@ export {
   updateCallNotes,
   retrieveCalls,
   retrieveCallNotes,
+  validateCall,
 };

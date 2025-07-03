@@ -7,6 +7,7 @@ import {
   updateCallNotes,
   retrieveCalls,
   retrieveCallNotes,
+  validateCall,
 } from "../models/callModel.js";
 import { Resend } from "resend";
 import dotenv from "dotenv";
@@ -24,7 +25,7 @@ const createLink = async (req, res) => {
   const access_token = crypto.randomBytes(16).toString("hex");
 
   try {
-    const link = `http://localhost:3000/join/${access_token}`;
+    const link = `http://localhost:3000/call/join/${access_token}`;
 
     if (email) {
       const sentEmail = await emailCallLink(email, link);
@@ -251,6 +252,22 @@ async function joinCallAsDoctor(req, res) {
   }
 }
 
+async function validatePatientToken(req, res) {
+  const access_token = req.params.access_token;
+  try {
+    const validCall = await validateCall(access_token);
+
+    if (!validCall) {
+      return res.status(403).send("Access denied or call not found.");
+    }
+    res.render("patient_call_view", {
+      callStatus: validCall.status,
+    });
+  } catch (error) {
+    res.status(500).send("Internal server error");
+  }
+}
+
 export {
   createLink,
   changeCallStatus,
@@ -259,4 +276,5 @@ export {
   addCallNotes,
   joinCallAsDoctor,
   getCallNotes,
+  validatePatientToken,
 };

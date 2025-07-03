@@ -20,11 +20,24 @@ export async function joinCall(call) {
         JSON.stringify(cameraSettings.enabled)
       );
       sessionStorage.setItem("access_token", call.access_token);
-      window.location.href = "/call/doctor_call_view";
+      window.location.href = "/call/doctor_call_view"; //will add logic once user is in this page to make the connection
     } else {
+      /***create custom error message */
       console.log("no");
     }
   } catch (error) {
     console.error("Join call error:", error);
   }
 }
+
+// To be kept the same when adding
+//
+// Triggers backend status updates ✅
+// Saves mic/cam preferences ✅
+// Redirects to the actual call page ✅
+
+// And in /call/doctor_call_view, you’ll use sessionStorage.getItem("access_token") to:
+// Get the call_id (via backend or socket handshake)
+// Join the correct WebRTC room
+// Start signaling
+//Do this in: public/js/doctor_call/index.js
