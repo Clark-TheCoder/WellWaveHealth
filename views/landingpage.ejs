@@ -22,14 +22,14 @@
         <li><a href="">WORKFLOW</a></li>
       </ul>
       <div class="button_nav_container">
-        <a href="">Login</a>
-        <a href="">Sign Up</a>
+        <a href="auth/login">Login</a>
+        <a href="auth/signup">Sign Up</a>
       </div>
     </div>
   </nav>
   <main>
     <section id="welcome">
-      <div id="welcome_content">
+      <div id="welcome_container" class="container">
         <div class="welcome_text">
           <h3>Welcome to</h3>
           <h1>WELLWAVE</h1>
@@ -39,8 +39,8 @@
           </h4>
         </div>
         <div class="button_welcome_container">
-          <a href="">Login</a>
-          <a href="">Sign Up</a>
+          <a href="auth/login">Login</a>
+          <a href="auth/signup">Sign Up</a>
         </div>
 
         <div class="welcome_image">
@@ -48,30 +48,34 @@
         </div>
       </div>
     </section>
-    <section id="quick_summary">
-      <div class="benefits_container">
-        <h2>Why Choose WellWave Health?</h2>
-        <div class="benefits_grid">
-          <div class="benefit_card">
+    <section id="benefits">
+      <div id="benefits_container">
+        <div class="benefits_text">
+          <h2>Why Choose WellWave Health?</h2>
+        </div>
+        <div class="benefit_card_container">
+          <div class="card">
             <h3>Secure Virtual Care</h3>
-            <p>End-to-end encrypted video calls keep patient information private and secure, in line with Nova Scotia Health Authority standards.</p>
+            <p>End-to-end <strong>encrypted video calls</strong> keep patient information private and secure, in line with Nova Scotia Health Authority standards.</p>
           </div>
-          <div class="benefit_card">
+          <div class="card">
             <h3>Streamlined Access</h3>
-            <p>Patients can connect with their provider in just one click—no downloads, no confusion.</p>
+            <p>Patients can connect with their provider in just one click—no downloads, no confusion. <strong>No extra apps, no setup</strong>—just click and join the call instantly.</p>
           </div>
-          <div class="benefit_card">
-            <h3>Real-Time Documentation</h3>
-            <p>Clinicians can take and save notes directly during the session, making documentation seamless and organized.</p>
+          <div class="card">
+            <h3>Real-Time Notes</h3>
+            <p>Clinicians can record notes during the session, <strong>streamlining documentation</strong> and enabling them to focus entirely on patient care.</p>
           </div>
-          <div class="benefit_card">
+          <div class="card">
             <h3>Efficient Workflow</h3>
-            <p>Appointments, notes, and call history are all managed in one place—saving time and reducing stress.</p>
+            <p>Appointments, notes, and call history are managed in one place—giving providers a <strong>clear, organized view</strong> of each patient’s care journey.</p>
           </div>
         </div>
       </div>
+
     </section>
-    <section id="more_info"></section>
+    <section id=" more_info">
+    </section>
   </main>
 </body>
 

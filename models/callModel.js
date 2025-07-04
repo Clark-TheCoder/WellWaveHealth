@@ -172,7 +172,7 @@ async function retrieveCalls(searchFields) {
 async function validateCall(access_token) {
   try {
     const [rows] = await db.execute(
-      `SELECT * FROM calls WHERE access_token = ? AND call_end_time IS NULL AND status IN ('in_progress', 'generated')`,
+      `SELECT * FROM calls WHERE access_token = ? AND call_end_time IS NULL AND status IN ('in_progress', 'generated', 'completed_not_charted', 'completed')`,
       [access_token]
     );
     console.log([rows]);
