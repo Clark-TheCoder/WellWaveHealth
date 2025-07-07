@@ -1,7 +1,4 @@
-import {
-  activateCamera,
-  deactivateCamera,
-} from "../../../../utils/cameraSettings.js";
+import { activateCamera, deactivateCamera } from "./cameraSettings.js";
 
 export const cameraSettings = { enabled: false };
 

@@ -1,7 +1,7 @@
 import { changeCallStatus } from "../../../../utils/api/change_call_status.js";
 import { submitVisitSummary } from "../../../../utils/api/submit_call_info.js";
-import { turnMicOff } from "../media_settings/toggle_audio.js";
-import { turnCameraOff } from "../media_settings/toggle_camera.js";
+import { turnMicOff } from "../media_settings/inCall_toggle_audio.js";
+import { turnCameraOff } from "../media_settings/inCall_toggle_camera.js";
 import { getSidebarNotes } from "./sidebar_functionality.js";
 
 const popup = document.getElementById("popup");

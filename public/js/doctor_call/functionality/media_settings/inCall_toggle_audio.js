@@ -1,7 +1,7 @@
 import {
   activateAudio,
   deactivateAudio,
-} from "../../../../utils/audioSettings.js";
+} from "../../../../utils/media/audioSettings.js";
 
 const providerAudio = document.getElementById("provider_audio");
 const audioIcon = document.getElementById("volume_image");

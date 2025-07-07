@@ -4,12 +4,12 @@ import {
   toggleAudio,
   turnMicOn,
   turnMicOff,
-} from "./functionality/media_settings/toggle_audio.js";
+} from "./functionality/media_settings/inCall_toggle_audio.js";
 import {
   toggleCamera,
   turnCameraOff,
   turnCameraOn,
-} from "./functionality/media_settings/toggle_camera.js";
+} from "./functionality/media_settings/inCall_toggle_camera.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // UI functionality

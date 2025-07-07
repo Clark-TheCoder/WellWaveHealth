@@ -1,7 +1,14 @@
-import { cameraSettings, toggleCameraSettings } from "./toggle_camera.js";
-import { audioSettings, toggleAudioSettings } from "./toggle_audio.js";
-import { deactivateCamera } from "../../../../utils/cameraSettings.js";
-import { deactivateAudio } from "../../../../utils/audioSettings.js";
+import {
+  cameraSettings,
+  toggleCameraSettings,
+} from "../../../../utils/media/preCall_toggle_camera_pre.js";
+
+import {
+  audioSettings,
+  toggleAudioSettings,
+} from "../../../../utils/media/preCall_toggle_audio.js";
+import { deactivateCamera } from "../../../../utils/media/cameraSettings.js";
+import { deactivateAudio } from "../../../../utils/media/audioSettings.js";
 import { joinCall } from "../../../doctor_call/fetches/join_call.js";
 
 const preCallPopup = document.getElementById("pc_popup");

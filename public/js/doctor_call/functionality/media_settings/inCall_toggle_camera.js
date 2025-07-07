@@ -1,7 +1,7 @@
 import {
   activateCamera,
   deactivateCamera,
-} from "../../../../utils/cameraSettings.js";
+} from "../../../../utils/media/cameraSettings.js";
 
 const providerVideoPlaceholder = document.querySelector(".provider_video");
 const providerVideo = document.querySelector(".provider_video_on");

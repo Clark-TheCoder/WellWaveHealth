@@ -1,5 +1,5 @@
-import { audioSettings } from "../../scheduled_calls/precall_call_ui/preCall_popup/toggle_audio.js";
-import { cameraSettings } from "../../scheduled_calls/precall_call_ui/preCall_popup/toggle_camera.js";
+import { audioSettings } from "../../../utils/media/preCall_toggle_audio.js";
+import { cameraSettings } from "../../../utils/media/preCall_toggle_camera_pre.js";
 
 export async function joinCall(call) {
   try {

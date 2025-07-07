@@ -1,5 +1,5 @@
-import { toggleAudio } from "../media_settings/toggle_audio.js";
-import { toggleCamera } from "../media_settings/toggle_camera.js";
+import { toggleAudio } from "../media_settings/inCall_toggle_audio.js";
+import { toggleCamera } from "../media_settings/inCall_toggle_camera.js";
 import { endCallPopup } from "./endCall_functionality.js";
 
 export function setupCallControls() {

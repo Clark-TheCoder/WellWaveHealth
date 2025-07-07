@@ -183,7 +183,7 @@ h3 {
 
 .card {
   height: 300px;
-  width: 20%;
+  width: 15%;
   min-width: 200px;
   border-radius: 15px;
   display: flex;
@@ -207,7 +207,7 @@ h3 {
 }
 
 .benefit_card_container .card:nth-child(1) {
-  background-color: #9d88a2;
+  background-color: #b4acc1;
 }
 
 .benefit_card_container .card:nth-child(2) {
@@ -219,7 +219,7 @@ h3 {
 }
 
 .benefit_card_container .card:nth-child(4) {
-  background-color: #d3c4e3;
+  background-color: #bfb1ce;
 }
 
 /* #benefits_container {

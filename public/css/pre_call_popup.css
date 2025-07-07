@@ -29,6 +29,9 @@
 
 #pc_popup h2 {
   text-align: center;
+  font-family: "Montserrat", sans-serif;
+  padding: 20px;
+  color: #ede8e1;
 }
 
 .settings_container {
