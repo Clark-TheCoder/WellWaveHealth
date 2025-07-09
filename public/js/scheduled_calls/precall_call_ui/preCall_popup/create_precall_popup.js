@@ -1,7 +1,7 @@
 import {
   cameraSettings,
   toggleCameraSettings,
-} from "../../../../utils/media/preCall_toggle_camera_pre.js";
+} from "../../../../utils/media/preCall_toggle_camera.js";
 
 import {
   audioSettings,

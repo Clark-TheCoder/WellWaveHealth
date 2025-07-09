@@ -16,6 +16,11 @@
     <h1>Please wait—your doctor has not joined the call yet. You will be able to enter the session as soon as they arrive.</h1>
   </div>
   <% } else if (callStatus === 'in_progress') { %>
+
+
+
+
+
   <link rel="stylesheet" href="/css/pre_call_popup.css" />
   <div id="pc_page_overlay" style="display: flex;"></div>
   <div id="pc_popup" style="display: flex;">
@@ -31,7 +36,7 @@
         <h3>Call Settings:</h3>
         <div class="camera_settings_container">
           <div class="camera_label_container">
-            <img id="camera_image" src=" /media/images/camera_off.png" alt="Video">
+            <img id="camera_image" src="/media/images/camera_off.png" alt="Video">
             <h4>Camera</h4>
           </div>
           <button id="camera_button"></button>
@@ -49,15 +54,43 @@
     <div class="pc_button_container">
       <button id="join_call_button">Join Call</button>
     </div>
-  </div> <% } else { %>
-  <div id="page_overlay" style="display: block;"></div>
-  <div id="popup" style="display: block;">
-    <h1>Call has ended or has been canceled. Please exit page.</h1>
   </div>
-  <% } %>
 
 
-  <script type="module" src="/js/patient_call/pre_call/pre_call_controls.js"></script>
+
+  <link rel="stylesheet" href="/css/patient_call_view.css" />
+  <div class="call_ui" style="display: flex;">
+    <audio id="provider_audio" autoplay muted></audio>
+    <div class="video_ui_container">
+      <div class="patient_video_container">
+        <!-- Placeholder before camera is on -->
+        <div class="patient_video"> <img src="/media/images/patient_icon.png" alt="You"></div>
+        <!-- Actual video stream -->
+        <video class="patient_video_on hidden" autoplay muted src=""></video>
+      </div>
+      <div class="video_container">
+        <div class="video"><img src="/media/images/stethoscope.png" alt="Provider"></div>
+      </div>
+      <div class="video_buttons">
+        <button id="incall_audio_button"><img id="volume_image" src="/media/images/volume_off.png" alt="Mic"></button>
+        <button id="incall_camera_button"><img id="camera_image" src="/media/images/camera_off.png" alt="Camera"></button>
+        <button id="end_call_button"><img src="/media/images/end_call.png" alt="Hang Up"></button>
+      </div>
+    </div>
+
+
+
+
+
+    <% } else { %>
+    <div id="page_overlay" style="display: block;"></div>
+    <div id="popup" style="display: block;">
+      <h1>Call has ended or has been canceled. Please exit page.</h1>
+    </div>
+    <% } %>
+
+
+    <script type="module" src="/js/patient_call/pre_call/pre_call_controls.js"></script>
 </body>
 
 </html>

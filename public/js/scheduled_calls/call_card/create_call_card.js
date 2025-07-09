@@ -1,7 +1,6 @@
 import { createCancelButton } from "./create_cancel_button.js";
 import { createChartButton } from "./create_chart_button.js";
 import { createJoinButton } from "./create_join_button.js";
-//import { createJoinButton } from "./create_join_button.js";
 
 export function createCallCard(call) {
   const callDiv = document.createElement("div");

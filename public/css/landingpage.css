@@ -79,7 +79,6 @@ nav ul a:hover {
 
 section {
   height: fit-content;
-  /* min-height: calc(100vh - 80px); */
   width: 100%;
   background-color: #0e5467;
   padding-top: 60px;
@@ -122,6 +121,10 @@ h3 {
   font-size: 2em;
 }
 
+.welcome_text h3 {
+  font-family: "Libre Baskerville", serif;
+}
+
 #welcome_container h4 {
   width: 80vw;
   font-size: 1em;
@@ -142,13 +145,76 @@ h3 {
   background-color: #0b3f4d;
 }
 
+.welcome_media {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0px;
+}
+
 .welcome_image {
-  width: 80%;
+  background-color: #b4acc1;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .welcome_image img {
-  height: 100%;
   width: 100%;
+  height: auto;
+}
+
+.computer_doodle {
+  position: absolute;
+  top: -30px; /* move image above the top */
+  left: -30px; /* optional: adjust how far it pokes out horizontally */
+  width: 50%;
+  opacity: 0.5;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.welcome_slogan {
+  position: relative;
+  background-color: #c7dfcf;
+  height: 100%;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden; /* hides horizontal overflow */
+  overflow-y: visible;
+}
+
+.welcome_slogan img {
+  position: absolute;
+  top: -30px; /* move image above the top */
+  right: -30px; /* optional: adjust how far it pokes out horizontally */
+  width: 50%;
+  opacity: 0.5;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.welcome_slogan h2 {
+  font-family: "Libre Baskerville", serif;
+  position: relative;
+  z-index: 1;
+}
+
+.slogan {
+  font-family: "Libre Baskerville", serif;
+  text-align: center;
+  font-style: italic;
+  padding: 20px;
 }
 
 #benefits {
@@ -165,6 +231,15 @@ h3 {
   justify-content: start;
   align-items: center;
   gap: 30px;
+}
+
+.benefits_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
 }
 
 .benefits_text h2 {
@@ -184,17 +259,21 @@ h3 {
 .card {
   height: 300px;
   width: 15%;
-  min-width: 200px;
+  min-width: 210px;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: flex-start;
   padding: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
   gap: 40px;
+}
+
+.card:hover {
+  scale: 1.1;
 }
 
 .card p {
@@ -204,6 +283,8 @@ h3 {
 
 .card h3 {
   color: #fefefe;
+  font-family: "Libre Baskerville", serif;
+  min-height: 80px;
 }
 
 .benefit_card_container .card:nth-child(1) {
@@ -222,99 +303,52 @@ h3 {
   background-color: #bfb1ce;
 }
 
-/* #benefits_container {
+#workflow_container {
   height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  padding: 80px 0px;
   align-items: center;
   gap: 30px;
+  color: #0e5467;
 }
 
-#benefits h2 {
-  color: #cfe7eb;
-  font-size: 2.5em;
-  margin-bottom: 50px;
+.workflow_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
 }
 
-.benefits_grid {
+.workflow_steps {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.step {
+  height: fit-content;
+  width: 100%;
+  padding: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 30px;
-  height: 100%;
-  width: 100%;
+  background-color: #bfb1ce;
 }
 
-.benefit_card {
-  width: 500px;
-  height: 800px;
-  border-radius: 10px;
-  padding: 20px;
-  transition: transform 0.3s ease;
-  height: 100%;
+.step_topic {
+  width: 50%;
 }
 
-.benefit_card h3 {
-  color: #0e5467;
+.step_description {
+  width: 50%;
 }
-
-.benefits_grid .benefit_card:nth-child(1) {
-  background-color: #9d88a2;
-}
-
-.benefits_grid .benefit_card:nth-child(2) {
-  background-color: #c7dfcf;
-}
-
-.benefits_grid .benefit_card:nth-child(3) {
-  background-color: #c1b9ad;
-}
-
-.benefits_grid .benefit_card:nth-child(4) {
-  background-color: #d3c4e3;
-}
-
-.benefit_card p {
-  color: #12363f;
-}
-
-.benefit_card:hover {
-  transform: translateY(-5px);
-} */
-
-/*
-.benefits_grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-}
-
-.benefit_card {
-  background-color: #fff;
-  padding: 30px 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.benefit_card:hover {
-  transform: translateY(-5px);
-}
-
-.benefit_card h3 {
-  color: #0e5467;
-  font-size: 1.5em;
-  margin-bottom: 15px;
-}
-
-.benefit_card p {
-  color: #555;
-  font-size: 1em;
-} */
 
 @media (max-width: 600px) {
   #button_nav_container {
@@ -330,5 +364,23 @@ h3 {
   }
   nav ul {
     transition: gap 0.8s ease;
+  }
+  .welcome_media {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+
+  .welcome_image,
+  .welcome_slogan {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .welcome_image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 }
