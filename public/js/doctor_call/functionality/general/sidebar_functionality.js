@@ -20,11 +20,3 @@ export function getSidebarNotes() {
   if (!notes) notes = "No additional notes provided.";
   return { summary, plan, notes };
 }
-
-// const sideBarButton = document.getElementById("notes_button");
-// const notes = document.getElementById("notes_container");
-
-// sideBarButton.addEventListener("click", toogleSideBar);
-// function toogleSideBar() {
-//   notes.classList.toggle("hidden");
-// }

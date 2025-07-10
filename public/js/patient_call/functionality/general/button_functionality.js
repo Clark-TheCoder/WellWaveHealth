@@ -1,0 +1,26 @@
+import { toggleAudio } from "../media_settings/inCall_toggle_audio.js";
+import { toggleCamera } from "../media_settings/inCall_toggle_camera.js";
+
+export function setupCallControls() {
+  const cameraButton = document.getElementById("incall_camera_button");
+  const audioButton = document.getElementById("incall_audio_button");
+  const endCallButton = document.getElementById("end_call_button");
+
+  if (cameraButton) {
+    cameraButton.addEventListener("click", async () => {
+      await toggleCamera();
+    });
+  }
+
+  if (audioButton) {
+    audioButton.addEventListener("click", async () => {
+      await toggleAudio();
+    });
+  }
+
+  if (endCallButton) {
+    endCallButton.addEventListener("click", async () => {
+      await endCallPopup();
+    });
+  }
+}

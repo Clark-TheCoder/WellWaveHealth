@@ -106,9 +106,7 @@ section:nth-of-type(odd) {
   justify-content: start;
   align-items: center;
   text-align: center;
-  gap: 15px;
 }
-
 h1 {
   font-size: 6em;
 }
@@ -123,12 +121,15 @@ h3 {
 
 .welcome_text h3 {
   font-family: "Libre Baskerville", serif;
+  color: #828b8e;
 }
 
 #welcome_container h4 {
   width: 80vw;
   font-size: 1em;
   color: #828b8e;
+  font-weight: 400;
+  padding: 20px;
 }
 
 .button_welcome_container a {
@@ -213,7 +214,6 @@ h3 {
 .slogan {
   font-family: "Libre Baskerville", serif;
   text-align: center;
-  font-style: italic;
   padding: 20px;
 }
 
