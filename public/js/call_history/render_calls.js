@@ -29,7 +29,7 @@ export function renderCalls(calls, callsContainer) {
     const status = document.createElement("h3");
     status.textContent = formatCallStatus(call.status);
     const duration = document.createElement("h4");
-    duration.textContent = call.duration_minutes || "00:00:00";
+    duration.textContent = call.duration_minutes + " mins" || "00:00:00 mins";
     bottomInfoContainer.appendChild(status);
     bottomInfoContainer.appendChild(duration);
 

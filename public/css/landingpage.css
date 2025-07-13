@@ -123,6 +123,9 @@ h3 {
   font-family: "Libre Baskerville", serif;
   color: #828b8e;
 }
+.welcome_text h2 {
+  letter-spacing: 4px;
+}
 
 #welcome_container h4 {
   width: 80vw;
@@ -163,22 +166,29 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .welcome_image img {
-  width: 100%;
-  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .computer_doodle {
   position: absolute;
-  top: -30px; /* move image above the top */
-  left: -30px; /* optional: adjust how far it pokes out horizontally */
+  top: -30px;
+  left: -30px;
   width: 50%;
   opacity: 0.5;
   height: auto;
   z-index: 0;
   pointer-events: none;
+}
+
+.welcome_slogan_container {
+  height: 100%;
+  width: 50%;
 }
 
 .welcome_slogan {
@@ -190,14 +200,18 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-x: hidden; /* hides horizontal overflow */
-  overflow-y: visible;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 20px;
 }
 
+.welcome_slogan h2 {
+  font-size: clamp(1rem, 5vw, 3rem);
+}
 .welcome_slogan img {
   position: absolute;
-  top: -30px; /* move image above the top */
-  right: -30px; /* optional: adjust how far it pokes out horizontally */
+  top: -30px;
+  right: -30px;
   width: 50%;
   opacity: 0.5;
   height: auto;
@@ -219,8 +233,8 @@ h3 {
 
 #benefits {
   background-image: url("/media/images/background_waves.png"); /* Change to your image path */
-  background-size: cover; /* Cover entire container */
-  background-position: center; /* Center the image */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
@@ -332,22 +346,201 @@ h3 {
 }
 
 .step {
-  height: fit-content;
+  min-height: 450px;
+  padding: 30px 50px;
   width: 100%;
-  padding: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+  background-color: #bfb1ce;
+  box-sizing: border-box;
+  gap: 50px;
+}
+
+.step:nth-of-type(even) {
+  flex-direction: row-reverse;
+}
+
+.workflow_steps .step:nth-child(1) {
   background-color: #bfb1ce;
 }
 
 .step_topic {
   width: 50%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step_topic video {
+  border: 3px solid white;
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.step_topic img {
+  border: 3px solid white;
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .step_description {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: left;
+  gap: 50px;
+  padding: 20px 0px;
+}
+
+.description_titles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.description_titles p {
+  color: #7d7388;
+  font-weight: 800;
+}
+
+.description_titles h3 {
+  color: white;
+  font-family: "Libre Baskerville", serif;
+}
+
+.notable_points {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.point {
+  background-color: #7d7388;
+  width: 100%;
+  min-height: 90px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  overflow: hidden;
+  transition:
+    padding 0.4s ease,
+    gap 0.4s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.point img {
+  height: 50px;
+  transition: transform 0.4s ease;
+  transform: translateX(50%);
+}
+
+.point_text {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 0;
+}
+
+.point p {
+  color: white;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transform: translateX(20px);
+  transition: transform 0.4s ease;
+  white-space: normal;
+  flex: 1;
+  padding-right: 10px;
+  opacity: 0;
+}
+
+.point h4 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.4s ease;
+  margin: 0;
+  padding: 0 10px;
+  opacity: 1;
+  color: #ede8e1;
+  font-size: 1.5em;
+  white-space: nowrap;
+}
+
+/* Hover animation for image and text only */
+.point:hover img {
+  transform: translateX(0);
+}
+
+.point:hover p {
+  transform: translateX(0);
+  opacity: 1;
+}
+.point:hover h4 {
+  transform: translateX(0);
+  transform: translate(150%, -50%);
+  opacity: 0;
+}
+
+/* special styling for second point */
+.workflow_steps .step:nth-child(2) .description_titles p {
+  color: #7f8e84;
+}
+
+.workflow_steps .step:nth-child(2) .point {
+  background-color: #7f8e84;
+}
+
+.workflow_steps .step:nth-child(2) {
+  background-color: #c7dfcf;
+}
+
+/* special styling for third point */
+.workflow_steps .step:nth-child(3) .description_titles p {
+  color: #868077;
+}
+
+.workflow_steps .step:nth-child(3) .point {
+  background-color: #868077;
+}
+
+.workflow_steps .step:nth-child(3) {
+  background-color: #c1b9ad;
+}
+
+/* special styling for fourth point */
+.workflow_steps .step:nth-child(4) .description_titles p {
+  color: #777180;
+}
+
+.workflow_steps .step:nth-child(4) .point {
+  background-color: #777180;
+}
+
+.workflow_steps .step:nth-child(4) {
+  background-color: #b4acc1;
 }
 
 @media (max-width: 600px) {

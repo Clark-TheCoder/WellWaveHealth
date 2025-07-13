@@ -16,3 +16,180 @@ CREATE TABLE IF NOT EXISTS calls (
   }')
   FOREIGN KEY (provider_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+
+
+
+INSERT INTO calls (
+  call_id,
+  provider_id,
+  patient_alias,
+  date_created,
+  call_start_time,
+  call_end_time,
+  duration_minutes,
+  access_token,
+  status,
+  call_notes
+) VALUES (
+  'call1',         
+  20,                   
+  'Ga2', 
+  '2025-07-01 00:00:00', 
+  '2025-07-01 14:00:00', 
+  '2025-07-01 14:30:00', 
+  30,                    
+  'token1',         
+  'completed',            
+  '{
+    "plan": "Follow-up care recommended.",
+    "notes": "Patient responded well to treatment.",
+    "summary": "Call completed successfully with no issues."
+  }'                     
+);
+
+
+INSERT INTO calls (
+  call_id,
+  provider_id,
+  patient_alias,
+  date_created,
+  call_start_time,
+  call_end_time,
+  duration_minutes,
+  access_token,
+  status,
+  call_notes
+) VALUES (
+  'call12',         
+  20,                   
+  'Ro9', 
+  '2025-07-01 00:00:00', 
+  '2025-07-01 14:35:00', 
+  '2025-07-01 14:45:00', 
+  10,                    
+  'token12',         
+  'completed',            
+  '{
+    "plan": "Follow-up care recommended.",
+    "notes": "Patient responded well to treatment.",
+    "summary": "Call completed successfully with no issues."
+  }'                     
+);
+
+
+
+INSERT INTO calls (
+  call_id,
+  provider_id,
+  patient_alias,
+  date_created,
+  call_start_time,
+  call_end_time,
+  duration_minutes,
+  access_token,
+  status,
+  call_notes
+) VALUES (
+  'call123',         
+  20,                   
+  'Tr15', 
+  '2025-07-01 00:00:00', 
+  '2025-07-01 15:50:00', 
+  '2025-07-01 16:50:00', 
+  60,                    
+  'token123',         
+  'completed',            
+  '{
+  "plan": "Schedule a medication review in two weeks.",
+  "notes": "Patient reported mild side effects, monitoring advised.",
+  "summary": "Call was productive; next steps outlined clearly."
+}'                    
+);
+
+INSERT INTO calls (
+  call_id,
+  provider_id,
+  patient_alias,
+  date_created,
+  call_start_time,
+  call_end_time,
+  duration_minutes,
+  access_token,
+  status,
+  call_notes
+) VALUES (
+  'call1234',         
+  20,                   
+  'Tr15', 
+  '2025-07-01 00:00:00', 
+  '2025-07-01 00:00:00', 
+  '2025-07-01 00:00:00', 
+  0,                    
+  'token1234',         
+  'no_show',            
+  '{
+  "plan": "Attempt to reschedule the appointment within the next week.",
+  "notes": "Patient did not attend the scheduled call. No contact was made during the appointment time.",
+  "summary": "No-show recorded. Follow-up needed to ensure patient engagement."
+}'                   
+);
+
+
+INSERT INTO calls (
+  call_id,
+  provider_id,
+  patient_alias,
+  date_created,
+  call_start_time,
+  call_end_time,
+  duration_minutes,
+  access_token,
+  status,
+  call_notes
+) VALUES (
+  'call12345',         
+  20,                   
+  'Mr31', 
+  '2025-07-01 00:00:00', 
+  '2025-07-01 13:00:00', 
+  '2025-07-01 14:40:00', 
+  120,                    
+  'token12345',         
+  'completed',            
+  '{
+  "plan": "Proceed with scheduling all required pre-operative tests and ensure the patient receives written instructions for surgical preparation. A follow-up call should be scheduled 1–2 weeks before the procedure to confirm readiness.",
+  "notes": "Patient attended the pre-surgery consultation as scheduled. We discussed the upcoming procedure in detail, including the surgical timeline, potential risks, and expected recovery. Patient expressed understanding and asked relevant questions regarding post-operative care and anesthesia.",
+  "summary": "Successful pre-operative consultation completed. Patient is informed, engaged, and aligned with the next steps leading up to surgery."
+}'                  
+);
+
+
+
+INSERT INTO calls (
+  call_id,
+  provider_id,
+  patient_alias,
+  date_created,
+  call_start_time,
+  call_end_time,
+  duration_minutes,
+  access_token,
+  status,
+  call_notes
+) VALUES (
+  'call123456',         
+  20,                   
+  'Qu17', 
+  '2025-07-01 00:00:00', 
+  '2025-07-01 14:45:00', 
+  '2025-07-01 15:15:00', 
+  30,                    
+  'token123456',         
+  'completed',            
+  '{
+  "plan": "Continue current treatment plan. Schedule another follow-up in 4–6 weeks to monitor progress. Patient was advised to contact the clinic earlier if symptoms worsen or new issues arise.",
+  "notes": "Patient attended the follow-up appointment and reported steady improvement since the last consultation. Vital signs and current medications were reviewed. No new concerns were raised. Discussed ongoing symptom management and emphasized adherence to the prescribed care plan.",
+  "summary": "Follow-up completed successfully. Patient is progressing well with no complications noted at this time."
+}'               
+);
