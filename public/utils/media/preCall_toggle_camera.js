@@ -8,14 +8,17 @@ export async function toggleCameraSettings(
   videoPreview,
   cameraPlaceholder
 ) {
-  if (cameraButton.classList.contains("selected")) {
+  const cameraOn = sessionStorage.getItem("cameraState") === "true";
+
+  if (cameraOn) {
     await deactivateCamera(videoPreview);
+    videoPreview.srcObject = null;
+    videoPreview.style.display = "none";
     cameraButton.classList.remove("selected");
     cameraImage.src = "/media/images/camera_off.png";
     cameraPlaceholder.style.display = "flex";
-    videoPreview.srcObject = null;
-    videoPreview.style.display = "none";
     cameraSettings.enabled = false;
+    sessionStorage.setItem("cameraState", "false");
   } else {
     videoPreview.srcObject = await activateCamera();
     videoPreview.style.display = "block";
@@ -23,5 +26,6 @@ export async function toggleCameraSettings(
     cameraImage.src = "/media/images/camera_on.png";
     cameraPlaceholder.style.display = "none";
     cameraSettings.enabled = true;
+    sessionStorage.setItem("cameraState", "true");
   }
 }

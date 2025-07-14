@@ -175,10 +175,30 @@ async function validateCall(access_token) {
       `SELECT * FROM calls WHERE access_token = ? AND call_end_time IS NULL AND status IN ('in_progress', 'generated', 'completed_not_charted', 'completed')`,
       [access_token]
     );
-    console.log([rows]);
     return rows.length > 0 ? rows[0] : null;
   } catch (error) {
     throw error;
+  }
+}
+
+async function getStatus(access_token) {
+  try {
+    console.log("Checking DB for access_token:", access_token);
+    const [rows] = await db.execute(
+      `SELECT status FROM calls WHERE access_token = ? LIMIT 1`,
+      [access_token]
+    );
+
+    console.log("DB result:", rows);
+
+    if (rows.length === 0) {
+      return null;
+    }
+
+    return rows[0].status;
+  } catch (error) {
+    console.error("Error fetching call status:", error);
+    throw new Error("Database error while fetching call status.");
   }
 }
 
@@ -190,4 +210,5 @@ export {
   retrieveCalls,
   retrieveCallNotes,
   validateCall,
+  getStatus,
 };

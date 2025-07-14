@@ -8,6 +8,7 @@ import {
   retrieveCalls,
   retrieveCallNotes,
   validateCall,
+  getStatus,
 } from "../models/callModel.js";
 import { Resend } from "resend";
 import dotenv from "dotenv";
@@ -258,13 +259,35 @@ async function validatePatientToken(req, res) {
     const validCall = await validateCall(access_token);
 
     if (!validCall) {
-      return res.status(403).send("Access denied or call not found.");
+      return res
+        .status(403)
+        .json({ message: "Access denied or call not found." });
     }
     res.render("patient_call_view", {
       callStatus: validCall.status,
     });
   } catch (error) {
     res.status(500).send("Internal server error");
+  }
+}
+
+async function getCallStatus(req, res) {
+  const access_token = req.params.access_token;
+  console.log("Incoming access token:", access_token);
+  try {
+    const callStatus = await getStatus(access_token);
+    //const callStatus = "waiting";
+
+    if (!callStatus) {
+      return res
+        .status(403)
+        .json({ message: "Access denied or call not found." });
+    }
+
+    return res.status(200).json({ message: "Success", status: callStatus });
+  } catch (error) {
+    console.error("Error getting call status:", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 }
 
@@ -277,4 +300,5 @@ export {
   joinCallAsDoctor,
   getCallNotes,
   validatePatientToken,
+  getCallStatus,
 };

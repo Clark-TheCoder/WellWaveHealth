@@ -1,5 +1,4 @@
 export async function getCallInfo(access_token) {
-  console.log("Sending access_token:", access_token);
   try {
     let response = await fetch("/call/visit_summary", {
       method: "POST",

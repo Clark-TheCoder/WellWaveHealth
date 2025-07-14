@@ -1,19 +1,26 @@
 import { audioSettings } from "../../../../utils/media/preCall_toggle_audio.js";
 import { cameraSettings } from "../../../../utils/media/preCall_toggle_camera.js";
+import { deactivateAudio } from "../../../utils/media/audioSettings.js";
+import { deactivateCamera } from "../../../utils/media/cameraSettings.js";
+import { showCallUI } from "../functionality/general/incall_ui.js";
+import { hidePreCallPopup } from "../functionality/general/pre_call_ui.js";
 import { turnMicOn } from "../functionality/media_settings/inCall_toggle_audio.js";
 import { turnCameraOn } from "../functionality/media_settings/inCall_toggle_camera.js";
 
 const precallOverlay = document.getElementById("pc_page_overlay");
 const precallPopup = document.getElementById("pc_popup");
-const callUI = document.querySelector(".call_ui");
-
-// const providerAudio = document.getElementById("provider_audio");
-// const audioIcon = document.getElementById("volume_image");
+const callUI = document.getElementById("call_ui");
 
 export async function joinCall() {
-  precallOverlay.style.display = "none";
-  precallPopup.style.display = "none";
-  callUI.style.display = "flex";
+  hidePreCallPopup();
+  showCallUI();
+
+  const preCallVideo = document.getElementById("video_preview");
+  const preCallAudio = document.getElementById("precall_audio");
+
+  await deactivateCamera(preCallVideo);
+  await deactivateAudio(preCallAudio);
+  preCallAudio?.remove();
 
   if (audioSettings.enabled === true) {
     await turnMicOn();
@@ -29,7 +36,6 @@ export async function joinCall() {
     );
     module.setupCallControls();
   } catch (error) {
-    /***custom error message */
     console.error("Failed to load button functionality:", error);
   }
 }

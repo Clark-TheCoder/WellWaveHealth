@@ -23,19 +23,12 @@ export async function turnCameraOff() {
   sessionStorage.setItem("cameraState", "false");
 }
 
-export async function toggleCamera(cameraOn) {
-  if (cameraOn === "true") {
-  }
-  if (providerVideoPlaceholder.classList.contains("hidden")) {
-    await deactivateCamera(providerVideo);
-    cameraIcon.src = "/media/images/camera_off.png";
-    sessionStorage.setItem("cameraState", "false");
-  } else {
-    providerVideo.srcObject = await activateCamera();
-    cameraIcon.src = "/media/images/camera_on.png";
-    sessionStorage.setItem("cameraState", "true");
-  }
+export async function toggleCamera() {
+  const cameraOn = sessionStorage.getItem("cameraState") === "true";
 
-  providerVideoPlaceholder.classList.toggle("hidden");
-  providerVideo.classList.toggle("hidden");
+  if (cameraOn) {
+    await turnCameraOff();
+  } else {
+    await turnCameraOn();
+  }
 }

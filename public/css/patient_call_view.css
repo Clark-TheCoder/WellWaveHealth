@@ -12,7 +12,7 @@ img {
   -webkit-user-drag: none;
 }
 
-.call_ui {
+#call_ui {
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -216,7 +216,7 @@ h3 {
 }
 
 @media (max-width: 700px) {
-  .call_ui {
+  #call_ui {
     flex-direction: column;
   }
   #notes_container {
