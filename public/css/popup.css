@@ -31,16 +31,26 @@ p {
 }
 
 #popup button {
-  font-family: "Montserrat", sans-serif;
-  font-size: small;
+  margin: 10px;
+  display: inline-block;
   padding: 10px 20px;
-  border: 2px #2184a3 solid;
-  color: #2184a3;
-  border-radius: 5px;
   background-color: white;
+  color: #2184a3;
+  border: 3px solid #2184a3;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: medium;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  cursor: pointer;
 }
+
 #popup button:hover {
-  background-color: rgb(194, 194, 194);
+  background-color: #2184a3;
+  color: white;
 }
 
 .defined_button {
@@ -63,6 +73,27 @@ p {
   background-color: rgba(234, 229, 229, 0.7);
   z-index: 99998;
   display: none;
+}
+
+.button_link {
+  margin: 10px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: white;
+  color: #2184a3;
+  border: 3px solid #2184a3;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.button_link:hover {
+  background-color: #2184a3;
+  color: white;
 }
 
 @media (max-width: 600px) {

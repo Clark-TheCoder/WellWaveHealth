@@ -18,6 +18,11 @@ export function createCallCard(call) {
     buttonDiv.appendChild(createJoinButton(call));
     buttonDiv.appendChild(createChartButton(call));
     buttonDiv.appendChild(createCancelButton(call));
+  } else if (call.status === "in_progress") {
+    callDiv.style.backgroundColor = "#046b6a";
+    buttonDiv.appendChild(createJoinButton(call));
+    buttonDiv.appendChild(createChartButton(call));
+    buttonDiv.appendChild(createCancelButton(call));
   } else if (call.status === "completed_not_charted") {
     callDiv.style.backgroundColor = "#a4a4a4";
     buttonDiv.appendChild(createChartButton(call));

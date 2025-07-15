@@ -149,11 +149,13 @@ button {
   height: fit-content;
   padding: 20px;
 }
+
 .call_notes {
   background-color: #cfe7eb;
   height: fit-content;
   padding: 20px;
 }
+
 .top_info_container {
   height: 50%;
   display: flex;

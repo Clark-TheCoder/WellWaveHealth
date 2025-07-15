@@ -2,33 +2,40 @@ import { toggleAudioSettings } from "../../../utils/media/preCall_toggle_audio.j
 import { toggleCameraSettings } from "../../../utils/media/preCall_toggle_camera.js";
 import { joinCall } from "./join_call.js";
 
-//camera settings for the pre call
-const cameraImage = document.getElementById("camera_image");
-const cameraButton = document.getElementById("camera_button");
-const videoPreview = document.getElementById("video_preview");
-const cameraPlaceholder = document.getElementById("camera_icon");
-cameraButton.addEventListener("click", () =>
-  toggleCameraSettings(
-    cameraButton,
-    cameraImage,
-    videoPreview,
-    cameraPlaceholder
-  )
-);
+export function setupPreCallControls() {
+  // Camera settings
+  const cameraImage = document.getElementById("camera_image");
+  const cameraButton = document.getElementById("camera_button");
+  const videoPreview = document.getElementById("video_preview");
+  const cameraPlaceholder = document.getElementById("camera_icon");
 
-//audio settings for the pre call
-const audioImage = document.getElementById("audio_image");
-const audio = document.createElement("audio");
-audio.autoplay = true;
+  if (cameraButton) {
+    cameraButton.addEventListener("click", () =>
+      toggleCameraSettings(
+        cameraButton,
+        cameraImage,
+        videoPreview,
+        cameraPlaceholder
+      )
+    );
+  }
 
-audio.style.display = "none";
-document.body.appendChild(audio);
+  //audio settings for the pre call
+  const audioImage = document.getElementById("audio_image");
+  const audio = document.createElement("audio");
+  audio.autoplay = true;
 
-const audioButton = document.getElementById("audio_button");
-audioButton.addEventListener("click", () =>
-  toggleAudioSettings(audioButton, audioImage, audio)
-);
+  audio.style.display = "none";
+  document.body.appendChild(audio);
 
-//join call button functionality
-const joinButton = document.getElementById("join_call_button");
-joinButton.addEventListener("click", joinCall);
+  const audioButton = document.getElementById("audio_button");
+  audioButton.addEventListener("click", () =>
+    toggleAudioSettings(audioButton, audioImage, audio)
+  );
+
+  // Join call button
+  const joinButton = document.getElementById("join_call_button");
+  if (joinButton) {
+    joinButton.addEventListener("click", joinCall);
+  }
+}

@@ -32,4 +32,6 @@ export async function joinCall() {
     /***custom error message */
     console.error("Failed to load button functionality:", error);
   }
+
+  patientStatus.status = "joined";
 }

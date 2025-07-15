@@ -7,18 +7,14 @@ export function showNoCallsMessage(container) {
     "No calls scheduled currently. To create a call select:";
   noCallsMessage.style.color = "rgb(196, 36, 36)";
 
-  const scheduleCallButton = document.createElement("button");
-  scheduleCallButton.classList.add("button");
-  scheduleCallButton.style.border = "3px solid #2184a3";
+  // Create the <a> tag and style it like a button
+  // const scheduleCallLink = document.createElement("a");
+  // scheduleCallLink.textContent = "Create Call";
+  // scheduleCallLink.href = "/call/create_link";
+  // scheduleCallLink.classList.add("button_link"); // Custom CSS class
 
-  const scheduleCallLink = document.createElement("a");
-  scheduleCallLink.textContent = "Create Call";
-  scheduleCallLink.href = "/call/create_link";
-  scheduleCallLink.style.textDecoration = "none";
-  scheduleCallLink.style.color = "#2184a3";
-  scheduleCallButton.appendChild(scheduleCallLink);
-
+  // Append everything
   noCallsDiv.appendChild(noCallsMessage);
-  noCallsDiv.appendChild(scheduleCallButton);
+  // noCallsDiv.appendChild(scheduleCallLink);
   container.appendChild(noCallsDiv);
 }

@@ -56,7 +56,7 @@ async function getCurrentCalls(userId) {
        FROM calls
        WHERE provider_id = ?
          AND DATE(date_created) = CURDATE()
-         AND status IN ('generated', 'completed_not_charted')
+         AND status IN ('generated', 'completed_not_charted', 'in_progress')
       `,
       [userId]
     );

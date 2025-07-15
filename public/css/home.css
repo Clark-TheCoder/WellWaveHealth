@@ -87,6 +87,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 50px;
+  transition: scale 0.3s;
 }
 
 .options_container a:hover {
