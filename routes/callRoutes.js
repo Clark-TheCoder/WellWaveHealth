@@ -7,6 +7,7 @@ import {
   fetchPastCalls,
   joinCallAsDoctor,
   getCallNotes,
+  getCallStatus,
   validatePatientToken,
 } from "../controllers/callController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
@@ -39,16 +40,12 @@ router.get("/call_history", (req, res) => {
 router.post("/call_history", authenticateToken, fetchPastCalls);
 router.patch("/change_call_status", authenticateToken, changeCallStatus);
 
-//join call routes
+//join call routes for doctor
 router.post("/join/doctor", authenticateToken, joinCallAsDoctor);
-// router.get("/join/:access_token", (req, res) => {
-//   const accessToken = req.params.access_token;
 
-//   // For now, no validation — just render the EJS file
-//   res.render("patient_call_view", { accessToken });
-// });
-
+//join call routes for patient
 router.get("/join/:access_token", validatePatientToken);
+router.get("/join/status/:access_token", getCallStatus);
 
 //doctor call view
 router.get("/doctor_call_view", (req, res) => {

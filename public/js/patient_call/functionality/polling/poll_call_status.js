@@ -1,5 +1,5 @@
 // import { getCallStatus } from "../../../../utils/api/get_call_status.js";
-// import { showPreCallPopup, hidePreCallPopup } from "../general/pre_call_ui.js";
+// import { showPreCallPopup, hidePreCallPopup } from "../general/precall_ui.js";
 // import { showWaitingRoom, hideWaitingRoom } from "../general/waiting_ui.js";
 // import { showCallUI, hideCallUI } from "../general/incall_ui.js";
 // import { patientStatus } from "../../index.js";
@@ -34,7 +34,7 @@
 // }
 
 import { getCallStatus } from "../../../../utils/api/get_call_status.js";
-import { showPreCallPopup, hidePreCallPopup } from "../general/pre_call_ui.js";
+import { showPreCallPopup, hidePreCallPopup } from "../general/precall_ui.js";
 import { showWaitingRoom, hideWaitingRoom } from "../general/waiting_ui.js";
 import { showCallUI, hideCallUI } from "../general/incall_ui.js";
 import { patientStatus } from "../../index.js";
