@@ -11,5 +11,6 @@ export async function deactivateCamera(streamSource) {
   let stream = streamSource.srcObject;
   if (stream) {
     stream.getTracks().forEach((track) => track.stop());
+    streamSource.srcObject = null;
   }
 }

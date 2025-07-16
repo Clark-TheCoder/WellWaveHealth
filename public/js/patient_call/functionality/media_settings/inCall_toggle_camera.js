@@ -3,7 +3,7 @@ import {
   deactivateCamera,
 } from "../../../../utils/media/cameraSettings.js";
 
-const patientVideo = document.querySelector(".patient_video_on");
+const patientVideo = document.getElementById("in_call_video");
 const patientVideoPlaceholder = document.querySelector(".patient_video");
 const cameraIcon = document.getElementById("in_call_camera_image");
 
@@ -12,6 +12,7 @@ export async function turnCameraOn() {
   cameraIcon.src = "/media/images/camera_on.png";
   patientVideoPlaceholder.classList.add("hidden");
   patientVideo.classList.remove("hidden");
+  sessionStorage.setItem("cameraState", "true");
 }
 
 export async function turnCameraOff() {
@@ -20,17 +21,21 @@ export async function turnCameraOff() {
   patientVideoPlaceholder.classList.remove("hidden");
   patientVideo.classList.add("hidden");
   patientVideo.classList.remove("hidden");
+  sessionStorage.setItem("cameraState", "false");
 }
 
 export async function toggleCamera() {
-  if (patientVideoPlaceholder.classList.contains("hidden")) {
+  console.log(patientVideo);
+  if (sessionStorage.getItem("cameraState") === "true") {
     await deactivateCamera(patientVideo);
     cameraIcon.src = "/media/images/camera_off.png";
     sessionStorage.setItem("cameraState", "false");
+    console.log("Camera turned OFF");
   } else {
     patientVideo.srcObject = await activateCamera();
     cameraIcon.src = "/media/images/camera_on.png";
     sessionStorage.setItem("cameraState", "true");
+    console.log("Camera turned ON");
   }
 
   patientVideoPlaceholder.classList.toggle("hidden");

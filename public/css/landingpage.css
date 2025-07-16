@@ -378,7 +378,7 @@ h3 {
 
 .step_topic video {
   border: 3px solid white;
-  border-radius: 20px;
+  border-radius: 5px;
   height: 100%;
   width: 100%;
   object-fit: cover;
