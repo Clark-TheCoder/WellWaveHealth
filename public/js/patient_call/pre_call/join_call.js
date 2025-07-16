@@ -1,5 +1,6 @@
 import { audioSettings } from "../../../../utils/media/preCall_toggle_audio.js";
 import { cameraSettings } from "../../../../utils/media/preCall_toggle_camera.js";
+import { setupCallControls } from "../functionality/general/button_functionality.js";
 import { turnMicOn } from "../functionality/media_settings/inCall_toggle_audio.js";
 import { turnCameraOn } from "../functionality/media_settings/inCall_toggle_camera.js";
 import { patientStatus } from "../index.js";
@@ -32,4 +33,5 @@ export async function joinCall() {
   }
 
   patientStatus.status = "joined";
+  setupCallControls();
 }
