@@ -10,17 +10,17 @@ import { patientStatus } from "../index.js";
 const precallOverlay = document.getElementById("pc_page_overlay");
 const precallPopup = document.getElementById("pc_popup");
 const callUI = document.getElementById("call_ui");
-const videoPreview = document.getElementById("video_preview");
-const patientAudio = document.getElementById("patient_audio");
 
 export async function joinCall() {
   precallOverlay.style.display = "none";
   precallPopup.style.display = "none";
   callUI.style.display = "flex";
 
-  //change this to add the deactivation of the pre call audio before the patient enters the call
-  await deactivateCamera(videoPreview);
+  // Clean up pre-call streams if any
+  await deactivateAudio();
+  await deactivateCamera(document.getElementById("video_preview"));
 
+  // Turn on mic and camera for call if enabled in pre-call
   if (audioSettings.enabled === true) {
     await turnMicOn();
   } else {

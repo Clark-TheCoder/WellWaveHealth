@@ -1,16 +1,23 @@
+let currentAudioStream = null;
+
 export async function activateAudio() {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    return stream;
+    // Avoid creating multiple streams
+    if (currentAudioStream) return currentAudioStream;
+
+    currentAudioStream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+    });
+    return currentAudioStream;
   } catch (error) {
     console.log("Mic access error:", error);
+    return null;
   }
 }
 
-export async function deactivateAudio(streamSource) {
-  const stream = streamSource.srcObject;
-  if (stream) {
-    stream.getTracks().forEach((track) => track.stop());
-    streamSource.srcObject = null;
+export async function deactivateAudio() {
+  if (currentAudioStream) {
+    currentAudioStream.getTracks().forEach((track) => track.stop());
+    currentAudioStream = null;
   }
 }

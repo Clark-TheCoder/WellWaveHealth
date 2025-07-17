@@ -3,7 +3,7 @@ import { toggleCameraSettings } from "../../../utils/media/preCall_toggle_camera
 import { joinCall } from "./join_call.js";
 
 export function setupPreCallControls() {
-  // Camera settings
+  // Camera controls (unchanged)
   const cameraImage = document.getElementById("camera_image");
   const cameraButton = document.getElementById("camera_button");
   const videoPreview = document.getElementById("video_preview");
@@ -20,18 +20,15 @@ export function setupPreCallControls() {
     );
   }
 
-  //audio settings for the pre call
+  // Audio controls — NO hidden audio element anymore
   const audioImage = document.getElementById("audio_image");
-  const audio = document.createElement("audio");
-  audio.autoplay = true;
-
-  audio.style.display = "none";
-  document.body.appendChild(audio);
-
   const audioButton = document.getElementById("audio_button");
-  audioButton.addEventListener("click", () =>
-    toggleAudioSettings(audioButton, audioImage, audio)
-  );
+
+  if (audioButton) {
+    audioButton.addEventListener("click", () =>
+      toggleAudioSettings(audioButton, audioImage)
+    );
+  }
 
   // Join call button
   const joinButton = document.getElementById("join_call_button");

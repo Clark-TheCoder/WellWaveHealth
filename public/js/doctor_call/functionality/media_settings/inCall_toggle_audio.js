@@ -3,38 +3,38 @@ import {
   deactivateAudio,
 } from "../../../../utils/media/audioSettings.js";
 
-const providerAudio = document.getElementById("provider_audio");
-const audioIcon = document.getElementById("volume_image");
+export const callAudioSettings = {
+  stream: null,
+  enabled: false,
+};
 
 export async function turnMicOn() {
-  providerAudio.srcObject = await activateAudio();
-  providerAudio.muted = true;
-  await providerAudio.play();
-  audioIcon.src = "/media/images/volume_on.png";
+  const stream = await activateAudio();
+  if (!stream) return;
+
+  callAudioSettings.stream = stream;
+  callAudioSettings.enabled = true;
+
+  document.getElementById("volume_image").src = "/media/images/volume_on.png";
   sessionStorage.setItem("audioState", "true");
+
+  // In the future: peerConnection.addTrack(track, stream)
 }
 
 export async function turnMicOff() {
-  await deactivateAudio(providerAudio);
-  providerAudio.srcObject = null;
-  audioIcon.src = "/media/images/volume_off.png";
+  await deactivateAudio();
+  callAudioSettings.stream = null;
+  callAudioSettings.enabled = false;
+
+  document.getElementById("volume_image").src = "/media/images/volume_off.png";
   sessionStorage.setItem("audioState", "false");
 }
 
 export async function toggleAudio() {
   const audioState = sessionStorage.getItem("audioState");
-  const providerAudio = document.getElementById("provider_audio");
-  const audioIcon = document.getElementById("volume_image");
   if (audioState === "false") {
-    providerAudio.srcObject = await activateAudio();
-    providerAudio.muted = true;
-    await providerAudio.play();
-    audioIcon.src = "/media/images/volume_on.png";
-    sessionStorage.setItem("audioState", "true");
-  } else if (audioState === "true") {
-    await deactivateAudio(providerAudio);
-    providerAudio.srcObject = null;
-    audioIcon.src = "/media/images/volume_off.png";
-    sessionStorage.setItem("audioState", "false");
+    await turnMicOn();
+  } else {
+    await turnMicOff();
   }
 }
