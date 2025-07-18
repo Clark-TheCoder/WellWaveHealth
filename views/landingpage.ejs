@@ -14,20 +14,39 @@
 </head>
 
 <body>
-  <nav>
-    <a href=""><img src="/media/images/WWH_Small_Logo.png" alt="Logo" /></a>
-    <div class="nav_right_container">
+  <div class="nav_wrapper">
+    <nav>
+      <a href=""><img src="/media/images/WWH_Small_Logo.png" alt="Logo" /></a>
+      <div class="nav_right_container">
+        <ul>
+          <li><a href="">HOME</a></li>
+          <li><a href="">ABOUT</a></li>
+          <li><a href="">WORKFLOW</a></li>
+          <li>
+            <div class="button_nav_container">
+              <a href="auth/login">Login</a>
+              <a href="auth/signup">Sign Up</a>
+            </div>
+          </li>
+        </ul>
+        <img id="menu_icon" src="/media/images/landingpage/menu-burger-blue.png" alt="Menu">
+      </div>
+    </nav>
+    <div id="navigation_container">
       <ul>
-        <li><a href="">HOME</a></li>
-        <li><a href="">ABOUT</a></li>
-        <li><a href="">WORKFLOW</a></li>
+        <li><a href="#welcome">Home</a></li>
+        <li><a href="#benefits">Create Call Link</a></li>
+        <li><a href="#workflow">Scheduled Calls</a></li>
       </ul>
-      <div class="button_nav_container">
+      <div class="dropdown_nav_btn_container">
         <a href="auth/login">Login</a>
         <a href="auth/signup">Sign Up</a>
       </div>
+
+
+
     </div>
-  </nav>
+  </div>
   <main>
     <section id="welcome">
       <div id="welcome_container" class="container">
@@ -258,6 +277,19 @@
       </div>
     </section>
   </main>
+  <script>
+    const menuIcon = document.getElementById("menu_icon");
+    const navigationContainer = document.getElementById("navigation_container");
+    menuIcon.addEventListener("click", () => {
+      menuIcon.classList.toggle("show_menu");
+      navigationContainer.classList.toggle("show_nav");
+    });
+
+    navigationContainer.addEventListener("mouseleave", () => {
+      menuIcon.classList.toggle("show_menu");
+      navigationContainer.classList.toggle("show_nav");
+    });
+  </script>
 </body>
 
 </html>
