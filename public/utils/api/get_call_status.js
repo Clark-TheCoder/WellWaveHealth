@@ -7,7 +7,6 @@ export async function getCallStatus(access_token) {
 
     const data = await response.json();
     if (response.ok) {
-      console.log(data);
       return data;
     } else {
       /***custom errror message */

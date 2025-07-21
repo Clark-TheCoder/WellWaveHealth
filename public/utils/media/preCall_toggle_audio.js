@@ -14,9 +14,8 @@ export async function toggleAudioSettings(audioButton, audioImage) {
     audioButton.classList.remove("selected");
     audioImage.src = "/media/images/volume_off.png";
   } else {
-    // Turn mic ON
     const stream = await activateAudio();
-    if (!stream) return; // failed to get mic
+    if (!stream) return;
 
     audioSettings.enabled = true;
     audioSettings.stream = stream;

@@ -25,17 +25,14 @@ export async function turnCameraOff() {
 }
 
 export async function toggleCamera() {
-  console.log(patientVideo);
   if (sessionStorage.getItem("cameraState") === "true") {
     await deactivateCamera(patientVideo);
     cameraIcon.src = "/media/images/camera_off.png";
     sessionStorage.setItem("cameraState", "false");
-    console.log("Camera turned OFF");
   } else {
     patientVideo.srcObject = await activateCamera();
     cameraIcon.src = "/media/images/camera_on.png";
     sessionStorage.setItem("cameraState", "true");
-    console.log("Camera turned ON");
   }
 
   patientVideoPlaceholder.classList.toggle("hidden");

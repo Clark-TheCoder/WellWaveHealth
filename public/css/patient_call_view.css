@@ -6,6 +6,28 @@ body {
   overflow: hidden;
 }
 
+#loading_spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 6px solid #ede8e1;
+  border-top: 6px solid #176177;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 img {
   pointer-events: none;
   user-drag: none;

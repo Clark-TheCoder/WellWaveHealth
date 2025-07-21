@@ -126,7 +126,6 @@ async function getCallNotes(req, res) {
       return res.status(404).json({ message: "Call not found." });
     }
 
-    console.log(call.call_notes);
     return res
       .status(200)
       .json({ message: "Success", data: { notes: call.call_notes } });
@@ -273,7 +272,6 @@ async function validatePatientToken(req, res) {
 
 async function getCallStatus(req, res) {
   const access_token = req.params.access_token;
-  console.log("Incoming access token:", access_token);
   try {
     const callStatus = await getStatus(access_token);
     //const callStatus = "waiting";

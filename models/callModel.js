@@ -188,8 +188,6 @@ async function getStatus(access_token) {
       [access_token]
     );
 
-    console.log("DB result:", rows);
-
     if (rows.length === 0) {
       return null;
     }

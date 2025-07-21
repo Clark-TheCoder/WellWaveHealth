@@ -2,7 +2,6 @@ let currentAudioStream = null;
 
 export async function activateAudio() {
   try {
-    // Avoid creating multiple streams
     if (currentAudioStream) return currentAudioStream;
 
     currentAudioStream = await navigator.mediaDevices.getUserMedia({
