@@ -9,12 +9,13 @@
   <link rel="stylesheet" href="/css/popup.css" />
   <link rel="stylesheet" href="/css/pre_call_popup.css" />
   <link rel="stylesheet" href="/css/patient_call_view.css" />
-  <script>
-    window.initialCallStatus = "<%= callStatus %>";
-  </script>
 </head>
 
 <body>
+  <!-- Loading Screen -->
+  <div id="loading_spinner" style="display: none;"></div>
+
+
   <!-- Waiting Room / End Call Popup -->
   <div id="page_overlay" style="display: none;"></div>
   <div id="popup" style="display: none;">
