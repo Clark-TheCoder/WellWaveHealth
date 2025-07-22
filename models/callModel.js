@@ -15,7 +15,6 @@ async function createCall(call_id, provider_id, patient_alias, access_token) {
 
     return result.affectedRows > 0;
   } catch (error) {
-    console.error("Error creating call:", error);
     throw error;
   }
 }
@@ -29,22 +28,63 @@ async function updateCallStatus(access_token, userId, newStatus) {
 
     return result.affectedRows > 0;
   } catch (error) {
-    console.error("Error updating call status:", error);
+    throw error;
+  }
+}
+
+async function setCallStartTime(access_token, userId) {
+  try {
+    await db.execute(
+      `UPDATE calls SET call_start_time = CURRENT_TIMESTAMP 
+        WHERE access_token = ? AND provider_id = ? 
+        AND call_start_time IS NULL AND call_end_time IS NULL 
+        LIMIT 1`,
+      [access_token, userId]
+    );
+
+    const [rows] = await db.execute(
+      `SELECT call_start_time FROM calls 
+        WHERE access_token = ? AND provider_id = ?`,
+      [access_token, userId]
+    );
+
+    if (rows.length === 0) return null;
+    return rows[0].call_start_time;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function setCallEndTime(access_token, userId) {
+  try {
+    const [result] = await db.execute(
+      `UPDATE calls 
+       SET 
+         call_end_time = CURRENT_TIMESTAMP,
+         duration_minutes = TIMESTAMPDIFF(MINUTE, call_start_time, CURRENT_TIMESTAMP)
+       WHERE 
+         access_token = ? 
+         AND provider_id = ? 
+         AND call_end_time IS NULL 
+         AND call_start_time IS NOT NULL 
+       LIMIT 1`,
+      [access_token, userId]
+    );
+    return result.affectedRows > 0;
+  } catch (error) {
+    console.error("Error setting call end time:", error);
     throw error;
   }
 }
 
 async function retrieveCallNotes(access_token, userId) {
-  console.log("Searching DB with:", access_token, userId);
   try {
     const [rows] = await db.execute(
       `SELECT call_notes FROM calls WHERE access_token = ? AND provider_id = ?`,
       [access_token, userId]
     );
-    console.log("DB rows:", rows);
     return rows[0] || null;
   } catch (err) {
-    console.error("DB error:", err);
     throw err; // Don't hide the error
   }
 }
@@ -56,14 +96,13 @@ async function getCurrentCalls(userId) {
        FROM calls
        WHERE provider_id = ?
          AND DATE(date_created) = CURDATE()
-         AND status IN ('generated', 'completed_not_charted')
+         AND status IN ('generated', 'completed_not_charted', 'in_progress')
       `,
       [userId]
     );
 
     return rows;
   } catch (error) {
-    console.error("Error fetching today's call summaries:", error);
     throw error;
   }
 }
@@ -85,7 +124,6 @@ async function updateCallNotes(access_token, formData) {
 
     return result;
   } catch (error) {
-    console.error("Error updating call_notes:", error);
     throw error;
   }
 }
@@ -155,20 +193,6 @@ async function retrieveCalls(searchFields) {
   }
 }
 
-// async function validateCall(access_token) {
-//   console.log("validateCall called with token:", access_token);
-//   try {
-//     const [rows] = await db.execute(
-//       `SELECT status FROM calls WHERE access_token = ? AND call_end_time IS NULL AND status IN ('in_progress', 'generated') `,
-//       [access_token]
-//     );
-//     console.log(rows);
-//     return rows.length > 0 ? rows[0] : null;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
 async function validateCall(access_token) {
   try {
     const [rows] = await db.execute(
@@ -194,7 +218,6 @@ async function getStatus(access_token) {
 
     return rows[0].status;
   } catch (error) {
-    console.error("Error fetching call status:", error);
     throw new Error("Database error while fetching call status.");
   }
 }
@@ -203,6 +226,8 @@ export {
   createCall,
   getCurrentCalls,
   updateCallStatus,
+  setCallStartTime,
+  setCallEndTime,
   updateCallNotes,
   retrieveCalls,
   retrieveCallNotes,

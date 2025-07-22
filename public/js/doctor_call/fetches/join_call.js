@@ -1,3 +1,4 @@
+import { startCallTime } from "../../../utils/api/start_call_time.js";
 import { audioSettings } from "../../../utils/media/preCall_toggle_audio.js";
 import { cameraSettings } from "../../../utils/media/preCall_toggle_camera.js";
 
@@ -20,6 +21,12 @@ export async function joinCall(call) {
         JSON.stringify(cameraSettings.enabled)
       );
       sessionStorage.setItem("access_token", call.access_token);
+      //set the call's start time
+
+      sessionStorage.setItem(
+        "startTime",
+        await startCallTime(call.access_token)
+      );
       window.location.href = "/call/doctor_call_view"; //will add logic once user is in this page to make the connection
     } else {
       /***create custom error message */

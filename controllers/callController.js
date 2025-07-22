@@ -3,6 +3,8 @@ import crypto, { createSecretKey } from "crypto";
 import {
   createCall,
   getCurrentCalls,
+  setCallStartTime,
+  setCallEndTime,
   updateCallStatus,
   updateCallNotes,
   retrieveCalls,
@@ -15,6 +17,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import { generatePatientAlias } from "../utils/generatePatientAlias.js";
 import { formatDateQuery } from "../utils/formatDateQuery.js";
+import { json } from "stream/consumers";
 
 const createLink = async (req, res) => {
   const userId = req.user.id;
@@ -156,6 +159,57 @@ async function changeCallStatus(req, res) {
   //,newCallStatus: updatedStatus
 }
 
+async function startCall(req, res) {
+  const userId = req.user.id;
+  const { access_token } = req.body;
+
+  if (!userId || !access_token) {
+    return res.status(400).json({
+      message: "Incorrect credentials, please log back in and try again.",
+    });
+  }
+  try {
+    const startTime = await setCallStartTime(access_token, userId);
+    if (startTime) {
+      return res.status(200).json({ message: "Success", startTime });
+    } else {
+      return res.status(404).json({
+        message: "A call with this status could not be found.",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "Could not begin the call's time. Please log in and try again.",
+    });
+  }
+}
+
+async function endCallTime(req, res) {
+  const userId = req.user.id;
+  const { access_token } = req.body;
+
+  if (!userId || !access_token) {
+    return res.status(400).json({
+      message: "Missing user ID or access token.",
+    });
+  }
+
+  try {
+    const updated = await setCallEndTime(access_token, userId);
+
+    if (updated) {
+      return res.sendStatus(204);
+    } else {
+      return res
+        .status(404)
+        .json({ message: "Call not found or already ended." });
+    }
+  } catch (error) {
+    console.error("Failed to end call time:", error);
+    return res.status(500).json({ message: "Internal server error." });
+  }
+}
+
 async function fetchCurrentCalls(req, res) {
   const userId = req.user.id;
 
@@ -292,6 +346,8 @@ async function getCallStatus(req, res) {
 export {
   createLink,
   changeCallStatus,
+  startCall,
+  endCallTime,
   fetchCurrentCalls,
   fetchPastCalls,
   addCallNotes,

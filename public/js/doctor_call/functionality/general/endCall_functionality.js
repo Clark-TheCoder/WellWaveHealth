@@ -1,4 +1,5 @@
 import { changeCallStatus } from "../../../../utils/api/change_call_status.js";
+import { endCallTime } from "../../../../utils/api/end_call_time.js";
 import { submitVisitSummary } from "../../../../utils/api/submit_call_info.js";
 import { turnMicOff } from "../media_settings/inCall_toggle_audio.js";
 import { turnCameraOff } from "../media_settings/inCall_toggle_camera.js";
@@ -41,6 +42,9 @@ async function endAndChart() {
     alert("Failed to end call.");
     return;
   }
+
+  //Flagged, have to figure out how to add endcalltime function here
+  await endCallTime();
 
   const { summary, plan, notes } = getSidebarNotes();
   let submitCallInfo = await submitVisitSummary({

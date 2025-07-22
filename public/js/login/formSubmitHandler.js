@@ -29,6 +29,6 @@ export async function handleLoginSubmit(event) {
     }
   } catch (error) {
     console.error("Login request failed:", error);
-    // You can optionally redirect to a 404 or error page
+    /***custom error message/404 page */
   }
 }

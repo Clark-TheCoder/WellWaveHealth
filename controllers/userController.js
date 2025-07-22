@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
         lastname: newUser.lastname,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "4h" }
+      { expiresIn: "8h" }
     );
 
     //cookies
@@ -104,7 +104,7 @@ const authenicateUser = async (req, res) => {
         lastname: existingUser.lastname,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "4h" }
+      { expiresIn: "8h" }
     );
 
     res.cookie("token", token, {
