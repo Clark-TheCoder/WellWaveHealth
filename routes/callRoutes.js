@@ -45,7 +45,7 @@ router.patch("/change_call_status", authenticateToken, changeCallStatus);
 //join call routes for doctor
 router.post("/join/doctor", authenticateToken, joinCallAsDoctor);
 router.patch("/start_call_time", authenticateToken, startCall);
-router.patch("end_call_time", authenticateToken, endCallTime);
+router.patch("/end_call_time", authenticateToken, endCallTime);
 
 //join call routes for patient
 router.get("/join/:access_token", validatePatientToken);

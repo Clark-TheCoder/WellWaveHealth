@@ -32,20 +32,20 @@ async function endAndChart() {
   await turnMicOff();
   await turnCameraOff();
 
-  //change the call status
+  // Change the call's status
   let changedStatus = await changeCallStatus(
     "completed_not_charted",
     sessionStorage.getItem("access_token")
   );
   if (!changedStatus) {
-    //***Tailor alert */
     alert("Failed to end call.");
     return;
   }
 
-  //Flagged, have to figure out how to add endcalltime function here
-  await endCallTime();
+  // End the call's timer
+  await endCallTime(sessionStorage.getItem("access_token"));
 
+  // Save the visit summary
   const { summary, plan, notes } = getSidebarNotes();
   let submitCallInfo = await submitVisitSummary({
     access_token: sessionStorage.getItem("access_token"),
@@ -55,7 +55,6 @@ async function endAndChart() {
     visitStatus: "completed_not_charted",
   });
   if (!submitCallInfo) {
-    //***Tailor alert */
     alert("Unable to save call notes. Call will still be ended.");
   }
 
@@ -66,16 +65,18 @@ async function endNoChart() {
   await turnMicOff();
   await turnCameraOff();
 
-  //change the call status
+  // Change the call's status
   let changedStatus = await changeCallStatus(
     "completed_not_charted",
     sessionStorage.getItem("access_token")
   );
   if (!changedStatus) {
-    //***Tailor alert */
     alert("Failed to end call.");
     return;
   }
+
+  // End the call's timer
+  await endCallTime(sessionStorage.getItem("access_token"));
 
   const { summary, plan, notes } = getSidebarNotes();
   let submitCallInfo = await submitVisitSummary({
@@ -86,7 +87,6 @@ async function endNoChart() {
     visitStatus: "completed_not_charted",
   });
   if (!submitCallInfo) {
-    //***Tailor alert */
     alert("Unable to save call notes. Call will still be ended.");
   }
 

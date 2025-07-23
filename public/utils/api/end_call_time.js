@@ -7,10 +7,10 @@ export async function endCallTime(access_token) {
       body: JSON.stringify({ access_token: access_token }),
     });
 
-    if (!response.ok) {
-      console.error("Failed to end call time");
-    } else {
+    if (response.ok) {
       console.log("Call end time recorded successfully.");
+    } else {
+      console.log("Fail.");
     }
   } catch (error) {}
 }

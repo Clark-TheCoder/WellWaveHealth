@@ -59,7 +59,7 @@ async function setCallEndTime(access_token, userId) {
   try {
     const [result] = await db.execute(
       `UPDATE calls 
-       SET 
+       SET
          call_end_time = CURRENT_TIMESTAMP,
          duration_minutes = TIMESTAMPDIFF(MINUTE, call_start_time, CURRENT_TIMESTAMP)
        WHERE 
