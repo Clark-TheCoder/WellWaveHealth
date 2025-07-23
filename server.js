@@ -27,7 +27,7 @@ app.get("/home", (req, res) => {
   res.render("home");
 });
 
-app.use("/error_page", (req, res) => {
+app.use("/not_found", (req, res) => {
   res.render("error_page");
 });
 

@@ -1,11 +1,92 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
+  min-height: 100vh;
+  width: 100vw;
   background-color: azure;
+  background-image: url("/media/images/homeBackground.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+#error_content {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 10px;
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  #error_content {
+    flex-direction: row;
+  }
+}
+
+.image_container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image_container img {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
 }
 
 .error_message_container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+}
+
+h1,
+h3 {
+  color: #0e5467;
+}
+
+h4 {
+  font-weight: 300;
+  color: gray;
+}
+
+#options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.button_nav_container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.button_nav_container a {
+  font-size: small;
+  padding: 10px 20px;
+  background-color: #0e5467;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.button_nav_container a:hover {
+  background-color: #0b3f4d;
 }
